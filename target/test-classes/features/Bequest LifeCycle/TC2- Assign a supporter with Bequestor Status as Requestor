@@ -1,0 +1,22 @@
+Feature: As a Bequest manager, I need to manage the whole bequest lifecycle
+
+  Scenario Outline: Assign a supporter with Bequestor Status as Requestor
+    Given I login to Salesforce URL
+    When I click on Contacts tag
+    And I click on Recently Viewed dropdown Select List View
+    And I select "All Contacts" from the list view
+    And I type the contact "Willson" in the Search box and press Enter to view the particular contact detail
+    And I click on the searched contact name
+    And I scroll down to page
+    And I scroll down to page
+    And I click "Edit Bequestor Status" button
+    And I click on Bequestor Status dropdown and select Requestor as status
+    And I click on Save button
+    And I scroll down to page
+    And I scroll down to page
+    Then I verify the Bequestor Status is set for the supporter record
+      | Bequestor Status |
+      | <Bequestor Status> |
+    Examples:
+      | Bequestor Status |
+      | Requestor |

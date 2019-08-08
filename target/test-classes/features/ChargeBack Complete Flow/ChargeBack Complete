@@ -1,0 +1,54 @@
+Feature: ChargeBack Complete flow
+
+  Scenario Outline: Verify 'Payment Status' is Paid and 'Record Type' is Payment then 'Adjustment','Chargeback' and 'Refund' button is visible
+
+#  Scenario:Create Opportunity: To Create New Opportunity
+    Given I login to Salesforce URL
+    When I click on Opportunities dropdown
+    And I click New Opportunity button
+    And I select Donation button
+    And I click the Next button
+    And I enter details in Opportunity Name, Primary Campaign Source, Close Date, Stage, Primary Contact and Amount fields under New Opportunity: Donation
+      | Opportunity Name   | Primary Campaign Source   | Close Date   | Stage   | Primary Contact   | Amount   |
+      | <Opportunity Name> | <Primary Campaign Source> | <Close Date> | <Stage> | <Primary Contact> | <Amount> |
+    And I select Payment Information checkbox
+    And I click on Save button
+
+    And I click on Once Off tag
+    And I provide "Miara Josh" Contact Name under Once Off page
+    And I select Donation Supporter radio button
+
+    And I provide the details Campaign/Appeal Name,Batch Id,Channel,Receipting,Donation Amount and Payment Method under Once Off page
+      | Campaign/Appeal Name   | Batch Id   | Channel   | Receipting   | Donation Amount   | Payment Method   |
+      | <Campaign/Appeal Name> | <Batch Id> | <Channel> | <Receipting> | <Donation Amount> | <Payment Method> |
+    And I click Create Payment button
+    And I click on Donation Link
+    And I click on Opportunities tag
+    And I click on OPPORTUNITY NAME Stark opp
+    And I click on "Related" Tab
+#  (//span[@title='Payments']/../../../../../..//table[contains(@class,'forceRecordLayout slds-table')]//tr//a)[1]
+    And I click on Payment
+    And I click on Paid CheckBox
+    And I select Payment Date from payment date
+    And I click on Save button
+    And I click Chargeback radio button
+    And I provide values in Chargeback Bank Action,Chargeback Received On and Chargeback Reference Number
+      | Chargeback Bank Action | Chargeback Received On | Chargeback Reference Number |
+      | <Chargeback Bank Action> | <Chargeback Received On> | <Chargeback Reference Number> |
+    And I click on Save button
+    Then I verify Success message "Chargeback has been initiated and is in progress." ganerated
+    Then I Verify Related Payment Record generated
+
+#  =driver.findElement(By.xpath("//div//span//span[@class='uiOutputTextArea'][text()='"+ filedPS +"']")).getText();
+#  String RecordType= driver.findElement(By.xpath("//span[text()='Record Type']/../..//div[@class='recordTypeName slds-grow slds-truncate']//span")).getText();
+#  waitfortheelement();
+
+    Examples:
+      | Opportunity Name | Primary Campaign Source | Close Date | Stage  | Primary Contact | Amount |
+      | flood Relief1    | Flood Relief            | 2019-08-27 | Posted | Miara Josh      | 100    |
+    Examples:
+      | Campaign/Appeal Name | Batch Id     | Channel | Receipting | Donation Amount | Payment Method |
+      | Campaign Finish Line | Batch Test 5 | Phone   | Emailed    | 50              | Cash           |
+    Examples:
+      | Chargeback Bank Action | Chargeback Received On | Chargeback Reference Number |
+      | Chargeback initiated | 2019-08-27 | CN100102 |

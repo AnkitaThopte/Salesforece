@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: Set Supporter Level as Key Supporter and verify the details
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 48.484 s - in Set Supporter Level as Key Supporter and verify the details

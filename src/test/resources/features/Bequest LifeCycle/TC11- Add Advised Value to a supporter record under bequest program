@@ -1,0 +1,18 @@
+Feature: As a Bequest manager, I need to manage the whole bequest lifecycle
+
+  Scenario Outline: Add Advised Value to a supporter record under bequest program
+    Given I login to Salesforce URL
+    When I click on Contacts tag
+    And I click on Recently Viewed dropdown Select List View
+    And I select "All Contacts" from the list view
+    And I type the contact "Willson" in the Search box and press Enter to view the particular contact detail
+    And I click on the searched contact name
+    And I scroll down to page
+    And I scroll down to page
+    And I click "'Edit Advised Value" button
+    And I enter the amount in the Advised Value textbox
+    And I click on Save button
+    Then I verify the Advised Amount now is displaying the amount entered
+    Examples:
+      | Bequest Relationship Manager |
+      | Suchi Nayak |

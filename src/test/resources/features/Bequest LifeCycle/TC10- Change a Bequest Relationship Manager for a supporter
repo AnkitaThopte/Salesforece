@@ -1,0 +1,23 @@
+Feature: As a Bequest manager, I need to manage the whole bequest lifecycle
+
+  Scenario Outline: Assign a Bequest Relationship Manager for a supporter without a existing Relationship Manager
+    Given I login to Salesforce URL
+    When I click on Contacts tag
+    And I click on Recently Viewed dropdown Select List View
+    And I select "All Contacts" from the list view
+    And I type the contact "Willson" in the Search box and press Enter to view the particular contact detail
+    And I click on the searched contact name
+    And I scroll down to page
+    And I scroll down to page
+    And I click "Edit Bequest Relationship Manager" button
+    And I click on the cross mark against the Bequest Relationship Manager name and remove it
+    And I select Bequest Relationship Manager
+      | Bequest Relationship Manager |
+      | <Bequest Relationship Manager> |
+    And I click on Save button
+    Then I verify the Bequestor Status is set for the supporter record
+      | Bequest Relationship Manager |
+      | <Bequest Relationship Manager> |
+    Examples:
+      | Bequest Relationship Manager |
+      | Suchi Nayak |

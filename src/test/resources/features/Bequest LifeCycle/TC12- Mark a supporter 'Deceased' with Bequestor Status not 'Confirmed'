@@ -1,0 +1,18 @@
+Feature: As a Bequest manager, I need to manage the whole bequest lifecycle
+
+  Scenario Outline: Mark a supporter 'Deceased' with Bequestor Status not 'Confirmed'
+    Given I login to Salesforce URL
+    When I click on Contacts tag
+    And I click on Recently Viewed dropdown Select List View
+    And I select "All Contacts" from the list view
+    And I type the contact "Willson" in the Search box and press Enter to view the particular contact detail
+    And I click on the searched contact name
+    And I scroll down to page
+    And I scroll down to page
+    And I click on 'Edit Deceased' button
+    And I click on "Deceased" check box
+    And I click on Save button
+    And I click on Details tab under contact record page
+    Examples:
+      | Bequest Relationship Manager |
+      | Suchi Nayak |
