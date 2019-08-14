@@ -10,7 +10,7 @@ Feature: ChargeBack Complete flow
     And I click on the searched contact name
     And I click Opportunities button
     And I click on OPPORTUNITY NAME Lancy Swag FR00009 Donation
-    And I click on "Re  lated" Tab
+    And I click on "Related" Tab
     And I click on Payment
     And I click on Paid CheckBox
     And I select Payment Date from payment date

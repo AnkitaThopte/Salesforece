@@ -16,6 +16,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
+import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 
@@ -171,10 +172,10 @@ public class SalesforceStepDefinitions {
 //        navigateTo.verifyDetails(driver, ept, contactName);
 //    }
 //
-//    @And("I scroll down to page")
-//    public void scroll_Down() {
-//        navigateTo.scrollDown(driver);
-//    }
+    @And("I scroll down to page")
+    public void scroll_Down() {
+        navigateTo.scrollDown(driver);
+    }
 //
 //    @And("I scroll up to page")
 //    public void scroll_up() {
@@ -558,15 +559,57 @@ public class SalesforceStepDefinitions {
         navigateTo.clickRadioButton(driver, filedName);
     }
 
-    @And("^I provide values in (.*),(.*) and (.*)$")
-    public void i_provide_values(String fieldChargebackBankAction, String fieldChargebackReceivedOn, String filedChargebackReferenceNumber, DataTable dataTable) throws Throwable {
+    @And("^I provide value in field (.*),(.*) and (.*)$")
+    public void i_provide_value(String fieldChargebackBankAction, String fieldChargebackReceivedOn, String filedChargebackReferenceNumber, DataTable dataTable) throws Throwable {
         List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
         String chargebackBankAction = data.get(0).get("Chargeback Bank Action");
         String chargebackReceivedOn = data.get(0).get("Chargeback Received On");
         String chargebackReferenceNumber = data.get(0).get("Chargeback Reference Number");
+        System.out.println("--------------------------");
+        System.out.println(chargebackBankAction);
+        System.out.println("----------------------------");
+        System.out.println(chargebackReceivedOn);
+        System.out.println("----------------------------");
+        System.out.println(chargebackReferenceNumber);
+        System.out.println("----------------------------");
 
-        navigateTo.chargebackValues(driver,fieldChargebackBankAction,fieldChargebackReceivedOn,filedChargebackReferenceNumber,chargebackBankAction,chargebackReceivedOn,chargebackReferenceNumber);
+        navigateTo.chargebackValue(driver,fieldChargebackBankAction,fieldChargebackReceivedOn,filedChargebackReferenceNumber,chargebackBankAction,chargebackReceivedOn,chargebackReferenceNumber);
+
     }
+    @And("^I provide values in (.*),(.*),(.*),(.*) and (.*)$")
+   // public void i_provide_values(String fieldChargebackBankAction, String fieldChargebackReceivedOn, String filedChargebackReferenceNumber, DataTable dataTable) throws Throwable {
+        public void i_provide_values(String fieldChargebackBankAction,String fieldChargebackResponseBy,String fieldChargebackActualResponseDate,String fieldChargebackSSTResponse,String fieldChargebackBankFinalNotificationDate,  DataTable dataTable) throws Throwable {
+        List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+//     String chargebackBankAction = data.get(0).get("Chargeback Bank Action");
+//        String chargebackReceivedOn = data.get(0).get("Chargeback Received On");
+  //      String chargebackReferenceNumber = data.get(0).get("Chargeback Reference Number");
+        String chargebackBankAction = data.get(0).get("Chargeback Bank Action");
+        String chargebackChargebackResponseBy= data.get(0).get("Chargeback Response By");
+        String chargebackChargebackActualResponseDate= data.get(0).get("Chargeback Actual Response Date");
+        String chargebackChargebackSSTResponse= data.get(0).get("Chargeback SST Response");
+        String chargebackChargebackBankFinalNotificationDate= data.get(0).get("Chargeback Bank Final Notification Date");
+        navigateTo.chargebackValues(driver,fieldChargebackBankAction,fieldChargebackResponseBy,fieldChargebackActualResponseDate,fieldChargebackSSTResponse,fieldChargebackBankFinalNotificationDate,chargebackBankAction,chargebackChargebackResponseBy,chargebackChargebackActualResponseDate,chargebackChargebackSSTResponse,chargebackChargebackBankFinalNotificationDate);
+     //   navigateTo.chargebackValues(driver,fieldChargebackBankAction,fieldChargebackReceivedOn,filedChargebackReferenceNumber,chargebackBankAction,chargebackReceivedOn,chargebackReferenceNumber);
+    }
+
+    @And("^I provided (.*),(.*),(.*),(.*) and (.*)$")
+    // public void i_provide_values(String fieldChargebackBankAction, String fieldChargebackReceivedOn, String filedChargebackReferenceNumber, DataTable dataTable) throws Throwable {
+    public void i_provided(String fieldChargebackBankAction,String fieldChargebackResponseBy,String fieldChargebackActualResponseDate,String fieldChargebackSSTResponse,String fieldChargebackBankFinalNotificationDate,  DataTable dataTable) throws Throwable {
+        List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+//     String chargebackBankAction = data.get(0).get("Chargeback Bank Action");
+//        String chargebackReceivedOn = data.get(0).get("Chargeback Received On");
+        //      String chargebackReferenceNumber = data.get(0).get("Chargeback Reference Number");
+        String chargebackBankAction = data.get(0).get("Chargeback Bank Action");
+        String chargebackChargebackResponseBy= data.get(0).get("Chargeback Response By");
+        String chargebackChargebackActualResponseDate= data.get(0).get("Chargeback Actual Response Date");
+        String chargebackChargebackSSTResponse= data.get(0).get("Chargeback SST Response");
+        String chargebackChargebackBankFinalNotificationDate= data.get(0).get("Chargeback Bank Final Notification Date");
+        navigateTo.chargeback(driver,fieldChargebackBankAction,fieldChargebackResponseBy,fieldChargebackActualResponseDate,fieldChargebackSSTResponse,fieldChargebackBankFinalNotificationDate,chargebackBankAction,chargebackChargebackResponseBy,chargebackChargebackActualResponseDate,chargebackChargebackSSTResponse,chargebackChargebackBankFinalNotificationDate);
+        //   navigateTo.chargebackValues(driver,fieldChargebackBankAction,fieldChargebackReceivedOn,filedChargebackReferenceNumber,chargebackBankAction,chargebackReceivedOn,chargebackReferenceNumber);
+    }
+
+
+
     @Then("^I verify Success message \"(.*)\" ganerated$")
     public void i_verify_success_message(String filedMassage){
         navigateTo.verifySuccessMessage(driver,filedMassage);
@@ -583,15 +626,69 @@ public class SalesforceStepDefinitions {
 
     }
 
-    @And("^I click on Payments$")
-    public void iClickOnPaymentUnderRelatedListQuickLinks() {
-        navigateTo.clickPayments(driver);
+    @And("^I click (.*) link$")
+    public void iClickOnPaymentUnderRelatedListQuickLinks(String Payclick) {
+        navigateTo.clickPayments(driver,Payclick);
     }
 
 
-    @Then("^I verify Payment records successfully created under Opportunity after Chargeback Initiate$")
-    public void iVerifyPaymentRecordsSuccessfullyCreatedUnderOpportunityAfterChargebackInitiate() {
-        navigateTo.verifyPaymentsRecord(driver);
+    @Then("^I verify Payment records successfully created under Chargeback Information which are (.*),(.*) and (.*)$")
+    public void iVerifyPaymentRecordSuccessfullyCreatedUnderOpportunityAfterChargebackInitiate(String fieldChargebackBankAction,String fieldChargebackReceivedOn, String fieldChargebackReferenceNumber,DataTable dataTable) throws ParseException {
+
+        List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+        String chargebackBankAction = data.get(0).get("Chargeback Bank Action");
+        String chargebackReceivedOn = data.get(0).get("Chargeback Received On");
+        String chargebackReferenceNumber = data.get(0).get("Chargeback Reference Number");
+
+        System.out.println("--------------------------");
+        System.out.println(chargebackBankAction);
+        System.out.println("----------------------------");
+        System.out.println(chargebackReceivedOn);
+        System.out.println("----------------------------");
+        System.out.println(chargebackReferenceNumber);
+        System.out.println("----------------------------");
+
+        navigateTo.verifyPaymentsRecord(driver,fieldChargebackBankAction,fieldChargebackReceivedOn,fieldChargebackReferenceNumber,chargebackBankAction,chargebackReceivedOn,chargebackReferenceNumber);
+    }
+
+    @Then("^I verify Payment records successfully created under Chargeback Information after Chargeback Processed which are (.*),(.*),(.*),(.*) and (.*)$")
+    public void iVerifyPaymentsRecordsSuccessfullyCreatedUnderOpportunityAfterChargebackProcessed(String fieldChargebackBankAction,String fieldChargebackResponseBy,String fieldChargebackActualResponseDate,String fieldChargebackSSTResponse,String fieldChargebackBankFinalNotificationDate,DataTable dataTable) {
+
+        List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+        String chargebackBankAction = data.get(0).get("Chargeback Bank Action");
+        String chargebackChargebackResponseBy= data.get(0).get("Chargeback Response By");
+        String chargebackChargebackActualResponseDate= data.get(0).get("Chargeback Actual Response Date");
+        String chargebackChargebackSSTResponse= data.get(0).get("Chargeback SST Response");
+        String chargebackChargebackBankFinalNotificationDate= data.get(0).get("Chargeback Bank Final Notification Date");
+        navigateTo.verifyPaymentRecords(driver,fieldChargebackBankAction,fieldChargebackResponseBy,fieldChargebackActualResponseDate,fieldChargebackSSTResponse,fieldChargebackBankFinalNotificationDate,chargebackBankAction,chargebackChargebackResponseBy,chargebackChargebackActualResponseDate,chargebackChargebackSSTResponse,chargebackChargebackBankFinalNotificationDate);
+    }
+
+    @Then("^I verify Payment records successfully created under Opportunity after Chargeback cancelled$")
+    public void iVerifyPaymentRecordsSuccessfullyCreatedUnderOpportunityAfterChargebackCancelled(DataTable dataTable) {
+
+        List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+        String chargebackBankAction = data.get(0).get("Chargeback Bank Action");
+        String chargebackReceivedOn = data.get(0).get("Chargeback Received On");
+        String chargebackReferenceNumber = data.get(0).get("Chargeback Reference Number");
+
+        navigateTo.verifyPayRecord(driver,chargebackBankAction,chargebackReceivedOn,chargebackReferenceNumber);
+    }
+
+    @And("^I click on Payment Number$")
+    public void iClickOnPaymentNumber() {
+        navigateTo.clickOnPaymentNumber(driver);
+
+    }
+
+
+    @Then("^I verify Error messsage (.*)$")
+    public void iVerifyErrorMessssge(String empty) throws Throwable {
+        System.out.println("----------------------------------------");
+        System.out.println(empty);
+        System.out.println("----------------------------------");
+
+        navigateTo.verifyEmptyField(driver,empty);
+       // throw new PendingException();
     }
 }
 
