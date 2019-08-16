@@ -652,7 +652,7 @@ public class SalesforceStepDefinitions {
     }
 
     @Then("^I verify Payment records successfully created under Chargeback Information after Chargeback Processed which are (.*),(.*),(.*),(.*) and (.*)$")
-    public void iVerifyPaymentsRecordsSuccessfullyCreatedUnderOpportunityAfterChargebackProcessed(String fieldChargebackBankAction,String fieldChargebackResponseBy,String fieldChargebackActualResponseDate,String fieldChargebackSSTResponse,String fieldChargebackBankFinalNotificationDate,DataTable dataTable) {
+    public void iVerifyPaymentsRecordsSuccessfullyCreatedUnderOpportunityAfterChargebackProcessed(String fieldChargebackBankAction,String fieldChargebackResponseBy,String fieldChargebackActualResponseDate,String fieldChargebackSSTResponse,String fieldChargebackBankFinalNotificationDate,DataTable dataTable) throws ParseException {
 
         List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
         String chargebackBankAction = data.get(0).get("Chargeback Bank Action");
@@ -660,18 +660,19 @@ public class SalesforceStepDefinitions {
         String chargebackChargebackActualResponseDate= data.get(0).get("Chargeback Actual Response Date");
         String chargebackChargebackSSTResponse= data.get(0).get("Chargeback SST Response");
         String chargebackChargebackBankFinalNotificationDate= data.get(0).get("Chargeback Bank Final Notification Date");
+
         navigateTo.verifyPaymentRecords(driver,fieldChargebackBankAction,fieldChargebackResponseBy,fieldChargebackActualResponseDate,fieldChargebackSSTResponse,fieldChargebackBankFinalNotificationDate,chargebackBankAction,chargebackChargebackResponseBy,chargebackChargebackActualResponseDate,chargebackChargebackSSTResponse,chargebackChargebackBankFinalNotificationDate);
     }
 
-    @Then("^I verify Payment records successfully created under Opportunity after Chargeback cancelled$")
-    public void iVerifyPaymentRecordsSuccessfullyCreatedUnderOpportunityAfterChargebackCancelled(DataTable dataTable) {
+    @Then("^I verify Payment records successfully created under Opportunity after Chargeback cancelled which are (.*),(.*) and (.*)$")
+    public void iVerifyPaymentRecordsSuccessfullyCreatedUnderOpportunityAfterChargebackCancelled(String fieldChargebackBankAction,String fieldChargebackReceivedOn, String fieldChargebackReferenceNumber,DataTable dataTable) throws ParseException {
 
         List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
         String chargebackBankAction = data.get(0).get("Chargeback Bank Action");
         String chargebackReceivedOn = data.get(0).get("Chargeback Received On");
         String chargebackReferenceNumber = data.get(0).get("Chargeback Reference Number");
 
-        navigateTo.verifyPayRecord(driver,chargebackBankAction,chargebackReceivedOn,chargebackReferenceNumber);
+        navigateTo.verifyPayRecord(driver,fieldChargebackBankAction,fieldChargebackReceivedOn,fieldChargebackReferenceNumber,chargebackBankAction,chargebackReceivedOn,chargebackReferenceNumber);
     }
 
     @And("^I click on Payment Number$")
@@ -689,6 +690,32 @@ public class SalesforceStepDefinitions {
 
         navigateTo.verifyEmptyField(driver,empty);
        // throw new PendingException();
+    }
+
+    @And("^I give following details (.*),(.*),(.*),(.*),(.*),(.*) and (.*)$")
+    public void iGiveFollowingDetails(String fieldChargebackBankAction,String fieldChargebackReceivedOn, String filedChargebackReferenceNumber,String fieldChargebackResponseBy,String fieldChargebackActualResponseDate,String fieldChargebackSSTResponse,String fieldChargebackBankFinalNotificationDate,  DataTable dataTable) {
+
+        List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+//     String chargebackBankAction = data.get(0).get("Chargeback Bank Action");
+//        String chargebackReceivedOn = data.get(0).get("Chargeback Received On");
+        //      String chargebackReferenceNumber = data.get(0).get("Chargeback Reference Number");
+        String chargebackBankAction = data.get(0).get("Chargeback Bank Action");
+        String chargebackChargebackResponseBy= data.get(0).get("Chargeback Response By");
+        String chargebackReceivedOn = data.get(0).get("Chargeback Received On");
+        String chargebackReferenceNumber = data.get(0).get("Chargeback Reference Number");
+        String chargebackChargebackActualResponseDate= data.get(0).get("Chargeback Actual Response Date");
+        String chargebackChargebackSSTResponse= data.get(0).get("Chargeback SST Response");
+        String chargebackChargebackBankFinalNotificationDate= data.get(0).get("Chargeback Bank Final Notification Date");
+
+        navigateTo.givedetails(driver,fieldChargebackBankAction,fieldChargebackReceivedOn,filedChargebackReferenceNumber,fieldChargebackResponseBy,fieldChargebackActualResponseDate,fieldChargebackSSTResponse,fieldChargebackBankFinalNotificationDate,chargebackBankAction,chargebackReceivedOn,chargebackReferenceNumber,chargebackChargebackResponseBy,chargebackChargebackActualResponseDate,chargebackChargebackSSTResponse,chargebackChargebackBankFinalNotificationDate);
+
+
+    }
+
+    @Then("^I verify the (.*) field has value (.*) displayed$")
+    public void iVerifyTheRecordTypeFieldHasValueChargeback(String fieldType,String record) {
+
+          navigateTo.recordType(driver,fieldType,record);
     }
 }
 

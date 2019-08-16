@@ -104,7 +104,7 @@ public class NavigateTo {
     public void scrollDown(WebDriver driver) {
         waitfortheelement();
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("scrollBy(10,30)");
+        js.executeScript("scrollBy(0,60)");
        //driver.findElement(By.xpath("//span[@class='test-id__section-header-title slds-truncate'][text()='Chargeback Information']"));
         Actions action = new Actions(driver);
         action.sendKeys(Keys.PAGE_DOWN).build().perform();
@@ -820,7 +820,7 @@ public class NavigateTo {
           driver.findElement(By.xpath("//label[text()='" + fieldChargebackBankAction + "']")).click();
           driver.findElement(By.xpath("//label[text()='" + fieldChargebackBankAction + "']/..//span[@title='" + chargebackBankAction + "']")).click();
 
-          driver.findElement(By.xpath("//label[text()='Chargeback Received On']/..//input")).click();
+          driver.findElement(By.xpath("//label[text()='"+fieldChargebackReceivedOn+"']/..//input")).click();
 //          DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 //          Date date = new Date();
 //          String strDate = dateFormat.format(date);
@@ -838,14 +838,14 @@ public class NavigateTo {
         driver.findElement(By.xpath("//label[text()='" + fieldChargebackBankAction + "']")).click();
         driver.findElement(By.xpath("//label[text()='" + fieldChargebackBankAction + "']/..//span[@title='" + chargebackBankAction + "']")).click();
 
-        driver.findElement(By.xpath("//label[text()='Chargeback Response By']/..//input")).click();
+        driver.findElement(By.xpath("//label[text()='"+fieldChargebackResponseBy+"']/..//input")).click();
 //        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 //        Date date = new Date();
 //        String strDate = dateFormat.format(date);
         driver.findElement(By.xpath("//td[@data-value='" + chargebackChargebackResponseBy + "']")).click();
         waitfortheelement();
 
-        driver.findElement(By.xpath("//label[text()='Chargeback Actual Response Date']/..//input")).click();
+        driver.findElement(By.xpath("//label[text()='"+fieldChargebackActualResponseDate+"']/..//input")).click();
         driver.findElement(By.xpath("//td[@data-value='" + chargebackChargebackActualResponseDate + "']")).click();
 
         waitfortheelement();
@@ -853,7 +853,7 @@ public class NavigateTo {
         driver.findElement(By.xpath("//label[text()='" + fieldChargebackSSTResponse + "']/..//span[@title='" + chargebackChargebackSSTResponse + "']")).click();
         waitfortheelement();
 
-        driver.findElement(By.xpath("//label[text()='Chargeback Bank Final Notification Date']/..//input")).click();
+        driver.findElement(By.xpath("//label[text()='"+fieldChargebackBankFinalNotificationDate+"']/..//input")).click();
         driver.findElement(By.xpath("//td[@data-value='" + chargebackChargebackBankFinalNotificationDate + "']")).click();
 
         waitfortheelement();
@@ -888,8 +888,7 @@ public class NavigateTo {
         Assert.assertEquals(priority, Prio);
     }
 
-    public void
-    clickOpportunity(WebDriver driver, String oppoName) {
+    public void clickOpportunity(WebDriver driver, String oppoName) {
 
         waitfortheelement();
         driver.findElement(By.xpath("//a[@class=' textUnderline outputLookupLink slds-truncate forceOutputLookup'] [text()='" + oppoName + "'] ")).click();
@@ -920,25 +919,42 @@ public class NavigateTo {
         String date = driver.findElement(By.xpath("//span[text()='"+fieldChargebackReceivedOn+"']/../..//span[@class='uiOutputDate']")).getText();
         String num = driver.findElement(By.xpath("//span[@class='test-id__field-label'][text()='"+fieldChargebackReferenceNumber+"']/../..//span[@class='uiOutputText']")).getText();
 //       String str = "Chargeback initiated";
-//        String str1= "2019-08-27";
+      //  String str1= "2019-08-27";
 //        String str2= "CN100102";
-        SimpleDateFormat sdf= new SimpleDateFormat("yyyy--mm--dd");
-        Date date1= sdf.parse("fieldChargebackReceivedOn");
+
+
+
+       SimpleDateFormat sdf= new SimpleDateFormat("yyyy-mm-dd");
+       Date data= sdf.parse(chargebackReceivedOn);
+      // String strDate= sdf.format(data);
+       String formattedTime = sdf.format(data);
+
+     //  Date date1= sdf.parse(fieldChargebackReceivedOn);
+       // Date date2= sdf.parse(chargebackReceivedOn);
+//            if(date1.compareTo(date2)==0)
+//            {
+//                System.out.println("Both dates are same!");
+//            }
+//            else
+//            {
+//                System.out.println("Not same");
+//            }
+
 
         System.out.println("-------------------------------");
         System.out.println(act);
         System.out.println("--------------------------------");
-        System.out.println(date);
+        System.out.println(formattedTime);
         System.out.println("--------------------------------");
         System.out.println(num);
         System.out.println("--------------------------------");
 
         Assert.assertEquals(chargebackBankAction, act);
-        Assert.assertEquals(chargebackReceivedOn, date);
+        Assert.assertEquals(chargebackReceivedOn, formattedTime);
         Assert.assertEquals(chargebackReferenceNumber, num);
     }
 
-    public void verifyPaymentRecords(WebDriver driver,String fieldChargebackBankAction,String fieldChargebackResponseBy,String fieldChargebackActualResponseDate,String fieldChargebackSSTResponse,String fieldChargebackBankFinalNotificationDate,String chargebackBankAction,String chargebackChargebackResponseBy,String chargebackChargebackActualResponseDate,String chargebackChargebackSSTResponse,String chargebackChargebackBankFinalNotificationDate) {
+    public void verifyPaymentRecords(WebDriver driver,String fieldChargebackBankAction,String fieldChargebackResponseBy,String fieldChargebackActualResponseDate,String fieldChargebackSSTResponse,String fieldChargebackBankFinalNotificationDate,String chargebackBankAction,String chargebackChargebackResponseBy,String chargebackChargebackActualResponseDate,String chargebackChargebackSSTResponse,String chargebackChargebackBankFinalNotificationDate) throws ParseException {
 
         waitfortheelement();
         waitfortheelement();
@@ -965,27 +981,42 @@ public class NavigateTo {
         String actual = driver.findElement(By.xpath("//span[text()='"+fieldChargebackActualResponseDate+"']/../..//span[@class='uiOutputDate']")).getText();
         String sst = driver.findElement(By.xpath(".//span[@class='test-id__field-label'][text()='"+fieldChargebackSSTResponse+"']/../..//span[@class='test-id__field-value slds-form-element__static slds-grow ']//span")).getText();
         String finalbank = driver.findElement(By.xpath("//span[text()='"+fieldChargebackBankFinalNotificationDate+"']/../..//span[@class='uiOutputDate']")).getText();
+
+
+        SimpleDateFormat sdf= new SimpleDateFormat("yyyy-mm-dd");
+         Date d= sdf.parse(chargebackChargebackResponseBy);
+         String formattedResponseTime = sdf.format(d);
+
+        SimpleDateFormat sdf1= new SimpleDateFormat("yyyy-mm-dd");
+        Date date1= sdf1.parse(chargebackChargebackActualResponseDate);
+        String formattedActualResponseTime = sdf1.format(date1);
+
+        SimpleDateFormat sdf2= new SimpleDateFormat("yyyy-mm-dd");
+        Date date2= sdf2.parse(chargebackChargebackBankFinalNotificationDate);
+        String formattedFinalBankTime = sdf2.format(date2);
+
+
         System.out.println("--------------------000000---------------------------");
         System.out.println(act);
         System.out.println("--------------------------------");
-        System.out.println(response);
+        System.out.println(formattedResponseTime);
         System.out.println("--------------------------------");
-        System.out.println(actual);
+        System.out.println(formattedActualResponseTime);
         System.out.println("--------------------------------");
         System.out.println(sst);
         System.out.println("--------------------------------");
-        System.out.println(finalbank);
+        System.out.println(formattedFinalBankTime);
         System.out.println("--------------------------------------------");
 
         Assert.assertEquals(chargebackBankAction,act);
-        Assert.assertEquals(chargebackChargebackResponseBy,response);
-        Assert.assertEquals(chargebackChargebackActualResponseDate,actual);
+        Assert.assertEquals(chargebackChargebackResponseBy,formattedResponseTime);
+        Assert.assertEquals(chargebackChargebackActualResponseDate,formattedActualResponseTime);
         Assert.assertEquals(chargebackChargebackSSTResponse,sst);
-        Assert.assertEquals(chargebackChargebackBankFinalNotificationDate,finalbank);
+        Assert.assertEquals(chargebackChargebackBankFinalNotificationDate,formattedFinalBankTime);
 
     }
 
-    public void verifyPayRecord(WebDriver driver, String chargebackBankAction, String chargebackReceivedOn, String chargebackReferenceNumber) {
+    public void verifyPayRecord(WebDriver driver,String fieldChargebackBankAction,String fieldChargebackReceivedOn, String fieldChargebackReferenceNumber, String chargebackBankAction, String chargebackReceivedOn, String chargebackReferenceNumber) throws ParseException {
 
         waitfortheelement();
         waitfortheelement();
@@ -996,9 +1027,9 @@ public class NavigateTo {
         System.out.println("--------------------------------");
         System.out.println(chargebackReferenceNumber);
         System.out.println("----------------------------");
-        String act = driver.findElement(By.xpath(".//span[@class='test-id__field-label'][text()='Chargeback Bank Action']/../..//span[@class='test-id__field-value slds-form-element__static slds-grow ']//span")).getText();
-        String date = driver.findElement(By.xpath("//span[text()='Chargeback Received On']/../..//span[@class='uiOutputDate']")).getText();
-        String num = driver.findElement(By.xpath("//span[@class='test-id__field-label'][text()='Chargeback Reference Number']/../..//span[@class='uiOutputText']")).getText();
+        String act = driver.findElement(By.xpath(".//span[@class='test-id__field-label'][text()='"+fieldChargebackBankAction+"']/../..//span[@class='test-id__field-value slds-form-element__static slds-grow ']//span")).getText();
+        String date = driver.findElement(By.xpath("//span[text()='"+fieldChargebackReceivedOn+"']/../..//span[@class='uiOutputDate']")).getText();
+        String num = driver.findElement(By.xpath("//span[@class='test-id__field-label'][text()='"+fieldChargebackReferenceNumber+"']/../..//span[@class='uiOutputText']")).getText();
 
 //        String act = driver.findElement(By.xpath(".//span[@class='test-id__field-label'][text()='"+chargebackBankAction+"']/../..//span[@class='test-id__field-value slds-form-element__static slds-grow ']//span")).getText();
 //        String date = driver.findElement(By.xpath("//span[text()='"+chargebackReceivedOn+"']/../..//span[@class='uiOutputDate']")).getText();
@@ -1006,15 +1037,22 @@ public class NavigateTo {
 //       String str = "Chargeback initiated";
 //        String str1= "2019-08-27";
 //        String str2= "CN100102";
+        SimpleDateFormat sdfd= new SimpleDateFormat("yyyy-mm-dd");
+        Date data= sdfd.parse(chargebackReceivedOn);
+        // String strDate= sdf.format(data);
+        String formattedTime = sdfd.format(data);
+
+
         System.out.println("-------------------------------");
         System.out.println(act);
         System.out.println("--------------------------------");
-        System.out.println(date);
+        System.out.println(formattedTime);
         System.out.println("--------------------------------");
         System.out.println(num);
         System.out.println("--------------------------------");
+
         Assert.assertEquals(chargebackBankAction, act);
-        Assert.assertEquals(chargebackReceivedOn, date);
+        Assert.assertEquals(chargebackReceivedOn, formattedTime);
         Assert.assertEquals(chargebackReferenceNumber, num);
 
     }
@@ -1045,14 +1083,21 @@ public class NavigateTo {
         waitfortheelement();
         waitfortheelement();
 
+        System.out.println("----------------------------------------");
+        System.out.println(empty);
+        System.out.println("----------------------------------");
+
         String str= driver.findElement(By.xpath("//div[@class='error uiMessage']//div[@class='uiBlock']//div[@class='bBody']")).getText();
         System.out.println("----------------------------------------");
-        String actual= str.substring(0,50);
+        //String actual= str.substring(0,50);
         System.out.println(str);
         System.out.println("----------------------------------");
         waitfortheelement();
         waitfortheelement();
-        Assert.assertEquals(empty,actual);
+
+        String data= "Error\n".concat(empty);
+
+        Assert.assertEquals(empty,data);
        // Assert.assertTrue(Boolean.parseBoolean(actual.concat("Error For chargeback processing all fields are mandatory")));
 //        if(empty==str)
 //        {
@@ -1095,5 +1140,61 @@ public class NavigateTo {
         waitfortheelement();
 
 
+    }
+
+    public void givedetails(WebDriver driver, String fieldChargebackBankAction,String fieldChargebackReceivedOn, String filedChargebackReferenceNumber,String fieldChargebackResponseBy,String fieldChargebackActualResponseDate,String fieldChargebackSSTResponse,String fieldChargebackBankFinalNotificationDate ,String chargebackBankAction,String chargebackReceivedOn,String chargebackReferenceNumber, String chargebackChargebackResponseBy, String chargebackChargebackActualResponseDate, String chargebackChargebackSSTResponse, String chargebackChargebackBankFinalNotificationDate) {
+
+        waitfortheelement();
+
+        driver.findElement(By.xpath("//label[text()='" + fieldChargebackBankAction + "']")).click();
+        driver.findElement(By.xpath("//label[text()='" + fieldChargebackBankAction + "']/..//span[@title='" + chargebackBankAction + "']")).click();
+
+        driver.findElement(By.xpath("//label[text()='"+fieldChargebackReceivedOn+"']/..//input")).click();
+//          DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//          Date date = new Date();
+//          String strDate = dateFormat.format(date);
+
+        driver.findElement(By.xpath("//td[@data-value='" + chargebackReceivedOn + "']")).click();
+        driver.findElement(By.xpath("//label[text()='" + filedChargebackReferenceNumber + "']/..//input")).clear();
+        driver.findElement(By.xpath("//label[text()='" + filedChargebackReferenceNumber + "']/..//input")).sendKeys(chargebackReferenceNumber);
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("scrollBy(0,50)");
+
+        driver.findElement(By.xpath("//label[text()='"+fieldChargebackResponseBy+"']/..//input")).click();
+//        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//        Date date = new Date();
+//        String strDate = dateFormat.format(date);
+        driver.findElement(By.xpath("//td[@data-value='" + chargebackChargebackResponseBy + "']")).click();
+        waitfortheelement();
+
+        driver.findElement(By.xpath("//label[text()='"+fieldChargebackActualResponseDate+"']/..//input")).click();
+        driver.findElement(By.xpath("//td[@data-value='" + chargebackChargebackActualResponseDate + "']")).click();
+
+        waitfortheelement();
+        driver.findElement(By.xpath("//label[text()='" + fieldChargebackSSTResponse + "']")).click();
+        driver.findElement(By.xpath("//label[text()='" + fieldChargebackSSTResponse + "']/..//span[@title='" + chargebackChargebackSSTResponse + "']")).click();
+        waitfortheelement();
+
+        driver.findElement(By.xpath("//label[text()='"+fieldChargebackBankFinalNotificationDate+"']/..//input")).click();
+        driver.findElement(By.xpath("//td[@data-value='" + chargebackChargebackBankFinalNotificationDate + "']")).click();
+
+        waitfortheelement();
+
+    }
+
+    public void recordType(WebDriver driver,String fieldType,String record) {
+
+        waitfortheelement();
+        waitfortheelement();
+
+        System.out.println("\n"+record);
+        String rc = driver.findElement(By.xpath("//span[@class='test-id__field-label'][text()='"+ fieldType +"']//..//..//div[@class='recordTypeName slds-grow slds-truncate']//span[text()='"+ record +"']")).getText();
+       // String rc=driver.findElement(By.xpath("//span[@class='test-id__field-label'][text()='"+chargebackRecordType+"']//..//..//div[@class='recordTypeName slds-grow slds-truncate']//span[text()='"+record+"']")).getText();
+        waitfortheelement();
+        System.out.println("-------------------------------");
+        System.out.println(rc);
+        System.out.println("--------------------------------");
+
+        Assert.assertEquals(record,rc);
     }
 }
