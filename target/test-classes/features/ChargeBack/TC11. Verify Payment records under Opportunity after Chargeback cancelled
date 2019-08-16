@@ -9,7 +9,7 @@ Feature: Verify Payment records under Opportunity chargeback cancelled
     And I type the contact "Allen Luther" in the Search box and press Enter to view the particular contact detail
     And I click on the searched contact name
     And I click Opportunities button
-    And I click on OPPORTUNITY NAME Allen Luther CAMP00001 Donation
+    And I click on OPPORTUNITY NAME Allen Luther FR00009 Donation
     And I click on "Related" Tab
     And I click on Payment
     #And I click Chargeback radio button
@@ -17,11 +17,11 @@ Feature: Verify Payment records under Opportunity chargeback cancelled
       | Chargeback Bank Action   | Chargeback Received On   | Chargeback Reference Number   |
       | <Chargeback Bank Action> | <Chargeback Received On> | <Chargeback Reference Number> |
     And I click on Save button
-    And I click on Opportunity Name Allen Luther CAMP00001 Donation under Details tab
+    And I click on Opportunity Name Allen Luther FR00009 Donation under Details tab
     And I click Payments link
     And I click on Payment Number
     And I scroll down to page
-    Then I verify Payment records successfully created under Opportunity after Chargeback cancelled
+    Then I verify Payment records successfully created under Opportunity after Chargeback cancelled which are Chargeback Bank Action,Chargeback Received On and Chargeback Reference Number
       | Chargeback Bank Action   | Chargeback Received On   | Chargeback Reference Number   |
       | <Chargeback Bank Action> | <Chargeback Received On> | <Chargeback Reference Number> |
 
