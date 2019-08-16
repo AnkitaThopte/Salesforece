@@ -1088,16 +1088,38 @@ public class NavigateTo {
         System.out.println("----------------------------------");
 
         String str= driver.findElement(By.xpath("//div[@class='error uiMessage']//div[@class='uiBlock']//div[@class='bBody']")).getText();
-        System.out.println("----------------------------------------");
-        //String actual= str.substring(0,50);
-        System.out.println(str);
-        System.out.println("----------------------------------");
-        waitfortheelement();
-        waitfortheelement();
 
-        String data= "Error\n".concat(empty);
+        String[] tokens= empty.split("/n");
+        int i;
+        try {
+            for (i = 0; i < tokens.length; i++)
+//            System.out.println(tokens[i]);
 
-        Assert.assertEquals(empty,data);
+//        System.out.println("----------------------");
+                System.out.println(tokens[i]);
+            System.out.println("----------------------");
+            System.out.println(tokens[i]);
+            System.out.println("----------------------");
+            System.out.println(str);
+            System.out.println("-----------------------");
+            Assert.assertEquals(tokens[i],str);
+        }
+        catch (ArrayIndexOutOfBoundsException exp)
+        {
+            System.out.println(str);
+        }
+
+
+//        System.out.println("----------------------------------------");
+//        //String actual= str.substring(0,50);
+//        System.out.println(str);
+//        System.out.println("----------------------------------");
+//        waitfortheelement();
+//        waitfortheelement();
+
+//        String data= "Error\n".concat(empty);
+//
+//        Assert.assertEquals(empty,data);
        // Assert.assertTrue(Boolean.parseBoolean(actual.concat("Error For chargeback processing all fields are mandatory")));
 //        if(empty==str)
 //        {
