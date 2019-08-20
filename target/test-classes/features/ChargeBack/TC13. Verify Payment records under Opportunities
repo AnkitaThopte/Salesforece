@@ -6,10 +6,10 @@ Feature: Verify Payment records under Opportunity after chargeback processed
     When I click on Contacts tag
     And I click on Recently Viewed dropdown Select List View
     And I select "All Contacts" from the list view
-    And I type the contact "Jim Kanes" in the Search box and press Enter to view the particular contact detail
+    And I type the contact "tom den" in the Search box and press Enter to view the particular contact detail
     And I click on the searched contact name
     And I click Opportunities button
-    And I click on OPPORTUNITY NAME Jim Kanes CG999889 Donation
+    And I click on OPPORTUNITY NAME tom den CAMPFL00002 Donation
     And I click on "Related" Tab
     And I click on Payment
     #And I click Chargeback radio button
@@ -17,15 +17,10 @@ Feature: Verify Payment records under Opportunity after chargeback processed
       |Chargeback Bank Action | Chargeback Response By | Chargeback Actual Response Date| Chargeback SST Response  | Chargeback Bank Final Notification Date |
       |<Chargeback Bank Action>| <Chargeback Response By> | <Chargeback Actual Response Date> | <Chargeback SST Response> | <Chargeback Bank Final Notification Date>|
     And I Save details
-    And I click on Opportunity Name Jim Kanes CG999889 Donation under Details tab
+    And I click on Opportunity Name tom den CAMPFL00002 Donation under Details tab
     And I click Payments link
-    And I click on Payment Number
-    And I scroll down to page
-    Then I verify Payment records successfully created under Chargeback Information after Chargeback Processed which are Chargeback Bank Action,Chargeback Response By,Chargeback Actual Response Date,Chargeback SST Response and Chargeback Bank Final Notification Date
-      |Chargeback Bank Action | Chargeback Response By | Chargeback Actual Response Date| Chargeback SST Response  | Chargeback Bank Final Notification Date |
-      |<Chargeback Bank Action>| <Chargeback Response By> | <Chargeback Actual Response Date> | <Chargeback SST Response> | <Chargeback Bank Final Notification Date>|
+    Then I verify Payment records successfully created under Opportunity with Record Type as Chargeback
 
     Examples:
       |Chargeback Bank Action | Chargeback Response By | Chargeback Actual Response Date | Chargeback SST Response | Chargeback Bank Final Notification Date |
       | Chargeback processed  | 2019-08-28             | 2019-08-28                      |  Proceed with chargeback      | 2019-08-30           |
-

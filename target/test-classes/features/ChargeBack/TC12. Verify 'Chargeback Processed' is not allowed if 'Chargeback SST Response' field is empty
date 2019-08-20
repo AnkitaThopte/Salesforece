@@ -16,11 +16,11 @@ Feature: Verify Chargeback Processed is not allowed if Chargeback SST Response f
     And I provided Chargeback Bank Action,Chargeback Response By,Chargeback Actual Response Date,Chargeback SST Response and Chargeback Bank Final Notification Date
       |Chargeback Bank Action | Chargeback Response By | Chargeback Actual Response Date| Chargeback SST Response  | Chargeback Bank Final Notification Date |
       |<Chargeback Bank Action>| <Chargeback Response By> | <Chargeback Actual Response Date> | <Chargeback SST Response> | <Chargeback Bank Final Notification Date>|
-    And I click on Save button
+    And I Save details
   #  And I click on Opportunity Name Joey Tribi FR00009 Donation under Details tab
   #  And I click Payments link
   # And I click on Payment Number
-  #  And I scroll down to page
+  # And I scroll down to page
     Then I verify Error messsage "Error For chargeback processing all fields are mandatory"
 
     Examples:

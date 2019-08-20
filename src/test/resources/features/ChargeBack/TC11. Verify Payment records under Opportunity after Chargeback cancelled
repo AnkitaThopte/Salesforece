@@ -16,7 +16,7 @@ Feature: Verify Payment records under Opportunity chargeback cancelled
     And I provide value in field Chargeback Bank Action,Chargeback Received On and Chargeback Reference Number
       | Chargeback Bank Action   | Chargeback Received On   | Chargeback Reference Number   |
       | <Chargeback Bank Action> | <Chargeback Received On> | <Chargeback Reference Number> |
-    And I click on Save button
+    And I Save details
     And I click on Opportunity Name Allen Luther FR00009 Donation under Details tab
     And I click Payments link
     And I click on Payment Number

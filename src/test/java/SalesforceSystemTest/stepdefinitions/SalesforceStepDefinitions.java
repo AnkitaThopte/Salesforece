@@ -177,10 +177,10 @@ public class SalesforceStepDefinitions {
         navigateTo.scrollDown(driver);
     }
 //
-//    @And("I scroll up to page")
-//    public void scroll_up() {
-//        navigateTo.scrollUP(driver);
-//    }
+    @And("I scroll up to page")
+   public void scroll_up() {
+        navigateTo.scrollUP(driver);
+    }
 //
 //    //    @And("^I click on (.*) new (.*)$")
 ////    public void click_EPN(String EPN,String Number) {
@@ -401,7 +401,7 @@ public class SalesforceStepDefinitions {
 //        String filedName = data.get(0).get("Name");
 //        String filedPhone = data.get(0).get("Phone");
 //        //String fullName =data.get(0).get("Ph");
-//        navigateTo.verifyDetailsContactPage(driver, filedName, filedPhone);
+ //       navigateTo.verifyDetailsContactPage(driver, filedName, filedPhone);
 //    }
 
 //    @And("^I click on Bequestor Status dropdown and select (.*) as status$")
@@ -549,9 +549,9 @@ public class SalesforceStepDefinitions {
         navigateTo.clickOnCheckbox(driver, filedCheckbox);
     }
 
-    @And("^I select (.*) from payment date$")
-    public void i_select_payment_date(String filedPaymentDate) {
-        navigateTo.selectPaymentDate(driver, filedPaymentDate);
+    @And("^I select (.*) from payment date (.*)$")
+    public void i_select_payment_date(String fieldPaymentDate,String fieldDate) {
+        navigateTo.selectPaymentDate(driver, fieldPaymentDate,fieldDate);
     }
 
     @And("^I click (.*) radio button$")
@@ -716,6 +716,81 @@ public class SalesforceStepDefinitions {
     public void iVerifyTheRecordTypeFieldHasValueChargeback(String fieldType,String record) {
 
           navigateTo.recordType(driver,fieldType,record);
+    }
+
+    @Then("^I verify there are valid Opportunities present$")
+    public void iVerifyThereAreValidOpportunitiesPresent(DataTable dataTable) {
+
+        List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+         String fieldOpportunityName = data.get(0).get("Opportunity Name");
+         String fieldAccountName = data.get(0).get("Account Name");
+//        String fullName = Salutation + " " + firstName + " " + lastName;
+        navigateTo.validOpportunities(driver,fieldOpportunityName,fieldAccountName);
+    }
+
+    @And("^I click \"(.*)\" Tab$")
+    public void iClickTab(String clickOpportunity) throws Throwable {
+                navigateTo.opportunityClick(driver,clickOpportunity);
+
+      //  throw new PendingException();
+    }
+
+    @And("^I click \"(.*)\"$")
+    public void iClick(String relatedClick) throws Throwable {
+
+        navigateTo.relatedClick(driver,relatedClick);
+     //   throw new PendingException();
+    }
+
+    @Then("^I verify Payment records successfully created under Opportunity with Record Type as (.*)$")
+    public void iVerifyPaymentRecordsSuccessfullyCreatedUnderOpportunityWithRecordTypeAsChargeback(String recordType) {
+
+        navigateTo.Recordclick(driver,recordType);
+    }
+
+
+    @And("^I provide fields as (.*),(.*),(.*),(.*) and (.*)$")
+    public void iProvideFieldsAsCaseOriginRefundTypeRefundInstrumentBankAccountNoAndBankBSB(String fieldCaseOrigin, String fieldRefundType,String fieldRefundInstrument, String fieldBankAccountNo, String fieldBankBSB, DataTable dataTable ) throws Throwable {
+
+          List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+            String refundCaseOrigin = data.get(0).get("Case Origin");
+            String refundRefundType = data.get(0).get("Refund Type");
+            String refundRefundInstrument = data.get(0).get("Refund Instrument");
+            String refundBankAccountNo = data.get(0).get("Bank Account No");
+            String refundBankBSB = data.get(0).get("Bank BSB");
+//            System.out.println("--------------------------------");
+//            System.out.println(refundCaseOrigin);
+//            System.out.println("----------------------------");
+//            System.out.println(refundRefundType);
+//            System.out.println("----------------------------");
+//            System.out.println(refundRefundInstrument);
+//            System.out.println("----------------------------");
+//            System.out.println(refundBankAccountNo);
+//            System.out.println("----------------------------");
+//            System.out.println(refundBankBSB);
+//            System.out.println("-----------------------------------");
+
+            navigateTo.clickReund(driver,fieldCaseOrigin,fieldRefundType,fieldRefundInstrument,fieldBankAccountNo,fieldBankBSB,refundCaseOrigin,refundRefundType,refundRefundInstrument,refundBankAccountNo,refundBankBSB);
+
+
+
+        }
+
+    @Then("^I verify message \"(.*)\"$")
+    public void iVerifyMessage(String message) throws Throwable {
+
+        System.out.println("----------------------------------------");
+        System.out.println(message);
+        System.out.println("----------------------------------");
+        navigateTo.validSuccessMessage(driver,message);
+     //   throw new PendingException();
+    }
+
+
+    @And("^I (.*) details$")
+    public void iSaveDetails(String btn) {
+
+        navigateTo.resave(driver,btn);
     }
 }
 

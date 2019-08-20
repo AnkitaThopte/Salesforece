@@ -9,15 +9,18 @@ Feature: Verify Payment records under Opportunity chargeback initiated
     And I type the contact "Adaa Malik" in the Search box and press Enter to view the particular contact detail
     And I click on the searched contact name
     And I click Opportunities button
-    And I click on OPPORTUNITY NAME Adaa Malik RC-00001 Donation
+    And I click on OPPORTUNITY NAME Adaa Malik CG999889 Donation
     And I click on "Related" Tab
     And I click on Payment
+    And I click on Paid CheckBox
+    And I select Payment Date from payment date 2019-08-27
+    And I click on Save button
     And I click Chargeback radio button
     And I give following details Chargeback Bank Action,Chargeback Received On,Chargeback Reference Number,Chargeback Response By,Chargeback Actual Response Date,Chargeback SST Response and Chargeback Bank Final Notification Date
       |Chargeback Bank Action | Chargeback Received On| Chargeback Reference Number| Chargeback Response By | Chargeback Actual Response Date| Chargeback SST Response  | Chargeback Bank Final Notification Date |
       |<Chargeback Bank Action>|  <Chargeback Received On>  | <Chargeback Reference Number> | <Chargeback Response By> | <Chargeback Actual Response Date> | <Chargeback SST Response> | <Chargeback Bank Final Notification Date>|
-    And I click on Save button
-    And I click on Opportunity Name Adaa Malik RC-00001 Donation under Details tab
+    And I Save details
+    And I click on Opportunity Name Adaa Malik CG999889 Donation under Details tab
     And I click Payments link
     And I click on Payment Number
     # And I scroll down to page
