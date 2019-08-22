@@ -12,6 +12,7 @@ import net.serenitybdd.core.environment.EnvironmentSpecificConfiguration;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.guice.Injectors;
 import net.thucydides.core.util.EnvironmentVariables;
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -101,8 +102,8 @@ public class SalesforceStepDefinitions {
 //        enteredSupporterLevel = supporterLevel;
 //    }
 
-    @When("^I click on (.*) button$")
-    public void i_click_on_Save_button(String saveButton) {
+    @When("^I click on (.*) btn$")
+    public void i_click_on_Save(String saveButton) {
         navigateTo.clickSave(driver, saveButton);
     }
 
@@ -438,9 +439,9 @@ public class SalesforceStepDefinitions {
 //
 //    }
 
-    @And("^I click Opportunities button$")
-    public void i_click_opportunities() {
-        navigateTo.clickOpportunitybutton(driver);
+    @And("^I click (.*) button$")
+    public void i_click_opportunities(String opportunity) {
+        navigateTo.clickOpportunitybutton(driver,opportunity);
     }
 
     @And("^I click on OPPORTUNITY NAME (.*)$")
@@ -554,7 +555,7 @@ public class SalesforceStepDefinitions {
         navigateTo.selectPaymentDate(driver, fieldPaymentDate,fieldDate);
     }
 
-    @And("^I click (.*) radio button$")
+    @And("^I click (.*) radio button under Payment Type$")
     public void i_click_radio_button(String filedName) {
         navigateTo.clickRadioButton(driver, filedName);
     }
@@ -565,13 +566,13 @@ public class SalesforceStepDefinitions {
         String chargebackBankAction = data.get(0).get("Chargeback Bank Action");
         String chargebackReceivedOn = data.get(0).get("Chargeback Received On");
         String chargebackReferenceNumber = data.get(0).get("Chargeback Reference Number");
-        System.out.println("--------------------------");
-        System.out.println(chargebackBankAction);
-        System.out.println("----------------------------");
-        System.out.println(chargebackReceivedOn);
-        System.out.println("----------------------------");
-        System.out.println(chargebackReferenceNumber);
-        System.out.println("----------------------------");
+//        System.out.println("--------------------------");
+//        System.out.println(chargebackBankAction);
+//        System.out.println("----------------------------");
+//        System.out.println(chargebackReceivedOn);
+//        System.out.println("----------------------------");
+//        System.out.println(chargebackReferenceNumber);
+//        System.out.println("----------------------------");
 
         navigateTo.chargebackValue(driver,fieldChargebackBankAction,fieldChargebackReceivedOn,filedChargebackReferenceNumber,chargebackBankAction,chargebackReceivedOn,chargebackReferenceNumber);
 
@@ -640,15 +641,20 @@ public class SalesforceStepDefinitions {
         String chargebackReceivedOn = data.get(0).get("Chargeback Received On");
         String chargebackReferenceNumber = data.get(0).get("Chargeback Reference Number");
 
-        System.out.println("--------------------------");
-        System.out.println(chargebackBankAction);
-        System.out.println("----------------------------");
-        System.out.println(chargebackReceivedOn);
-        System.out.println("----------------------------");
-        System.out.println(chargebackReferenceNumber);
-        System.out.println("----------------------------");
+        String obj= "Chargeback initiated";
+//        System.out.println("--------------------------");
+//        System.out.println(chargebackBankAction);
+//        System.out.println("----------------------------");
+//        System.out.println(chargebackReceivedOn);
+//        System.out.println("----------------------------");
+//        System.out.println(chargebackReferenceNumber);
+//        System.out.println("----------------------------");
 
         navigateTo.verifyPaymentsRecord(driver,fieldChargebackBankAction,fieldChargebackReceivedOn,fieldChargebackReferenceNumber,chargebackBankAction,chargebackReceivedOn,chargebackReferenceNumber);
+
+
+        Assert.assertEquals(obj,chargebackBankAction);
+
     }
 
     @Then("^I verify Payment records successfully created under Chargeback Information after Chargeback Processed which are (.*),(.*),(.*),(.*) and (.*)$")
@@ -730,7 +736,7 @@ public class SalesforceStepDefinitions {
 
     @And("^I click \"(.*)\" Tab$")
     public void iClickTab(String clickOpportunity) throws Throwable {
-                navigateTo.opportunityClick(driver,clickOpportunity);
+        navigateTo.opportunityClick(driver,clickOpportunity);
 
       //  throw new PendingException();
     }
@@ -758,17 +764,6 @@ public class SalesforceStepDefinitions {
             String refundRefundInstrument = data.get(0).get("Refund Instrument");
             String refundBankAccountNo = data.get(0).get("Bank Account No");
             String refundBankBSB = data.get(0).get("Bank BSB");
-//            System.out.println("--------------------------------");
-//            System.out.println(refundCaseOrigin);
-//            System.out.println("----------------------------");
-//            System.out.println(refundRefundType);
-//            System.out.println("----------------------------");
-//            System.out.println(refundRefundInstrument);
-//            System.out.println("----------------------------");
-//            System.out.println(refundBankAccountNo);
-//            System.out.println("----------------------------");
-//            System.out.println(refundBankBSB);
-//            System.out.println("-----------------------------------");
 
             navigateTo.clickReund(driver,fieldCaseOrigin,fieldRefundType,fieldRefundInstrument,fieldBankAccountNo,fieldBankBSB,refundCaseOrigin,refundRefundType,refundRefundInstrument,refundBankAccountNo,refundBankBSB);
 
@@ -791,6 +786,65 @@ public class SalesforceStepDefinitions {
     public void iSaveDetails(String btn) {
 
         navigateTo.resave(driver,btn);
+    }
+
+
+    @When("^I clicked on (.*) Tab$")
+    public void iClickedOnCasesTab(String cases) {
+
+        navigateTo.casesClick(driver,cases);
+
+    }
+
+    @And("^I type the case number \"(.*)\" in the Search box and press Enter to view the particular case detail$")
+    public void iTypeTheCaseNumberInTheSearchBoxAndPressEnterToViewTheParticularContactDetail(String casenumber) throws Throwable {
+
+        navigateTo.caseNumber(driver,casenumber);
+       // throw new PendingException();
+    }
+
+    @And("^I click Refund Payment Link$")
+    public void iClickOnRefundPayment() {
+
+        navigateTo.paymentRefund(driver);
+    }
+
+    @And("^I click on the searched case number$")
+    public void iClickOnTheSearchedCaseNumber() {
+
+        navigateTo.searchCaseNumber(driver);
+    }
+
+    @Then("^I verify (.*) is displayed$")
+    public void iVerifyRefundCompletionDateIsDisplayed(String fieldRefundStatus,DataTable dataTable) {
+
+        List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+        String refundRefundStatus = data.get(0).get("Refund Status");
+       navigateTo.Refundstatus(driver,fieldRefundStatus,refundRefundStatus);
+
+    }
+
+
+    @Then("^I verify (.*) displayed$")
+    public void iVerifyRefundCompletionDateDisplayed(String CompletionDate,DataTable dataTable) {
+
+       List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+        String refundRefundCompletionDate = data.get(0).get("Refund Completion Date");
+        navigateTo.refundDateDislayed(driver,CompletionDate,refundRefundCompletionDate);
+
+
+    }
+
+    @Then("^I verify (.*) is display$")
+    public void iVerifyRefundDecisionDateIsDisplay(String fieldDeisionDate,DataTable dataTable) {
+
+        List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+        String refundDeisionDate = data.get(0).get("Refund Completion Date");
+
+        navigateTo.refundDecisionDate(driver,fieldDeisionDate,refundDeisionDate);
+
+
+
     }
 }
 
