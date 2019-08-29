@@ -9,7 +9,7 @@ Feature: Verify Refund completion Date should be updated after the review
     And I scroll down to page
     And I click Refund Payment Link
    # And I scroll down to page
-    Then I verify Refund Status is displayed
+    Then I verifed Refund Status is displayed
       | Refund Status |
       |<Refund Status>|
 

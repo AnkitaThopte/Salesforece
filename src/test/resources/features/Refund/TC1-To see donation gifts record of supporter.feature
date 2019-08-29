@@ -1,0 +1,21 @@
+Feature: To see donation/gifts record of supporter
+  As a Salesforce user, login to Salesforce and Searching Payment Records with Refund Request
+
+  Scenario Outline: To see donation/gifts record of supporter.
+    Given I login to Salesforce URL
+    When I click on Contacts tag
+    And I click on Recently Viewed dropdown Select List View
+    And I select "All Contacts" from the list view
+    And I type the contact "Helen Justin" in the Search box and press Enter to view the particular contact detail
+    And I click on the searched contact name
+   # And I click Opportunities button
+   # And I click on OPPORTUNITY NAME Helen Justin CAMPFL00002 Donation
+    And I click "Related"
+    And I click "Opportunities" Tab
+    Then I verify there are valid Opportunities present
+    | Opportunity Name| Account Name|
+    |<Opportunity Name> | <Account Name>|
+
+    Examples:
+      | Opportunity Name| Account Name|
+      |Helen Justin CAMPFL00002 Donation| Justin Household|

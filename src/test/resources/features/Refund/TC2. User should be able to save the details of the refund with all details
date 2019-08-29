@@ -6,10 +6,10 @@ Feature: Verify Payment records under Opportunity Refund initiated
     When I click on Contacts tag
     And I click on Recently Viewed dropdown Select List View
     And I select "All Contacts" from the list view
-    And I type the contact "James Wright" in the Search box and press Enter to view the particular contact detail
+    And I type the contact "Aidan Le Gras" in the Search box and press Enter to view the particular contact detail
     And I click on the searched contact name
     And I click Opportunities button
-    And I click on OPPORTUNITY NAME James Wright 123 Donation
+    And I click on OPPORTUNITY NAME Aidan Le Gras CAMPFL00002 Donation
     And I click on "Related" Tab
     And I click on Payment
     And I click on Paid CheckBox

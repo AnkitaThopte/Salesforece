@@ -7,7 +7,9 @@ import org.junit.runner.RunWith;
 @RunWith(CucumberWithSerenity.class)
 @CucumberOptions(
         plugin = {"pretty"},
-        features = "src/test/resources/features/KeySupporterLevelA.feature"
+        features = "src/test/resources/features/ChargeBack"
+   //     features = "src/test/resources/features/Refund"
+
 )
  public class CucumberTestSuite {
 
