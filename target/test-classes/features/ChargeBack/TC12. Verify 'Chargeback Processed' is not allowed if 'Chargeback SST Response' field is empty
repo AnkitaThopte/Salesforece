@@ -6,17 +6,17 @@ Feature: Verify Chargeback Processed is not allowed if Chargeback SST Response f
     When I click on Contacts tag
     And I click on Recently Viewed dropdown Select List View
     And I select "All Contacts" from the list view
-    And I type the contact "Stephnie Meyer" in the Search box and press Enter to view the particular contact detail
+    And I type the contact "David Dash" in the Search box and press Enter to view the particular contact detail
     And I click on the searched contact name
-    And I click Opportunities button
-    And I click on OPPORTUNITY NAME Stephnie Meyer 123 Donation
+    And I click the Opportunities button
+    And I click on Opportunities name David Dash CAMP00001 Donation link
     And I click on "Related" Tab
     And I click on Payment
-    #And I click Chargeback radio button under Payment Type
+   #And I click "Chargeback" radio button
     And I provided Chargeback Bank Action,Chargeback Response By,Chargeback Actual Response Date,Chargeback SST Response and Chargeback Bank Final Notification Date
       |Chargeback Bank Action | Chargeback Response By | Chargeback Actual Response Date| Chargeback SST Response  | Chargeback Bank Final Notification Date |
       |<Chargeback Bank Action>| <Chargeback Response By> | <Chargeback Actual Response Date> | <Chargeback SST Response> | <Chargeback Bank Final Notification Date>|
-    And I Save details
+    And I select on Chargeback's "Save" button
   #  And I click on Opportunity Name Joey Tribi FR00009 Donation under Details tab
   #  And I click Payments link
   # And I click on Payment Number
@@ -25,4 +25,4 @@ Feature: Verify Chargeback Processed is not allowed if Chargeback SST Response f
 
     Examples:
       |Chargeback Bank Action | Chargeback Response By | Chargeback Actual Response Date | Chargeback SST Response | Chargeback Bank Final Notification Date |
-      | Chargeback processed  | 2019-08-30             | 2019-08-30                     |                         | 2019-08-30           |
+      | Chargeback processed  | 2019-09-03             | 2019-09-03                     |                         | 2019-09-03           |

@@ -1,4 +1,4 @@
-Feature: Error message displayed if total refund amount less than the individual GAU amount
+Feature: Error message displayed if refund amount is negative
   As a Salesforce user, login to Salesforce and Error message displayed if total refund amount less than the individual GAU amount
 
   Scenario Outline: Error message displayed if total refund amount less than the individual GAU amount
@@ -8,15 +8,15 @@ Feature: Error message displayed if total refund amount less than the individual
     And I select "All Contacts" from the list view
     And I type the contact "Alan Bennett" in the Search box and press Enter to view the particular contact detail
     And I click on the searched contact name
-    And I click Opportunities button
-    And I click on OPPORTUNITY NAME Alan Bennett 123 Donation
+    And I click the Opportunities button
+    And I click on Opportunities name Alan Bennett 123 Donation link
     And I click on "Related" Tab
     And I click on Payment
-   # And I click on Paid CheckBox
-    #And I select Payment Date from payment date 2019-08-27
-    #And I click on Save btn
-    And I click Refund radio button under Payment Type
-    And I provide information as Case Origin,Refund Type,Refund Amount,Refund Instrument,Bank Account No and Bank BSB
+#    And I click on Paid CheckBox with click on Edit Paid option
+#    And I select Payment Date from payment date 2019-08-27
+#    And I click on Save button
+    And I click "Refund" radio button
+    And I provide field as Case Origin,Refund Type,Refund Amount,Refund Instrument,Bank Account No and Bank BSB
       | Case Origin   | Refund Type   | Refund Instrument  |Refund Amount | Bank Account No | Bank BSB |
       | <Case Origin> | <Refund Type> | <Refund Instrument> | <Refund Amount> | <Bank Account No> | <Bank BSB> |
 #    And I scroll up to page

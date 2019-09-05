@@ -9,8 +9,8 @@ Feature: Refunds & Adjustments - Searching Payment Records with Refund Request
     And I select "All Contacts" from the list view
     And I type the contact "Stephnie Meyer" in the Search box and press Enter to view the particular contact detail
     And I click on the searched contact name
-    And I click Opportunities button
-    And I click on OPPORTUNITY NAME Stephnie Meyer CAMP00001 Donation
+    And I click the Opportunities button
+    And I click on Opportunities name Stephnie Meyer CAMP00001 Donation link
     And I click on "Related" Tab
     And I click on Payment
     Then I verified Paid is unchecked and Record Type as Payment

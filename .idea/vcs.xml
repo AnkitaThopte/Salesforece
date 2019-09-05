@@ -5,6 +5,7 @@
     <mapping directory="$PROJECT_DIR$/Chargeback" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/Salesforece" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/Salesforece/Salesforece" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Salesforece2" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/src/Salesforece" vcs="Git" />
   </component>
 </project>

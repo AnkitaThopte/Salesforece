@@ -10,7 +10,7 @@ Feature: To see donation/gifts record of supporter
     And I click on the searched contact name
    # And I click Opportunities button
    # And I click on OPPORTUNITY NAME Helen Justin CAMPFL00002 Donation
-    And I click "Related"
+    And I click on "Related" Tab
     And I click "Opportunities" Tab
     Then I verify there are valid Opportunities present
     | Opportunity Name| Account Name|

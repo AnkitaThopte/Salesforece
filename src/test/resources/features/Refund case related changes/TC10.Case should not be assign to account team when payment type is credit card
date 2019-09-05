@@ -1,0 +1,37 @@
+Feature: Case should not be assign to account team when payment type is credit card
+  As a Salesforce user, login to Salesforce and Case should not be assign to account team when payment type is credit card
+
+  Scenario Outline: Case should not be assign to account team when payment type is credit card
+    Given I login to Salesforce URL
+    When I click on Contacts tag
+    And I click on Recently Viewed dropdown Select List View
+    And I select "All Contacts" from the list view
+    And I type the contact "Miara Josh" in the Search box and press Enter to view the particular contact detail
+    And I click on the searched contact name
+    And I click the Opportunities button
+    And I click on Opportunities name Miara Josh CAMPFL00002 Donation link
+    And I click on "Related" Tab
+    And I click on Payment
+    #And I click on Paid CheckBox
+    #And I select Payment Date from payment date 2019-08-27
+    #And I click on Save btn
+   # And I click "Refund" radio button
+    #And I provide field as Case Origin,Refund Type,Refund Amount,Refund Instrument,Bank Account No and Bank BSB
+   #   | Case Origin   | Refund Type   | Refund Instrument  |Refund Amount | Bank Account No | Bank BSB |
+    #  | <Case Origin> | <Refund Type> | <Refund Instrument> | <Refund Amount> | <Bank Account No> | <Bank BSB> |
+#    And I scroll up to page
+#    And I enter amount in the GAU under Manual Refund for Test Campaign and Running For Cause
+#    And click the GAU for Test Campaign and Running For Cause
+  # And I scroll down to page
+   # And I Save details
+   # And I scroll up to page
+    And I clicked "Related"
+    And I click Case Link
+    And I click Approval History
+    #And I click on Approve under Approval Request
+    #And I enter Comment under Approve case
+    #And I click Approve btn under Approve case
+    Then I checked Case Owner as "SST Managers Queue"
+    Examples:
+      | Case Origin   | Refund Type | Refund Amount  | Refund Instrument   | Bank Account No | Bank BSB |
+      | Direct Mail   | Full     | 50 | Credit Card     | 1782236         | 123456   |

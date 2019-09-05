@@ -1,0 +1,18 @@
+Feature: Verify Case should not be display under related payment when account team make the status to payment done
+  As a Salesforce user, login to Salesforce and Case should not be display under related payment when account team make the status to payment done
+
+  Scenario Outline: Refund completion Date should be display after making status as payment done
+     Given I login to Salesforce URL
+     When I clicked the Opportunities tab
+     And I click on Recently Viewed dropdown Select List View
+     And I selected the "All Opportunities" from the list view
+     And I type the opportunity name "Oxfam Australia FR000013 Donation" in the Search box and press Enter to view the particular opportunity detail
+     And I click on the searched opportunity name
+     And I click on "Related" Tab
+     And I click on Payment
+     And I clicked "Related"
+     Then I verify their is no case
+
+    Examples:
+      |Cases|
+      | 0|

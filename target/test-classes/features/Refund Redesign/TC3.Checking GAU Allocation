@@ -1,0 +1,21 @@
+Feature: Checking GAU Allocation
+  As a Salesforce user, login to Salesforce and Checking GAU Allocation
+
+  Scenario Outline: Refund completion Date should be display after making status as payment done
+    Given I login to Salesforce URL
+    When I click on Once Off tag
+    And I provide "Matthew Coghlan" in Contact Name under Once Off page
+    And I provide the details Campaign/Appeal Name,Batch Id,Channel,Receipting,Donation Amount and Payment Method under Once Off page
+      | Campaign/Appeal Name   | Batch Id   | Channel   | Receipting   | Donation Amount   | Payment Method   |
+      | <Campaign/Appeal Name> | <Batch Id> | <Channel> | <Receipting> | <Donation Amount> | <Payment Method> |
+    And I click Create Payment button
+    And I click on Donation Link
+    And I click on "Related" Tab
+    And I click on Payment
+    And I clicked "Related"
+    Then I verify GAU list is viewed in Payment Allocations
+
+
+    Examples:
+      | Campaign/Appeal Name | Batch Id     | Channel | Receipting | Donation Amount | Payment Method |
+      | Campaign Mystery | QA Batch 7   | Phone   | Emailed    | 50              | Cash           |

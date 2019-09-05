@@ -1,0 +1,31 @@
+Feature: Error message displayed system should not allow refund amount more than payment amount
+  As a Salesforce user, login to Salesforce and Error message displayed system should not allow refund amount more than payment amount
+
+  Scenario Outline: Error message displayed if total refund amount less than the individual GAU amount
+    Given I login to Salesforce URL
+    When I click on Contacts tag
+    And I click on Recently Viewed dropdown Select List View
+    And I select "All Contacts" from the list view
+    And I type the contact "Alan Bennett" in the Search box and press Enter to view the particular contact detail
+    And I click on the searched contact name
+    And I click the Opportunities button
+    And I click on Opportunities name Alan Bennett 123 Donation link
+    And I click on "Related" Tab
+    And I click on Payment
+#    And I click on Paid CheckBox with click on Edit Paid option
+#    And I select Payment Date from payment date 2019-09-02
+#    And I click on Save button
+    And I click "Refund" radio button
+    And I provide field as Case Origin,Refund Type,Refund Amount,Refund Instrument,Bank Account No and Bank BSB
+      | Case Origin   | Refund Type   | Refund Instrument  |Refund Amount | Bank Account No | Bank BSB |
+      | <Case Origin> | <Refund Type> | <Refund Instrument> | <Refund Amount> | <Bank Account No> | <Bank BSB> |
+ #   And I scroll up to page
+#    And I enter amount in the GAU under Manual Refund for Test Campaign and Running For Cause
+#    And click the GAU for Test Campaign and Running For Cause
+  #  And I scroll down to page
+   # And I select on Refund's "Save" button
+    And I Save details
+    Then I verifies Error Refund Amount entered is more than the original Payment Amount. Enter an amount which is less than the original Payment Amount
+    Examples:
+      | Case Origin   | Refund Type | Refund Amount  | Refund Instrument   | Bank Account No | Bank BSB |
+      | Direct Mail   | Partial     | 2500 | Bank Deposit     | 1782236         | 123456   |

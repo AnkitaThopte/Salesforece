@@ -8,17 +8,17 @@ Feature: Verify Payment records under Opportunity after chargeback processed. No
     And I select "All Contacts" from the list view
     And I type the contact "Andrew J Palmer" in the Search box and press Enter to view the particular contact detail
     And I click on the searched contact name
-    And I click Opportunities button
-    And I click on OPPORTUNITY NAME Andrew J Palmer RC-00001 Donation
+    And I click the Opportunities button
+    And I click on Opportunities name Andrew J Palmer RC-00001 link
     And I click on "Related" Tab
     And I click on Payment
-   #And I click Chargeback radio button under Payment Type
+   #And I click "Chargeback" radio button
     And I provide values in Chargeback Bank Action,Chargeback Response By,Chargeback Actual Response Date,Chargeback SST Response and Chargeback Bank Final Notification Date
       |Chargeback Bank Action | Chargeback Response By | Chargeback Actual Response Date| Chargeback SST Response  | Chargeback Bank Final Notification Date |
       |<Chargeback Bank Action>| <Chargeback Response By> | <Chargeback Actual Response Date> | <Chargeback SST Response> | <Chargeback Bank Final Notification Date>|
-    And I Save details
+    And I select on Chargeback's "Save" button
     And I click on Opportunity Name Andrew J Palmer RC-00001 Donation under Details tab
-    And I click Payments link
+    And I clicked Payments link
     Then I verify Payment records successfully created under Opportunity with Record Type as Chargeback
 
     Examples:
