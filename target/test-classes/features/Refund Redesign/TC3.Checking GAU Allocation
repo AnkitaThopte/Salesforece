@@ -10,8 +10,10 @@ Feature: Checking GAU Allocation
       | <Campaign/Appeal Name> | <Batch Id> | <Channel> | <Receipting> | <Donation Amount> | <Payment Method> |
     And I click Create Payment button
     And I click on Donation Link
-    And I click on "Related" Tab
-    And I click on Payment
+#    And I click on "Related" Tab
+    And I clicked Payments link
+    And I click Payment's Number
+   # And I click on Payment
     And I clicked "Related"
     Then I verify GAU list is viewed in Payment Allocations
 

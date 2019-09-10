@@ -1,0 +1,27 @@
+Feature: Verify Adjustment record is not created for adjusting contact
+  As a Salesforce user, login to Salesforce and Verify Adjustment record is not created for adjusting contact
+
+  Scenario Outline: Verify Adjustment record is not created for adjusting contact
+    Given I login to Salesforce URL
+    When I click on Contacts tag
+    And I click on Recently Viewed dropdown Select List View
+    And I select "All Contacts" from the list view
+    And I type the contact "Carl NULL Travis" in the Search box and press Enter to view the particular contact detail
+    And I click on the searched contact name
+    And I click the Opportunities button
+    And I click on Opportunities name Carl NULL Travis AW0903RAO1-Tel Donation link
+    And I click on "Related" Tab
+    And I click on Payment
+    And I click "Adjustment" radio button
+    #And I click the "Adjust Contact" radio button under Adjustment Type
+    And I select new Primary Contact as "Warren NULL Bourne"
+    And I click on Adjust Contact btn
+    And I scroll up to page
+    And I see Success message Supporter has been changed on the Donation.
+    And I clicked "Related"
+    Then I verifiy Payments (Related Payment Record) is null
+
+
+    Examples:
+      | Chargeback Bank Action | Chargeback Received On | Chargeback Reference Number |
+      | Chargeback initiated   | 2019-08-27             | CN100102                    |

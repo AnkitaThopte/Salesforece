@@ -98,8 +98,21 @@ public class SalesforceStepDefinitions {
 
     @When("^I select (.*) under (.*)$")
     public void i_select(String supporterLevel, String supporterfieldName) throws Throwable {
-        // navigateTo.selectFromDropDown(driver, supporterLevel, supporterfieldName);
+       // navigateTo.selectFromDropDown(driver, supporterLevel, supporterfieldName);
         enteredSupporterLevel = supporterLevel;
+    }
+
+    @And("^I selected (.*) under case information$")
+    public void iSelectDonePayment(String done) {
+
+        navigateTo.donePayment(driver,done);
+    }
+
+    @And("^I selected \"(.*)\" under case tab$")
+    public void iSelectUnderCaseTab(String Mycases) throws Throwable {
+
+        navigateTo.myCases(driver,Mycases);
+        // throw new PendingException();
     }
 
     @When("^I click on (.*) button")
@@ -1092,7 +1105,7 @@ public void iVerifyTheRelatedPaymentRecordChargeback(String RPaymentType, DataTa
         navigateTo.paymentRefund(driver);
     }
 
-    @Then("^I verify (.*) displayed$")
+    @Then("^I verified (.*) displayed$")
     public void iVerifyRefundCompletionDateDisplayed(String CompletionDate,DataTable dataTable) throws ParseException {
 
         List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
@@ -1347,6 +1360,128 @@ public void iVerifyTheRelatedPaymentRecordChargeback(String RPaymentType, DataTa
     }
 
 
+    @And("^I click the \"(.*)\" radio button under (.*)$")
+    public void iClickTheRadioButtonUnderAdjustmentType(String arg0) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+
+    }
+
+    @And("^I click (.*) linked$")
+    public void iClickOnSupporterHistoryTab(String history) {
+
+        navigateTo.historyTab(driver,history);
+    }
+
+    @Then("^I verify (.*) contains valid records$")
+    public void iVerifySupporterHistoryConatinsValidRecords(String fieldHistoryName) {
+
+//        List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+//        String fieldHistoryName = data.get(0).get("Subject(Action)");
+         navigateTo.historyRecord(driver,fieldHistoryName);
+      //  String validOpportunities= navigateTo.validOpportunities(driver,fieldOpportunityName,fieldAccountName);
+        System.out.println("-------------------------------\n");
+        System.out.println();
+
+    }
+
+    @And("^I select new Primary Contact as \"(.*)\"$")
+    public void iSelectNewPrimaryContactAs(String arg0) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+      //  throw new PendingException();
+        navigateTo.primaryContact(driver,arg0);
+
+    }
+
+    @And("^I click on (.*) btn$")
+    public void iClickOnAdjustContact(String adjContact) {
+
+      navigateTo.adjustContact(driver,adjContact);
+    }
+
+    @And("^I see (.*)$")
+    public void iVerifiySuccessMessageSupporter(String success) {
+
+        navigateTo.successMessage(driver,success);
+    }
+
+    @Then("^I verifiy (.*) is null$")
+    public void iVerifiyPaymentsRelatedPaymentRecordIsNull(String relatedPay) {
+
+        navigateTo.paymentRecord(driver,relatedPay);
+    }
+
+    @And("^I select Reason option as (.*)$")
+    public void selectReasonOptionAsUserError(String reason) {
+
+        navigateTo.selectReasionOpt(driver,reason);
+    }
+
+    @And("^I clicked \"(.*)\" radio button$")
+    public void iRadioButton(String arg0) throws Throwable {
+
+        navigateTo.adjbtn(driver,arg0);
+    }
+
+    @And("^I give Reason Comments$")
+    public void iGiveReasonComments() {
+
+    navigateTo.reasons(driver);
+    }
+
+
+    @And("^I Refresh the page$")
+    public void iRefreshThePage() {
+
+        navigateTo.refresh(driver);
+    }
+
+    @And("^I select new Campagin Name as \"(.*)\"$")
+    public void iSelectNewCampaginNameAs(String arg0) throws Throwable {
+
+        navigateTo.campaginName(driver,arg0);
+    }
+
+    @Then("^I verify Primary Contact and Account Name is of the new Contact$")
+    public void iVerifyPrimaryContactAndAccountName(DataTable dataTable) {
+        List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+        String fieldPrimaryName = data.get(0).get("Primary Name");
+        String fieldAccountName = data.get(0).get("Account Name");
+        navigateTo.accountName(driver,fieldPrimaryName,fieldAccountName);
+
+
+    }
+
+//   @And("^I clicked on (.*) tag$")
+//public void iClickedOnContactsTag(String arg0) {
+//
+//   navigateTo.contactsTag(driver,arg0);
+//}
+
+    @And("^I observed (.*) is displayed$")
+    public void iSeeMessage(String arg0) {
+
+        navigateTo.obsvervedMessage(driver,arg0);
+    }
+
+    @And("^I select (.*) and (.*)$")
+    public void iNewCampaginNameAs(String arg0,String arg1,DataTable dataTable) throws Throwable {
+
+        List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+        String CampaignName = data.get(0).get("Campaign Name");
+        String Product = data.get(0).get("Product");
+        navigateTo.campaginN(driver,arg0,arg1,CampaignName,Product);
+    }
+
+
+    @And("^I click (.*) under payment information$")
+    public void iClickRelatedPaymentRecordUnderPaymentInformation(String related, DataTable dataTable) {
+
+        List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+        String fieldRT = data.get(0).get("Related Payment Type");
+        // System.out.println(fieldRT);
+        System.out.println(fieldRT);
+        navigateTo.payInfoRecord(driver,related,fieldRT);
+    }
 }
 
 

@@ -22,7 +22,7 @@ Feature: Error message displayed if refund amount is negative
 #    And I scroll up to page
 #    And I enter amount in the GAU under Manual Refund for Test Campaign and Running For Cause
 #    And click the GAU for Test Campaign and Running For Cause
-  # And I scroll down to page
+#   And I scroll down to page
     And I Save details
     Then I check Error Please enter Refund Amount which should positive and greater than zero
     Examples:

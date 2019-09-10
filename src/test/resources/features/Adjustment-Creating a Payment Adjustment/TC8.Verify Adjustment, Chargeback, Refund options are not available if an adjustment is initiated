@@ -1,0 +1,27 @@
+Feature: Verify Adjustment, Chargeback, Refund options are not available if an adjustment is initiated
+
+  Scenario Outline: Verify Adjustment, Chargeback, Refund options are not available if an adjustment is initiated
+
+    Given I login to Salesforce URL
+    When I click on Contacts tag
+    And I click on Recently Viewed dropdown Select List View
+    And I select "All Contacts" from the list view
+    And I type the contact "Carl NULL Travis" in the Search box and press Enter to view the particular contact detail
+    And I click on the searched contact name
+    And I click the Opportunities button
+    And I click on Opportunities name Carl NULL Travis 123 Donation link
+    And I click on "Related" Tab
+    And I click on Payment
+    And I click "Adjustment" radio button
+    And I clicked "Adjust Campaign/Product" radio button
+    And I select new Campagin Name as "CPJOIN"
+    And I select Reason option as User Error
+    And I give Reason Comments
+    And I click on Make Adjustment btn
+    And I observed Adjustment has been done successfully for the record. You may check by going to the adjustment record. is displayed
+    And I Refresh the page
+    Then I verify message "Success Adjustment is already processed."
+
+    Examples:
+      | Chargeback Bank Action | Chargeback Received On | Chargeback Reference Number |
+      | Chargeback initiated   | 2019-08-27             | CN100102                    |

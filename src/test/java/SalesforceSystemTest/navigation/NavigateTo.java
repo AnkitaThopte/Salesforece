@@ -106,7 +106,7 @@ public class NavigateTo {
         //  WebElement elem = driver.findElement(By.xpath("//span[@class='test-id__section-header-title slds-truncate'][text()='Refund Details']"));
 
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("javascript:window.scrollBy(0,350)");
+        js.executeScript("javascript:window.scrollBy(0,1000)");
 
 //       JavascriptExecutor jse = (JavascriptExecutor)driver;
 //        jse.executeScript("arguments[0].scrollIntoView();",elem);
@@ -218,8 +218,9 @@ public class NavigateTo {
     public void clickTabName(WebDriver driver, String tagName) {
         waitfortheelement();
         //String filedTagName =TagName;
-      //  WebElement elem = driver.findElement(By.xpath("//div[@class='uiTabBar']//a[@class='tabHeader'][@title='"+ tagName +"']//span[@class='title'][text()='"+ tagName +"']"));
-        WebElement elem = driver.findElement(By.xpath("//div[@class='uiTabBar']//a[@class='tabHeader'][@title='Related']//span[@class='title'][text()='Related']"));
+        WebElement elem = driver.findElement(By.xpath("(//div[@class='uiTabBar']//a[@class='tabHeader'][@title='Related']//span[@class='title'][text()='Related'])[2]"));
+       // WebElement elem = driver.findElement(By.xpath("//div[@class='uiTabBar']//a[@class='tabHeader'][@title='Related']//span[@class='title'][text()='Related']"));
+     //   driver.findElement(By.xpath("//div[@class='column region-main']//div[@class='uiTabBar']//span[@class='title'][text()='"+tagName+"']")).click();
 
         elem.click();
         waitfortheelement();
@@ -1187,8 +1188,9 @@ public class NavigateTo {
    //***************************************3/9/2019****************************************************
     public void clickPayments(WebDriver driver, String Payclick) {
         waitfortheelement();
-        // driver.findElement(By.xpath("//div//a//span[@class='rlql-label'][text()='" + Payclick + "']")).click();
-        driver.findElement(By.xpath("//div[@class='showPreview forceRelatedListQuickLinksContainer']//span[@class='rlql-label'][text()='"+Payclick+"']")).click();
+         driver.findElement(By.xpath("//div//a//span[@class='rlql-label'][text()='" + Payclick + "']")).click();
+       // driver.findElement(By.xpath("//div[@class='showPreview forceRelatedListQuickLinksContainer']//span[@class='rlql-label'][text()='"+Payclick+"']")).click();
+
         waitfortheelement();
     }
 
@@ -1650,8 +1652,8 @@ public class NavigateTo {
             waitfortheelement();
             waitfortheelement();
 
-            String str= driver.findElement(By.xpath("//div[@class='confirm uiMessage']//div[@class='uiBlock']//div[@class='bBody']")).getText();
-
+           // String str= driver.findElement(By.xpath("//div[@class='confirm uiMessage']//div[@class='uiBlock']//div[@class='bBody']")).getText();
+        String str= driver.findElement(By.xpath("//div[@class='confirm  uiMessage']//div[@class='uiBlock']//div[@class='bBody']")).getText();
             return str;
    }
 
@@ -2100,6 +2102,199 @@ public class NavigateTo {
            return error1;
     }
 
+    public void historyTab(WebDriver driver, String history) {
+
+        waitfortheelement();
+        waitfortheelement();
+
+        driver.findElement(By.xpath("//div[@class='column region-main']//div[@class='slds-media__body']//span[@title='"+history+"']")).click();
+
+
+    }
+
+    public void historyRecord(WebDriver driver, String fieldHistoryName) {
+
+        waitfortheelement();
+        waitfortheelement();
+        waitfortheelement();
+        WebElement e = driver.findElement(By.xpath("//table[contains(@class,'uiVirtualDataTable')]//tbody"));
+        //   WebElement e = driver.findElement(By.xpath("//div[@class='column left-col']//div[@class='slds-media__body']//span[@title='"+fieldPaymentAllocations+"']"));
+        waitfortheelement();
+
+        List<WebElement> rows = e.findElements(By.tagName("tr"));
+        WebElement firstRecordFound = rows.get(0);
+
+        firstRecordFound.findElement(By.tagName("th")).findElement(By.tagName("a")).getText();
+        waitfortheelement();
+        waitfortheelement();
+        waitfortheelement();
+
+    }
+
+    public void primaryContact(WebDriver driver, String arg0) {
+
+        waitfortheelement();
+        waitfortheelement();
+
+        driver.findElement(By.xpath("//div[@class='slds-card__body']//button[@title='Clear Selection']")).click();
+       // driver.findElement(By.xpath("//div[@class='slds-card__body']//div[@class='slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right']")).sendKeys(arg0);
+        driver.findElement(By.xpath("//div[@class='slds-card__body']//lightning-base-combobox-item[@class='slds-media slds-listbox__option slds-media_center slds-listbox__option_entity']//span[@title='"+arg0+"']")).click();
+        waitfortheelement();
+//        Actions act1 = new Actions(driver);
+//        waitfortheelement();
+//        act1.sendKeys(Keys.ENTER).build().perform();
+//        waitfortheelement();
+
+    }
+
+    public void adjustContact(WebDriver driver, String adjContact) {
+
+        waitfortheelement();
+        waitfortheelement();
+
+        driver.findElement(By.xpath("//div[@class='slds-card__body']//button[@class='slds-button slds-button_brand'][text()='"+adjContact+"']")).click();
+
+
+    }
+
+    public void successMessage(WebDriver driver, String success) {
+
+        waitfortheelement();
+        waitfortheelement();
+
+        String str= driver.findElement(By.xpath("//div[@class='confirm uiMessage']//div[@class='uiBlock']//div[@class='bBody']")).getText();
+      //  String str= driver.findElement(By.xpath("//div[@class='confirm  uiMessage']//div[@class='uiBlock']//div[@class='bBody']")).getText();
+        System.out.println(str);
+    }
+
+    public void paymentRecord(WebDriver driver, String relatedPay) {
+
+        waitfortheelement();
+        waitfortheelement();
+
+        String str= driver.findElement(By.xpath("//div[@class='column left-col']//div[@class='slds-media__body']//span[@title='"+relatedPay+"']")).getText();
+        System.out.println(str);
+
+    }
+
+
+    public void myCases(WebDriver driver, String mycases) {
+
+        waitfortheelement();
+        driver.findElement(By.xpath("//span[@class= ' virtualAutocompleteOptionText'][contains(text(),'" + mycases + "')]")).click();
+        waitfortheelement();
+        Actions act1 = new Actions(driver);
+        waitfortheelement();
+        act1.sendKeys(Keys.ENTER).build().perform();
+        waitfortheelement();
+    }
+
+    public void donePayment(WebDriver driver, String done) {
+        waitfortheelement();
+
+        driver.findElement(By.xpath("//div[@class='uiMenu']//a[@class='select']//..//..//a")).click();
+        driver.findElement(By.xpath("//div[@class='select-options']//li[@class='uiMenuItem uiRadioMenuItem']//a[@title='"+done+"']")).click();
+
+    }
+
+    public void selectReasionOpt(WebDriver driver, String reason) {
+        waitfortheelement();
+
+        driver.findElement(By.xpath("//div[@class='slds-card__body']//input[@name='Reason__c']")).click();
+        driver.findElement(By.xpath("//div[@class='slds-card__body']//label[@class='slds-form-element__label']//..//span[@title='"+reason+"']")).click();
+
+    }
+
+    public void adjbtn(WebDriver driver, String arg0) {
+
+        waitfortheelement();
+
+        driver.findElement(By.xpath("//div[@class='slds-card__body']//label[@class='slds-radio__label']//span[@class='slds-radio_faux']//..//span[text()='"+arg0+"']")).click();
+    }
+
+    public void reasons(WebDriver driver) {
+
+        waitfortheelement();
+
+        String text="error occurred due to user incorrect option";
+        driver.findElement(By.xpath("//div[@class='slds-card__body']//div[@class='slds-form-element__control slds-grow']//textarea")).sendKeys(text);
+    }
+
+    public void refresh(WebDriver driver) {
+
+        waitfortheelement();
+        driver.navigate().refresh();
+    }
+
+    public void campaginName(WebDriver driver, String arg0) {
+
+        waitfortheelement();
+        driver.findElement(By.xpath("//div[@class='slds-card__body']//button[@title='Remove']")).click();
+        driver.findElement(By.xpath("//div[@class='slds-card__body']//input[contains(@class,'slds-lookup__search-input slds-input leftPaddingClass')][1]")).click();
+        driver.findElement(By.xpath("//div[@class='slds-card__body']//span[@class='slds-listbox__option-text slds-listbox__option-text_entity'][text()='"+arg0+"']")).click();
+        waitfortheelement();
+
+    }
+
+    public void accountName(WebDriver driver, String fieldPrimaryName,String fieldAccountName) {
+
+        waitfortheelement();
+        waitfortheelement();
+        waitfortheelement();
+        WebElement e = driver.findElement(By.xpath("//table[contains(@class,'uiVirtualDataTable')]//tbody"));
+        //   WebElement e = driver.findElement(By.xpath("//div[@class='column left-col']//div[@class='slds-media__body']//span[@title='"+fieldPaymentAllocations+"']"));
+        waitfortheelement();
+
+        List<WebElement> rows = e.findElements(By.tagName("tr"));
+        WebElement firstRecordFound = rows.get(0);
+
+        firstRecordFound.findElement(By.tagName("th")).findElement(By.tagName("a")).getText();
+        waitfortheelement();
+        waitfortheelement();
+        waitfortheelement();
+
+    }
+
+//    public void contactsTag(WebDriver driver, String arg0) {
+//
+//        waitfortheelement();
+//        // String e=driver.findElement(By.xpath("//one-app-nav-bar-item-root[@class='navItem slds-context-bar__item slds-shrink-none'][a[span[@class='slds-truncate'][text()='"+ tagname +"']]]")).getText();
+//
+//
+//        driver.findElement(By.xpath(".//one-app-nav-bar-item-root[@class='navItem slds-context-bar__item slds-shrink-none'][a[span[@class='slds-truncate'][text()='" + arg0 + "']]]")).click();
+////       // driver.findElement(By.xpath(".//one-app-nav-bar-item-root[@class='navItem slds-context-bar__item slds-shrink-none'][a[@title='Once Off']]//span")).click();
+////        driver.findElement(By.xpath("//one-app-nav-bar-item-root[@class='navItem slds-context-bar__item slds-shrink-none']//a[@class='slds-context-bar__label-action dndItem']//span[text()='Once Off']")).click();
+//        // driver.findElement(By.xpath(".//one-app-nav-bar-item-root[@class='navItem slds-context-bar__item slds-shrink-none']//a//span[@class='slds-truncate'][text()='"+ tagname +"']")).click();
+//        waitfortheelement();
+//    }
+
+    public void obsvervedMessage(WebDriver driver, String arg0) {
+
+        waitfortheelement();
+        String str= driver.findElement(By.xpath("//div[@class='confirm  uiMessage']//div[@class='uiBlock']//div[@class='bBody']")).getText();
+        System.out.println(str);
+    }
+
+    public void campaginN(WebDriver driver, String arg0, String arg1, String CampaginName, String Product) {
+
+        waitfortheelement();
+        driver.findElement(By.xpath("//div[@class='slds-card__body']//button[@title='Remove']")).click();
+        driver.findElement(By.xpath("//div[@class='slds-card__body']//input[contains(@class,'slds-lookup__search-input slds-input leftPaddingClass')][1]")).click();
+
+        driver.findElement(By.xpath("//div[@class='slds-card__body']//span[@class='slds-listbox__option-text slds-listbox__option-text_entity'][text()='"+CampaginName+"']")).click();
+        waitfortheelement();
+        driver.findElement(By.xpath("(//div[@class='slds-card__body']//input[contains(@class,'slds-lookup__search-input slds-input leftPaddingClass input')])[2]")).click();
+        driver.findElement(By.xpath("//div[@class='slds-card__body']//span[@class='slds-listbox__option-text slds-listbox__option-text_entity'][text()='"+Product+"']")).click();
+        waitfortheelement();
+
+    }
+
+    public void payInfoRecord(WebDriver driver, String related, String fieldRT) {
+
+        waitfortheelement();
+        driver.findElement(By.xpath("//div[@class='column left-col']//label[@class='label inputLabel uiLabel-left form-element__label uiLabel']//span[text()='"+related+"']")).click();
+
+    }
 
 //    public void noCases(WebDriver driver) {
 //

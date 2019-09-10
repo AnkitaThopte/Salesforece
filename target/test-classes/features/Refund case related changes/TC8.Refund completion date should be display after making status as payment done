@@ -9,7 +9,7 @@ Feature: Verify Refund completion Date should be display after making status as 
     And I scroll down to page
     And I click Refund Payment Link
    # And I scroll down to page
-    Then I verify Refund Completion Date displayed
+    Then I verified Refund Completion Date displayed
       | Refund Completion Date |
       |<Refund Completion Date>|
 
