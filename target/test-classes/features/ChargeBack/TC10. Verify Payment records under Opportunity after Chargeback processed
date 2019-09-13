@@ -19,7 +19,7 @@ Feature: Verify Payment records under Opportunity after chargeback processed
     And I select on Chargeback's "Save" button
     And I click on Opportunity Name Alannah Matheson CAMP00001 Donation under Details
     And I clicked Payments link
-    And I click Payment's Number
+    And I click Payments Number
     And I scroll down to page
     Then I verify Payment records successfully created under Chargeback Information after Chargeback Processed which are Chargeback Bank Action,Chargeback Response By,Chargeback Actual Response Date,Chargeback SST Response and Chargeback Bank Final Notification Date
       |Chargeback Bank Action | Chargeback Response By | Chargeback Actual Response Date| Chargeback SST Response  | Chargeback Bank Final Notification Date |

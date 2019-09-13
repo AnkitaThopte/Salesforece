@@ -13,7 +13,7 @@ Feature: Verify Adjustment contact changes the associated account
     And I click on "Related" Tab
     And I click on Payment
     And I click "Adjustment" radio button
-    #And I click the "Adjust Contact" radio button under Adjustment Type
+    And I click the "Adjust Contact" radio button under Adjustment Type
     And I select new Primary Contact as "Michael E Evans"
     And I click on Adjust Contact btn
     And I scroll up to page

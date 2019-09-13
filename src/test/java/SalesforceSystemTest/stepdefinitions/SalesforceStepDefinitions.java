@@ -778,7 +778,7 @@ public void iVerifyTheRelatedPaymentRecordChargeback(String RPaymentType, DataTa
         navigateTo.recordType(driver,fieldType,record);
     }
 
-    @And("^I click Payment's Number$")
+    @And("^I click Payments Number$")
     public void iClickOnPaymentNumber() {
         navigateTo.clickOnPaymentNumber(driver);
 
@@ -1360,7 +1360,7 @@ public void iVerifyTheRelatedPaymentRecordChargeback(String RPaymentType, DataTa
     }
 
 
-    @And("^I click the \"(.*)\" radio button under (.*)$")
+    @And("^I click the \"(.*)\" radio button under Adjustment Type$")
     public void iClickTheRadioButtonUnderAdjustmentType(String arg0) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
 
@@ -1469,18 +1469,63 @@ public void iVerifyTheRelatedPaymentRecordChargeback(String RPaymentType, DataTa
         List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
         String CampaignName = data.get(0).get("Campaign Name");
         String Product = data.get(0).get("Product");
+       // String Amount= data.get()
         navigateTo.campaginN(driver,arg0,arg1,CampaignName,Product);
     }
 
 
     @And("^I click (.*) under payment information$")
-    public void iClickRelatedPaymentRecordUnderPaymentInformation(String related, DataTable dataTable) {
+    public void iClickRelatedPaymentInformation(String related) {
+
+//        List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+//        String fieldRT = data.get(0).get("Payments (Related Payment Record)");
+//        // System.out.println(fieldRT);
+    //    System.out.println(fieldRT);
+        navigateTo.payInfoRecord(driver,related);
+    }
+
+    @And("^I click on \"(.*)\"$")
+    public void iClickOn(String arg0) throws Throwable {
+
+       navigateTo.payAlloction(driver,arg0);
+
+    }
+
+    @And("^I click \"(.*)\" link$")
+    public void iClickLink(String arg0) throws Throwable {
+
+        navigateTo.link(driver,arg0);
+    }
+
+    @And("^I selected (.*) and (.*)$")
+    public void iSelectedCampaignNameAndProduct(String arg0,String arg1, DataTable dataTable) {
 
         List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
-        String fieldRT = data.get(0).get("Related Payment Type");
-        // System.out.println(fieldRT);
-        System.out.println(fieldRT);
-        navigateTo.payInfoRecord(driver,related,fieldRT);
+        String CampaignName = data.get(0).get("Campaign Name");
+        String Product = data.get(0).get("Product");
+
+        navigateTo.changeProduct(driver,arg0,arg1,CampaignName,Product);
+
+    }
+
+    @And("^I enter Amount$")
+    public void iEnterAmount() {
+//        List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+//        String Amount = data.get(0).get("Amount");
+//
+        navigateTo.enterAmount(driver);
+    }
+
+    @Then("^I verify Adjustment Status is (.*)$")
+    public void iVerifyAdjustmentStatusIsCompleted(String complete) {
+
+        navigateTo.complete(driver,complete);
+    }
+
+    @Then("^I verify (.*) is already populated$")
+    public void iVerifyAlreadyPopulated(String PrimaryContact) {
+
+        navigateTo.alreadyPopulated(driver,PrimaryContact);
     }
 }
 

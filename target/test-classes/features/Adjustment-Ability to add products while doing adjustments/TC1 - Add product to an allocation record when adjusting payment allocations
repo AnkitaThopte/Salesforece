@@ -1,6 +1,6 @@
-Feature: Change product to an allocation record when adjusting payment allocations
+Feature: Add product to an allocation record when adjusting payment allocations
 
-  Scenario Outline: Change product to an allocation record when adjusting payment allocations
+  Scenario Outline: Add product to an allocation record when adjusting payment allocations
 
     Given I login to Salesforce URL
     When I click on Contacts tag
@@ -14,9 +14,12 @@ Feature: Change product to an allocation record when adjusting payment allocatio
     And I click on Payment
     And I click "Adjustment" radio button
     And I clicked "Adjust Campaign/Product" radio button
-    And I selected Campaign Name and Product
-    |Campaign Name| Product |
-    | <Campaign Name> | <Product> |
+    And I select Campaign Name and Product
+      |Campaign Name| Product |
+      | <Campaign Name> | <Product> |
+    And I enter Amount
+#      |Amount|
+#      |<Amount>|
     And I select Reason option as User Error
     And I give Reason Comments
     And I click on Make Adjustment btn
@@ -31,3 +34,6 @@ Feature: Change product to an allocation record when adjusting payment allocatio
       |Campaign Name| Product |
       | CPJOIN | 4215AG |
 
+#    Examples:
+#    |Amount|
+#    | 120 |
