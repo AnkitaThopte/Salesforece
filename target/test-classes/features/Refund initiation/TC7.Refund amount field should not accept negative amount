@@ -19,10 +19,10 @@ Feature: Error message displayed if refund amount is negative
     And I provide field as Case Origin,Refund Type,Refund Amount,Refund Instrument,Bank Account No and Bank BSB
       | Case Origin   | Refund Type   | Refund Instrument  |Refund Amount | Bank Account No | Bank BSB |
       | <Case Origin> | <Refund Type> | <Refund Instrument> | <Refund Amount> | <Bank Account No> | <Bank BSB> |
-#    And I scroll up to page
-#    And I enter amount in the GAU under Manual Refund for Test Campaign and Running For Cause
-#    And click the GAU for Test Campaign and Running For Cause
-#   And I scroll down to page
+    And I scroll up to page
+    And I enter amount in the GAU under Manual Refund for Test Campaign and Running For Cause
+    And I click the GAU for Test Campaign and Running For Cause
+    And I scroll down to page
     And I Save details
     Then I check Error Please enter Refund Amount which should positive and greater than zero
     Examples:

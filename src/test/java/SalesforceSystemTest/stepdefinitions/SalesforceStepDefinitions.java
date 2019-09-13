@@ -598,14 +598,14 @@ public class SalesforceStepDefinitions {
     }
 
     @Then("^I verify message \"(.*)\" generated$")
-    public void i_verify_success_message(String filedMassage) {
+    public void i_verify_success_message(String filedMessage) {
         System.out.println("...............................................................");
 
-        filedMassage = filedMassage.replaceAll("<new_line>","\n");
-        System.out.println(filedMassage);
+        filedMessage = filedMessage.replaceAll("<new_line>","\n");
+        System.out.println(filedMessage);
         System.out.println("...............................................................");
 
-        navigateTo.verifySuccessMessage(driver, filedMassage);
+        navigateTo.verifySuccessMessage(driver, filedMessage);
     }
 
     @Then("^I Verify Related Payment Record generated$")
@@ -949,7 +949,7 @@ public void iVerifyTheRelatedPaymentRecordChargeback(String RPaymentType, DataTa
     }
 
     @Then("^I check (.*)$")
-    public void iCheckErrorPleaseEnterRefundAmountWhichShouldPositiveAndGreaterThanZero(String arg1) {
+    public void iCheckErrorPlease(String arg1) {
 
         String stat= navigateTo.negativeRefundAmt(driver,arg1);
         String[] tokens= arg1.split("/n");
@@ -1253,10 +1253,10 @@ public void iVerifyTheRelatedPaymentRecordChargeback(String RPaymentType, DataTa
         navigateTo.allOpportunities(driver,allOpportunity);
     }
 
-//    @Then("^I verify their is no case$")
-//    public void iVerifyTheirIsNoCase() {
-//        navigateTo.noCases(driver);
-//    }
+    @Then("^I verify their is no (.*)$")
+    public void iVerifyTheirIsNoCase(String cases) {
+        navigateTo.noCases(driver,cases);
+    }
 
     @Then("^I checked (.*) as \"(.*)\"$")
     public void iCheckedCaseOwnerAs(String Owner,String SSt) throws Throwable {
@@ -1508,12 +1508,12 @@ public void iVerifyTheRelatedPaymentRecordChargeback(String RPaymentType, DataTa
 
     }
 
-    @And("^I enter Amount$")
-    public void iEnterAmount() {
+    @And("^I enter (.*)$")
+    public void iEnterAmount(String amt) {
 //        List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
 //        String Amount = data.get(0).get("Amount");
 //
-        navigateTo.enterAmount(driver);
+        navigateTo.enterAmount(driver,amt);
     }
 
     @Then("^I verify Adjustment Status is (.*)$")

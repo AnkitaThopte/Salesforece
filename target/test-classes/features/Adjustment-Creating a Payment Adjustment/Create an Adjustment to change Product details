@@ -1,6 +1,6 @@
-Feature: Add product to an allocation record when adjusting payment allocations
+Feature: Create an Adjustment to change Product details
 
-  Scenario Outline: Add product to an allocation record when adjusting payment allocations
+  Scenario Outline: Create an Adjustment to change Product details
 
     Given I login to Salesforce URL
     When I click on Contacts tag
@@ -14,10 +14,9 @@ Feature: Add product to an allocation record when adjusting payment allocations
     And I click on Payment
     And I click "Adjustment" radio button
     And I clicked "Adjust Campaign/Product" radio button
-    And I select Campaign Name and Product
+    And I selected Campaign Name and Product
       |Campaign Name| Product |
       | <Campaign Name> | <Product> |
-    And I enter Amount
     And I select Reason option as User Error
     And I give Reason Comments
     And I click on Make Adjustment btn

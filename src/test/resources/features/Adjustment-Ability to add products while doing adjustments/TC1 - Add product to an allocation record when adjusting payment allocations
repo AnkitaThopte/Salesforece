@@ -18,8 +18,6 @@ Feature: Add product to an allocation record when adjusting payment allocations
       |Campaign Name| Product |
       | <Campaign Name> | <Product> |
     And I enter Amount
-#      |Amount|
-#      |<Amount>|
     And I select Reason option as User Error
     And I give Reason Comments
     And I click on Make Adjustment btn
@@ -33,7 +31,3 @@ Feature: Add product to an allocation record when adjusting payment allocations
     Examples:
       |Campaign Name| Product |
       | CPJOIN | 4215AG |
-
-#    Examples:
-#    |Amount|
-#    | 120 |

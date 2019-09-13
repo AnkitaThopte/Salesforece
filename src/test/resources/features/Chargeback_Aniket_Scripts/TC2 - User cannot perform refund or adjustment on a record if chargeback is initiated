@@ -19,8 +19,8 @@ Feature: ChargeBack Complete flow
     And I provide details Chargeback Bank Action,Chargeback Received On and Chargeback Reference Number
       | Chargeback Bank Action   | Chargeback Received On   | Chargeback Reference Number   |
       | <Chargeback Bank Action> | <Chargeback Received On> | <Chargeback Reference Number> |
-#    And I select on Chargeback's "Save" button
-#    Then I verify that 'Charegback Bank Action' is initiated and 'Refund','Adjustment' and 'Chargeback' radio button should not be visible and cannot perform 'Refund' or 'Adjustment'
+    And I select on Chargeback's "Save" button
+    Then I verify that 'Charegback Bank Action' is initiated and 'Refund','Adjustment' and 'Chargeback' radio button should not be visible and cannot perform 'Refund' or 'Adjustment'
 
     Examples:
       | Chargeback Bank Action | Chargeback Received On | Chargeback Reference Number |

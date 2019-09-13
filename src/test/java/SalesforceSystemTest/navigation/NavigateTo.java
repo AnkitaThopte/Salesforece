@@ -218,9 +218,9 @@ public class NavigateTo {
     public void clickTabName(WebDriver driver, String tagName) {
         waitfortheelement();
         //String filedTagName =TagName;
-        WebElement elem = driver.findElement(By.xpath("(//div[@class='uiTabBar']//a[@class='tabHeader'][@title='Related']//span[@class='title'][text()='Related'])[2]"));
+        WebElement elem = driver.findElement(By.xpath("(//div[@class='uiTabBar']//a[@class='tabHeader'][@title='"+tagName+"']//span[@class='title'][text()='"+tagName+"'])[2]"));
        // WebElement elem = driver.findElement(By.xpath("//div[@class='uiTabBar']//a[@class='tabHeader'][@title='Related']//span[@class='title'][text()='Related']"));
-     //   driver.findElement(By.xpath("//div[@class='column region-main']//div[@class='uiTabBar']//span[@class='title'][text()='"+tagName+"']")).click();
+    //   driver.findElement(By.xpath("//div[@class='column region-main']//div[@class='uiTabBar']//span[@class='title'][text()='"+tagName+"']")).click();
       //  driver.findElement(By.xpath("//div[contains(@class,'uiTabBar')]//a[contains(@title,'"+tagName+"')]")).click();
         elem.click();
         waitfortheelement();
@@ -947,7 +947,7 @@ public class NavigateTo {
 //
 //        Assert.assertTrue(contains);
 
-        Assert.assertEquals(message, msg);
+        //Assert.assertEquals(message, msg);
     }
 
     public void verifyRecord(WebDriver driver) {
@@ -2279,13 +2279,13 @@ public class NavigateTo {
     public void campaginN(WebDriver driver, String arg0, String arg1, String CampaginName, String Product) {
 
         waitfortheelement();
-        driver.findElement(By.xpath("//div[@class='slds-card__body']//button[@title='Remove']")).click();
+       driver.findElement(By.xpath("//div[@class='slds-card__body']//button[@title='Remove']")).click();
         driver.findElement(By.xpath("//div[@class='slds-card__body']//input[contains(@class,'slds-lookup__search-input slds-input leftPaddingClass')][1]")).click();
 
         driver.findElement(By.xpath("//div[@class='slds-card__body']//span[@class='slds-listbox__option-text slds-listbox__option-text_entity'][text()='"+CampaginName+"']")).click();
         waitfortheelement();
-        driver.findElement(By.xpath("(//div[@class='slds-card__body']//input[contains(@class,'slds-lookup__search-input slds-input leftPaddingClass input')])[2]")).click();
-        driver.findElement(By.xpath("//div[@class='slds-card__body']//span[@class='slds-listbox__option-text slds-listbox__option-text_entity'][text()='"+Product+"']")).click();
+     //   driver.findElement(By.xpath("(//div[@class='slds-card__body']//input[contains(@class,'slds-lookup__search-input slds-input leftPaddingClass input')])[2]")).click();
+     //   driver.findElement(By.xpath("//div[@class='slds-card__body']//span[@class='slds-listbox__option-text slds-listbox__option-text_entity'][text()='"+Product+"']")).click();
         waitfortheelement();
 
     }
@@ -2340,14 +2340,16 @@ public class NavigateTo {
 
     }
 
-    public void enterAmount(WebDriver driver) {
+    public void enterAmount(WebDriver driver, String amt) {
 
-        String arg0= "1000";
+        String arg0= "120";
         waitfortheelement();
-        driver.findElement(By.xpath("//div[@class='slds-card__body']//input[@class='slds-input']")).click();
-        driver.findElement(By.xpath("//div[@class='slds-card__body']//input[@class='slds-input']")).clear();
-        waitfortheelement();
-        driver.findElement(By.xpath("//div[@class='slds-card__body']//input[@class='slds-input']")).sendKeys(arg0);
+       // driver.findElement(By.xpath("//div[@class='slds-card__body']//input[@class='slds-input']")).click();
+        driver.findElement(By.xpath("//div[contains(@class,'container-fluid')]//th//div[@title='"+amt+"']/../../../..//tr//input[@name='allAmount']")).clear();
+        //driver.findElement(By.xpath("//div[@class='slds-card__body']//input[@class='slds-input']")).clear();
+      //  waitfortheelement();
+        driver.findElement(By.xpath("//div[contains(@class,'container-fluid')]//th//div[@title='"+amt+"']/../../../..//tr//input[@name='allAmount']")).sendKeys(arg0);
+       // driver.findElement(By.xpath("//div[@class='slds-card__body']//input[@class='slds-input']")).sendKeys(arg0);
 
     }
 
@@ -2369,9 +2371,12 @@ public class NavigateTo {
 
     }
 
-//    public void noCases(WebDriver driver) {
-//
-//
-//
-//    }
+    public void noCases(WebDriver driver, String cases) {
+
+        waitfortheelement();
+        String str= driver.findElement(By.xpath("//div[@class='column left-col']//div[@class='slds-card__header slds-grid']//div[@class='slds-media__body']//span[text()='"+cases+"']")).getText();
+        waitfortheelement();
+        System.out.println(str);
+
+    }
 }

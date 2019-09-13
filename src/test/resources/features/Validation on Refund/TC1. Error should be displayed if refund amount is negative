@@ -12,9 +12,9 @@ Feature: Error message displayed if refund amount is negative
     And I click on Opportunities name Alan Bennett 123 Donation link
     And I click on "Related" Tab
     And I click on Payment
-   # And I click on Paid CheckBox
-    #And I select Payment Date from payment date 2019-08-27
-    #And I click on Save btn
+   # And I click on Paid CheckBox with click on Edit Paid option
+#    And I select Payment Date from payment date 2019-08-27
+#    And I click on Save button
     And I click "Refund" radio button
     And I provide field as Case Origin,Refund Type,Refund Amount,Refund Instrument,Bank Account No and Bank BSB
       | Case Origin   | Refund Type   | Refund Instrument  |Refund Amount | Bank Account No | Bank BSB |

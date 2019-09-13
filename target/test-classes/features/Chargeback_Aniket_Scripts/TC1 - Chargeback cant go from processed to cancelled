@@ -6,7 +6,7 @@ Feature: ChargeBack Complete flow
     When I click on Contacts tag
     And I click on Recently Viewed dropdown Select List View
     And I select "All Contacts" from the list view
-    And I type the contact "Samaira" in the Search box and press Enter to view the particular contact detail
+    And I type the contact "Swati NULL Baindur" in the Search box and press Enter to view the particular contact detail
     And I click on the searched contact name
     And I click the Opportunities button
     And I click on Opportunities name Samaira Malhotra FR00009 Donation link
