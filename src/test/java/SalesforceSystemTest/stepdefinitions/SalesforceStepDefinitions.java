@@ -4,6 +4,7 @@ package SalesforceSystemTest.stepdefinitions;
 import SalesforceSystemTest.navigation.NavigateTo;
 import SalesforceSystemTest.navigation.SalesforceHomePage;
 import cucumber.api.DataTable;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -34,6 +35,13 @@ public class SalesforceStepDefinitions {
     String enteredSupporterLevel, expectedSupporterLevel, expectedLevelOfService, expectedSelectService, expectedchoosedSupporter, enteredSelectService;
     String opportunityName, primaryCampaignSource, closeDate, stage;
     String Assignedto, Subject, Status, Priorty;
+
+
+    //  String fieldCompany ,fieldWebsite,  fieldCIN, fieldGroup,  fieldEmail,  fieldAnnual,  fieldOwnership,  fieldLeadstat,  fieldLastName,  fieldExpdate;
+
+
+    private Object Newbtn;
+    private String radioButton= "Director";
 
     public WebDriver initialize() {
         String saleforceNotifications = getConfigurationDetails("webdriver.base.disable_notifications");
@@ -98,20 +106,20 @@ public class SalesforceStepDefinitions {
 
     @When("^I select (.*) under (.*)$")
     public void i_select(String supporterLevel, String supporterfieldName) throws Throwable {
-       // navigateTo.selectFromDropDown(driver, supporterLevel, supporterfieldName);
+        // navigateTo.selectFromDropDown(driver, supporterLevel, supporterfieldName);
         enteredSupporterLevel = supporterLevel;
     }
 
     @And("^I selected (.*) under case information$")
     public void iSelectDonePayment(String done) {
 
-        navigateTo.donePayment(driver,done);
+        navigateTo.donePayment(driver, done);
     }
 
     @And("^I selected \"(.*)\" under case tab$")
     public void iSelectUnderCaseTab(String Mycases) throws Throwable {
 
-        navigateTo.myCases(driver,Mycases);
+        navigateTo.myCases(driver, Mycases);
         // throw new PendingException();
     }
 
@@ -135,7 +143,7 @@ public class SalesforceStepDefinitions {
         navigateTo.allContacts(driver, allContact);
     }
 
-    @And("^I type the contact \"(.*)\" in the Search box and press Enter to view the particular contact detail$")
+    @And("^I type the leads \"(.*)\" in the Search box and press Enter to view the particular contact detail$")
     public void search_enter(String arg1) {
         navigateTo.contactNameInSearch(driver, arg1);
     }
@@ -146,7 +154,7 @@ public class SalesforceStepDefinitions {
 //        navigateTo.contactNameInSearch(driver);
 //    }
 
-    @And("I click on the searched contact name$")
+    @And("I click on the searched lead name$")
     public void searched_contact_name() {
         navigateTo.searchContactName(driver);
     }
@@ -455,10 +463,10 @@ public class SalesforceStepDefinitions {
 
     }
 
-    @And("^I click the (.*) button$")
-    public void i_click_opportunities(String fieldValue) {
-        navigateTo.clickOpportunitybutton(driver, fieldValue);
-    }
+//    @And("^I click the (.*) button$")
+//    public void i_click_opportunities(String fieldValue) {
+//        navigateTo.clickOpportunitybutton(driver, fieldValue);
+//    }
 
     @And("^I click on Opportunities name (.*) link$")
     public void i_click_opportunity_name(String opportunityName) {
@@ -532,8 +540,8 @@ public class SalesforceStepDefinitions {
     }
 
     @And("^I provide \"(.*)\" in (.*) under Once Off page$")
-    public void i_provide_contact_name_once(String ContactName,String filedName) {
-        navigateTo.provideContactName(driver,ContactName,filedName);
+    public void i_provide_contact_name_once(String ContactName, String filedName) {
+        navigateTo.provideContactName(driver, ContactName, filedName);
     }
 
     @And("^I provide the details (.*),(.*),(.*),(.*),(.*) and (.*) under Once Off page$")
@@ -601,7 +609,7 @@ public class SalesforceStepDefinitions {
     public void i_verify_success_message(String filedMessage) {
         System.out.println("...............................................................");
 
-        filedMessage = filedMessage.replaceAll("<new_line>","\n");
+        filedMessage = filedMessage.replaceAll("<new_line>", "\n");
         System.out.println(filedMessage);
         System.out.println("...............................................................");
 
@@ -686,60 +694,64 @@ public class SalesforceStepDefinitions {
     public void i_click_on_approve_case(String fieldbutton) {
         navigateTo.clickOnCase(driver, fieldbutton);
     }
+
     @Then("^I verify (.*) is (.*) under Case Approval$")
-    public void i_verify_under_case_approval(String tagName,String status){
-        navigateTo.verifyCaseApproval(driver,tagName,status);
+    public void i_verify_under_case_approval(String tagName, String status) {
+        navigateTo.verifyCaseApproval(driver, tagName, status);
     }
+
     @And("^I click (.*) tab$")
-    public void i_click_Email_Payment_Receipt_tab(String tabName){
-        navigateTo.clickOnTab(driver,tabName);
+    public void i_click_Email_Payment_Receipt_tab(String tabName) {
+        navigateTo.clickOnTab(driver, tabName);
     }
+
     @And("^I click (.*) in (.*)$")
-    public void i_click_in(String fieldEdit,String filedPayment){
-        navigateTo.clickEditInPayment(driver,fieldEdit,filedPayment);
+    public void i_click_in(String fieldEdit, String filedPayment) {
+        navigateTo.clickEditInPayment(driver, fieldEdit, filedPayment);
     }
+
     @And("^I select the (.*) from (.*)$")
-    public void i_select_from(String fieldValue,String filedPayment){
-        navigateTo.selectPayment(driver,fieldValue,filedPayment);
+    public void i_select_from(String fieldValue, String filedPayment) {
+        navigateTo.selectPayment(driver, fieldValue, filedPayment);
     }
 
-//  *******************************************************************************************************
-@Then("^I verify the (.*) Chargeback$")
-public void iVerifyTheRelatedPaymentRecordChargeback(String RPaymentType, DataTable dataTable) {
+    //  *******************************************************************************************************
+    @Then("^I verify the (.*) Chargeback$")
+    public void iVerifyTheRelatedPaymentRecordChargeback(String RPaymentType, DataTable dataTable) {
 
-    List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
-    String fieldRT = data.get(0).get("Related Payment Type");
-    // System.out.println(fieldRT);
-    System.out.println(fieldRT);
-    String CB= navigateTo.relatedPaymentRecord(driver,RPaymentType);
-    //  Assert.assertEquals("Chargeback",CB);
+        List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+        String fieldRT = data.get(0).get("Related Payment Type");
+        // System.out.println(fieldRT);
+        System.out.println(fieldRT);
+        String CB = navigateTo.relatedPaymentRecord(driver, RPaymentType);
+        //  Assert.assertEquals("Chargeback",CB);
 
-}
+    }
 
     @And("^I search for \"(.*)\" of an Chargeback record$")
     public void iSearchForOfAnChargebackRecord(String number) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
-        navigateTo.searchRecord(driver,number);
+        navigateTo.searchRecord(driver, number);
         //  throw new PendingException();
     }
 
 
     @And("^I give following details (.*),(.*),(.*),(.*),(.*),(.*) and (.*)$")
-    public void iGiveFollowingDetails(String fieldChargebackBankAction,String fieldChargebackReceivedOn, String filedChargebackReferenceNumber,String fieldChargebackResponseBy,String fieldChargebackActualResponseDate,String fieldChargebackSSTResponse,String fieldChargebackBankFinalNotificationDate,  DataTable dataTable) {
+    public void iGiveFollowingDetails(String fieldChargebackBankAction, String fieldChargebackReceivedOn, String filedChargebackReferenceNumber, String fieldChargebackResponseBy, String fieldChargebackActualResponseDate, String fieldChargebackSSTResponse, String fieldChargebackBankFinalNotificationDate, DataTable dataTable) {
 
         List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
 //     String chargebackBankAction = data.get(0).get("Chargeback Bank Action");
 //        String chargebackReceivedOn = data.get(0).get("Chargeback Received On");
         //      String chargebackReferenceNumber = data.get(0).get("Chargeback Reference Number");
         String chargebackBankAction = data.get(0).get("Chargeback Bank Action");
-        String chargebackChargebackResponseBy= data.get(0).get("Chargeback Response By");
+        String chargebackChargebackResponseBy = data.get(0).get("Chargeback Response By");
         String chargebackReceivedOn = data.get(0).get("Chargeback Received On");
         String chargebackReferenceNumber = data.get(0).get("Chargeback Reference Number");
-        String chargebackChargebackActualResponseDate= data.get(0).get("Chargeback Actual Response Date");
-        String chargebackChargebackSSTResponse= data.get(0).get("Chargeback SST Response");
-        String chargebackChargebackBankFinalNotificationDate= data.get(0).get("Chargeback Bank Final Notification Date");
+        String chargebackChargebackActualResponseDate = data.get(0).get("Chargeback Actual Response Date");
+        String chargebackChargebackSSTResponse = data.get(0).get("Chargeback SST Response");
+        String chargebackChargebackBankFinalNotificationDate = data.get(0).get("Chargeback Bank Final Notification Date");
 
-        navigateTo.givedetails(driver,fieldChargebackBankAction,fieldChargebackReceivedOn,filedChargebackReferenceNumber,fieldChargebackResponseBy,fieldChargebackActualResponseDate,fieldChargebackSSTResponse,fieldChargebackBankFinalNotificationDate,chargebackBankAction,chargebackReceivedOn,chargebackReferenceNumber,chargebackChargebackResponseBy,chargebackChargebackActualResponseDate,chargebackChargebackSSTResponse,chargebackChargebackBankFinalNotificationDate);
+        navigateTo.givedetails(driver, fieldChargebackBankAction, fieldChargebackReceivedOn, filedChargebackReferenceNumber, fieldChargebackResponseBy, fieldChargebackActualResponseDate, fieldChargebackSSTResponse, fieldChargebackBankFinalNotificationDate, chargebackBankAction, chargebackReceivedOn, chargebackReferenceNumber, chargebackChargebackResponseBy, chargebackChargebackActualResponseDate, chargebackChargebackSSTResponse, chargebackChargebackBankFinalNotificationDate);
 
 
     }
@@ -747,18 +759,18 @@ public void iVerifyTheRelatedPaymentRecordChargeback(String RPaymentType, DataTa
 
     @And("^I clicked (.*) link$")
     public void iClickOnPaymentUnderRelatedListQuickLinks(String Payclick) {
-        navigateTo.clickPayments(driver,Payclick);
+        navigateTo.clickPayments(driver, Payclick);
     }
 
     @Then("^I verify Payment records successfully created under Chargeback Information which are (.*),(.*) and (.*)$")
-    public void iVerifyPaymentRecordSuccessfullyCreatedUnderOpportunityAfterChargebackInitiate(String fieldChargebackBankAction,String fieldChargebackReceivedOn, String fieldChargebackReferenceNumber,DataTable dataTable) throws ParseException, ParseException {
+    public void iVerifyPaymentRecordSuccessfullyCreatedUnderOpportunityAfterChargebackInitiate(String fieldChargebackBankAction, String fieldChargebackReceivedOn, String fieldChargebackReferenceNumber, DataTable dataTable) throws ParseException, ParseException {
 
         List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
         String chargebackBankAction = data.get(0).get("Chargeback Bank Action");
         String chargebackReceivedOn = data.get(0).get("Chargeback Received On");
         String chargebackReferenceNumber = data.get(0).get("Chargeback Reference Number");
 
-        String obj=  navigateTo.verifyPaymentsRecord(driver,fieldChargebackBankAction,fieldChargebackReceivedOn,fieldChargebackReferenceNumber,chargebackBankAction,chargebackReceivedOn,chargebackReferenceNumber);
+        String obj = navigateTo.verifyPaymentsRecord(driver, fieldChargebackBankAction, fieldChargebackReceivedOn, fieldChargebackReferenceNumber, chargebackBankAction, chargebackReceivedOn, chargebackReferenceNumber);
 
         // Assert.assertEquals(chargebackBankAction,obj);
 
@@ -773,9 +785,9 @@ public void iVerifyTheRelatedPaymentRecordChargeback(String RPaymentType, DataTa
 
 
     @Then("^I verify the (.*) field has value as (.*) displays$")
-    public void iRecordTypeFieldHasValueChargeback(String fieldType,String record) {
+    public void iRecordTypeFieldHasValueChargeback(String fieldType, String record) {
 
-        navigateTo.recordType(driver,fieldType,record);
+        navigateTo.recordType(driver, fieldType, record);
     }
 
     @And("^I click Payments Number$")
@@ -784,72 +796,75 @@ public void iVerifyTheRelatedPaymentRecordChargeback(String RPaymentType, DataTa
 
     }
 
-    @And("^I provide values in (.*),(.*),(.*),(.*) and (.*)$")
-    // public void i_provide_values(String fieldChargebackBankAction, String fieldChargebackReceivedOn, String filedChargebackReferenceNumber, DataTable dataTable) throws Throwable {
-    public void i_provide_values(String fieldChargebackBankAction,String fieldChargebackResponseBy,String fieldChargebackActualResponseDate,String fieldChargebackSSTResponse,String fieldChargebackBankFinalNotificationDate,  DataTable dataTable) throws Throwable {
+    @And("^I provide values in (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*) and (.*)$")
+// public void i_provide_values(String fieldChargebackBankAction, String fieldChargebackReceivedOn, String filedChargebackReferenceNumber, DataTable dataTable) throws Throwable {
+    public void i_provide_values(String fieldCompany, String fieldWebsite, String fieldCIN, String fieldGroup, String fieldEmail, String fieldAnnual, String fieldOwnership, String fieldLeadstat, String fieldLastName, String fieldExpdate, DataTable dataTable) throws Throwable {
+
         List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
-//     String chargebackBankAction = data.get(0).get("Chargeback Bank Action");
-//        String chargebackReceivedOn = data.get(0).get("Chargeback Received On");
-        //      String chargebackReferenceNumber = data.get(0).get("Chargeback Reference Number");
-        String chargebackBankAction = data.get(0).get("Chargeback Bank Action");
-        String chargebackChargebackResponseBy= data.get(0).get("Chargeback Response By");
-        String chargebackChargebackActualResponseDate= data.get(0).get("Chargeback Actual Response Date");
-        String chargebackChargebackSSTResponse= data.get(0).get("Chargeback SST Response");
-        String chargebackChargebackBankFinalNotificationDate= data.get(0).get("Chargeback Bank Final Notification Date");
-        navigateTo.chargebackValues(driver,fieldChargebackBankAction,fieldChargebackResponseBy,fieldChargebackActualResponseDate,fieldChargebackSSTResponse,fieldChargebackBankFinalNotificationDate,chargebackBankAction,chargebackChargebackResponseBy,chargebackChargebackActualResponseDate,chargebackChargebackSSTResponse,chargebackChargebackBankFinalNotificationDate);
-        //   navigateTo.chargebackValues(driver,fieldChargebackBankAction,fieldChargebackReceivedOn,filedChargebackReferenceNumber,chargebackBankAction,chargebackReceivedOn,chargebackReferenceNumber);
+        String Company = data.get(0).get("Company");
+        String Website = data.get(0).get("Website");
+        String CIN = data.get(0).get("CIN");
+        String Group = data.get(0).get("Group");
+        String Email = data.get(0).get("Email");
+        String Annual = data.get(0).get("Annual Revenue");
+        String Ownership = data.get(0).get("Ownership");
+        String Lead_status = data.get(0).get("Lead Status");
+        String Last_Name = data.get(0).get("Last Name");
+        String Exp_date = data.get(0).get("Expected Date");
+        navigateTo.Values(driver, fieldCompany, fieldWebsite, fieldCIN, fieldGroup, fieldEmail, fieldAnnual, fieldOwnership, fieldLeadstat, fieldLastName, fieldExpdate, Company, Website, CIN, Group, Email, Annual, Ownership, Lead_status, Last_Name, Exp_date);
+
     }
 
 
     @Then("^I verify Payment records successfully created under Chargeback Information after Chargeback Processed which are (.*),(.*),(.*),(.*) and (.*)$")
-    public void iVerifyPaymentsRecordsSuccessfullyCreatedUnderOpportunityAfterChargebackProcessed(String fieldChargebackBankAction,String fieldChargebackResponseBy,String fieldChargebackActualResponseDate,String fieldChargebackSSTResponse,String fieldChargebackBankFinalNotificationDate,DataTable dataTable) throws ParseException {
+    public void iVerifyPaymentsRecordsSuccessfullyCreatedUnderOpportunityAfterChargebackProcessed(String fieldChargebackBankAction, String fieldChargebackResponseBy, String fieldChargebackActualResponseDate, String fieldChargebackSSTResponse, String fieldChargebackBankFinalNotificationDate, DataTable dataTable) throws ParseException {
 
         List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
         String chargebackBankAction = data.get(0).get("Chargeback Bank Action");
-        String chargebackChargebackResponseBy= data.get(0).get("Chargeback Response By");
-        String chargebackChargebackActualResponseDate= data.get(0).get("Chargeback Actual Response Date");
-        String chargebackChargebackSSTResponse= data.get(0).get("Chargeback SST Response");
-        String chargebackChargebackBankFinalNotificationDate= data.get(0).get("Chargeback Bank Final Notification Date");
+        String chargebackChargebackResponseBy = data.get(0).get("Chargeback Response By");
+        String chargebackChargebackActualResponseDate = data.get(0).get("Chargeback Actual Response Date");
+        String chargebackChargebackSSTResponse = data.get(0).get("Chargeback SST Response");
+        String chargebackChargebackBankFinalNotificationDate = data.get(0).get("Chargeback Bank Final Notification Date");
 
-        String recopay=  navigateTo.verifyPaymentRecords(driver,fieldChargebackBankAction,fieldChargebackResponseBy,fieldChargebackActualResponseDate,fieldChargebackSSTResponse,fieldChargebackBankFinalNotificationDate,chargebackBankAction,chargebackChargebackResponseBy,chargebackChargebackActualResponseDate,chargebackChargebackSSTResponse,chargebackChargebackBankFinalNotificationDate);
+        String recopay = navigateTo.verifyPaymentRecords(driver, fieldChargebackBankAction, fieldChargebackResponseBy, fieldChargebackActualResponseDate, fieldChargebackSSTResponse, fieldChargebackBankFinalNotificationDate, chargebackBankAction, chargebackChargebackResponseBy, chargebackChargebackActualResponseDate, chargebackChargebackSSTResponse, chargebackChargebackBankFinalNotificationDate);
         //Assert.assertEquals(chargebackBankAction,recopay);
 
     }
 
 
     @Then("^I verify Payment records successfully created under Opportunity after Chargeback cancelled which are (.*),(.*) and (.*)$")
-    public void iVerifyPaymentRecordsSuccessfullyCreatedUnderOpportunityAfterChargebackCancelled(String fieldChargebackBankAction,String fieldChargebackReceivedOn, String fieldChargebackReferenceNumber,DataTable dataTable) throws ParseException {
+    public void iVerifyPaymentRecordsSuccessfullyCreatedUnderOpportunityAfterChargebackCancelled(String fieldChargebackBankAction, String fieldChargebackReceivedOn, String fieldChargebackReferenceNumber, DataTable dataTable) throws ParseException {
 
         List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
         String chargebackBankAction = data.get(0).get("Chargeback Bank Action");
         String chargebackReceivedOn = data.get(0).get("Chargeback Received On");
         String chargebackReferenceNumber = data.get(0).get("Chargeback Reference Number");
 
-        String rec=  navigateTo.verifyPayRecord(driver,fieldChargebackBankAction,fieldChargebackReceivedOn,fieldChargebackReferenceNumber,chargebackBankAction,chargebackReceivedOn,chargebackReferenceNumber);
+        String rec = navigateTo.verifyPayRecord(driver, fieldChargebackBankAction, fieldChargebackReceivedOn, fieldChargebackReferenceNumber, chargebackBankAction, chargebackReceivedOn, chargebackReferenceNumber);
         //   Assert.assertEquals(chargebackBankAction, rec);
     }
 
     @And("^I provided (.*),(.*),(.*),(.*) and (.*)$")
     // public void i_provide_values(String fieldChargebackBankAction, String fieldChargebackReceivedOn, String filedChargebackReferenceNumber, DataTable dataTable) throws Throwable {
-    public void i_provided(String fieldChargebackBankAction,String fieldChargebackResponseBy,String fieldChargebackActualResponseDate,String fieldChargebackSSTResponse,String fieldChargebackBankFinalNotificationDate,  DataTable dataTable) throws Throwable {
+    public void i_provided(String fieldChargebackBankAction, String fieldChargebackResponseBy, String fieldChargebackActualResponseDate, String fieldChargebackSSTResponse, String fieldChargebackBankFinalNotificationDate, DataTable dataTable) throws Throwable {
         List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
 //     String chargebackBankAction = data.get(0).get("Chargeback Bank Action");
 //        String chargebackReceivedOn = data.get(0).get("Chargeback Received On");
         //      String chargebackReferenceNumber = data.get(0).get("Chargeback Reference Number");
         String chargebackBankAction = data.get(0).get("Chargeback Bank Action");
-        String chargebackChargebackResponseBy= data.get(0).get("Chargeback Response By");
-        String chargebackChargebackActualResponseDate= data.get(0).get("Chargeback Actual Response Date");
-        String chargebackChargebackSSTResponse= data.get(0).get("Chargeback SST Response");
-        String chargebackChargebackBankFinalNotificationDate= data.get(0).get("Chargeback Bank Final Notification Date");
-        navigateTo.chargeback(driver,fieldChargebackBankAction,fieldChargebackResponseBy,fieldChargebackActualResponseDate,fieldChargebackSSTResponse,fieldChargebackBankFinalNotificationDate,chargebackBankAction,chargebackChargebackResponseBy,chargebackChargebackActualResponseDate,chargebackChargebackSSTResponse,chargebackChargebackBankFinalNotificationDate);
+        String chargebackChargebackResponseBy = data.get(0).get("Chargeback Response By");
+        String chargebackChargebackActualResponseDate = data.get(0).get("Chargeback Actual Response Date");
+        String chargebackChargebackSSTResponse = data.get(0).get("Chargeback SST Response");
+        String chargebackChargebackBankFinalNotificationDate = data.get(0).get("Chargeback Bank Final Notification Date");
+        navigateTo.chargeback(driver, fieldChargebackBankAction, fieldChargebackResponseBy, fieldChargebackActualResponseDate, fieldChargebackSSTResponse, fieldChargebackBankFinalNotificationDate, chargebackBankAction, chargebackChargebackResponseBy, chargebackChargebackActualResponseDate, chargebackChargebackSSTResponse, chargebackChargebackBankFinalNotificationDate);
         //   navigateTo.chargebackValues(driver,fieldChargebackBankAction,fieldChargebackReceivedOn,filedChargebackReferenceNumber,chargebackBankAction,chargebackReceivedOn,chargebackReferenceNumber);
     }
 
     @Then("^I verify Error messsage (.*)$")
     public void iVerifyErrorMessssge(String empty) throws Throwable {
 
-        String msg = navigateTo.validSuccessMessage(driver,empty);
-        String[] tokens= empty.split("/n");
+        String msg = navigateTo.validSuccessMessage(driver, empty);
+        String[] tokens = empty.split("/n");
         int i;
         try {
             for (i = 0; i < tokens.length; i++)
@@ -862,10 +877,8 @@ public void iVerifyTheRelatedPaymentRecordChargeback(String RPaymentType, DataTa
             System.out.println("----------------------");
             System.out.println(msg);
             System.out.println("-----------------------");
-            Assert.assertEquals(tokens[i],msg);
-        }
-        catch (ArrayIndexOutOfBoundsException exp)
-        {
+            Assert.assertEquals(tokens[i], msg);
+        } catch (ArrayIndexOutOfBoundsException exp) {
             System.out.println(exp);
         }
 //      String message=  navigateTo.verifyEmptyField(driver,empty);
@@ -876,23 +889,23 @@ public void iVerifyTheRelatedPaymentRecordChargeback(String RPaymentType, DataTa
     @Then("^I verify Payment records successfully created under Opportunity with Record Type as (.*)$")
     public void iVerifyPaymentRecordsSuccessfullyCreatedUnderOpportunityWithRecordTypeAsChargeback(String recordType) {
 
-        String recType=  navigateTo.Recordclick(driver,recordType);
+        String recType = navigateTo.Recordclick(driver, recordType);
         //  Assert.assertEquals(recordType,recType);
 
     }
 
     @And("^I provide field as (.*),(.*),(.*),(.*),(.*) and (.*)$")
-    public void iProvideFieldAsCaseOriginRefundTypeRefundAmountRefundInstrumentBankAccountNoAndBankBSB(String fieldCaseOrigin, String fieldRefundType,String fieldRefundAmount,String fieldRefundInstrument, String fieldBankAccountNo, String fieldBankBSB, DataTable dataTable) {
+    public void iProvideFieldAsCaseOriginRefundTypeRefundAmountRefundInstrumentBankAccountNoAndBankBSB(String fieldCaseOrigin, String fieldRefundType, String fieldRefundAmount, String fieldRefundInstrument, String fieldBankAccountNo, String fieldBankBSB, DataTable dataTable) {
 
         List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
         String refundCaseOrigin = data.get(0).get("Case Origin");
         String refundRefundType = data.get(0).get("Refund Type");
-        String refundRefundAmount= data.get(0).get("Refund Amount");
+        String refundRefundAmount = data.get(0).get("Refund Amount");
         String refundRefundInstrument = data.get(0).get("Refund Instrument");
         String refundBankAccountNo = data.get(0).get("Bank Account No");
         String refundBankBSB = data.get(0).get("Bank BSB");
 
-        navigateTo.provideRefundField(driver,fieldCaseOrigin,fieldRefundType,fieldRefundAmount,fieldRefundInstrument,fieldBankAccountNo,fieldBankBSB,refundCaseOrigin,refundRefundType,refundRefundAmount,refundRefundInstrument,refundBankAccountNo,refundBankBSB);
+        navigateTo.provideRefundField(driver, fieldCaseOrigin, fieldRefundType, fieldRefundAmount, fieldRefundInstrument, fieldBankAccountNo, fieldBankBSB, refundCaseOrigin, refundRefundType, refundRefundAmount, refundRefundInstrument, refundBankAccountNo, refundBankBSB);
 
     }
 
@@ -900,9 +913,9 @@ public void iVerifyTheRelatedPaymentRecordChargeback(String RPaymentType, DataTa
     @Then("^I verifies (.*)$")
     public void iVerifiesRefundAmount(String refundAmount) {
 
-     String refund= navigateTo.refundAmount(driver,refundAmount);
+        String refund = navigateTo.refundAmount(driver, refundAmount);
 
-        String[] tokens= refundAmount.split("/n");
+        String[] tokens = refundAmount.split("/n");
         int i;
         try {
             for (i = 0; i < tokens.length; i++)
@@ -915,10 +928,8 @@ public void iVerifyTheRelatedPaymentRecordChargeback(String RPaymentType, DataTa
             System.out.println("----------------------");
             System.out.println(refund);
             System.out.println("-----------------------");
-            Assert.assertEquals(tokens[i],refund);
-        }
-        catch (ArrayIndexOutOfBoundsException exp)
-        {
+            Assert.assertEquals(tokens[i], refund);
+        } catch (ArrayIndexOutOfBoundsException exp) {
             System.out.println(exp);
         }
     }
@@ -926,19 +937,19 @@ public void iVerifyTheRelatedPaymentRecordChargeback(String RPaymentType, DataTa
     @And("^I (.*) details$")
     public void iSaveDetails(String btn) {
 
-        navigateTo.resave(driver,btn);
+        navigateTo.resave(driver, btn);
     }
 
     @And("^I gave amount for (.*) and (.*)$")
     public void iGaveAmountForTestCampaignAndRunningForCause(String arg1, String arg2) {
 
-        navigateTo.testCampaign(driver,arg1,arg2);
+        navigateTo.testCampaign(driver, arg1, arg2);
     }
 
     @And("^I click the GAU for (.*) and (.*)$")
-    public void clickTheGAU(String arg1,String arg2) {
+    public void clickTheGAU(String arg1, String arg2) {
 
-        navigateTo.GAUclick(driver,arg1,arg2);
+        navigateTo.GAUclick(driver, arg1, arg2);
     }
 
 
@@ -951,8 +962,8 @@ public void iVerifyTheRelatedPaymentRecordChargeback(String RPaymentType, DataTa
     @Then("^I check (.*)$")
     public void iCheckErrorPlease(String arg1) {
 
-        String stat= navigateTo.negativeRefundAmt(driver,arg1);
-        String[] tokens= arg1.split("/n");
+        String stat = navigateTo.negativeRefundAmt(driver, arg1);
+        String[] tokens = arg1.split("/n");
         int i;
         try {
             for (i = 0; i < tokens.length; i++)
@@ -965,43 +976,41 @@ public void iVerifyTheRelatedPaymentRecordChargeback(String RPaymentType, DataTa
             System.out.println("----------------------");
             System.out.println(stat);
             System.out.println("-----------------------");
-            Assert.assertEquals(tokens[i],stat);
-        }
-        catch (ArrayIndexOutOfBoundsException exp)
-        {
+            Assert.assertEquals(tokens[i], stat);
+        } catch (ArrayIndexOutOfBoundsException exp) {
             System.out.println(exp);
         }
 
     }
 
     @And("^I entered amount in the GAU under Manual Refund for (.*) and (.*)$")
-    public void iEnteredAmountInTheGAUUnderManualRefundForTestCampaignAndRunningForCause(String argument1,String argument2) {
+    public void iEnteredAmountInTheGAUUnderManualRefundForTestCampaignAndRunningForCause(String argument1, String argument2) {
 
-        navigateTo.Campagin(driver,argument1,argument2);
+        navigateTo.Campagin(driver, argument1, argument2);
     }
 
 
     @Then("^I observe (.*)$")
     public void iObserveAmountShouldBeLessThanSelectedGAUAmount(String argument) {
 
-        String selectGAUAmt= navigateTo.GauAmount(driver,argument);
-        Assert.assertEquals(argument,selectGAUAmt);
+        String selectGAUAmt = navigateTo.GauAmount(driver, argument);
+        Assert.assertEquals(argument, selectGAUAmt);
 
     }
 
     @And("^I enter amount in the GAU under Manual Refund for (.*) and (.*)$")
-    public void iEnterAmountInTheGAUUnderManualRefund(String runforcause,String flood) {
+    public void iEnterAmountInTheGAUUnderManualRefund(String runforcause, String flood) {
 
-        navigateTo.manualRefund(driver,runforcause,flood);
+        navigateTo.manualRefund(driver, runforcause, flood);
     }
 
 
     @Then("^I varify (.*)$")
     public void iErrorTheRequestedRefundAmountShouldBeEqualToTheTotalAmountAllocatedAgainstTheCampaignsProducts(String error) {
 
-        String erro= navigateTo.productsError(driver,error);
+        String erro = navigateTo.productsError(driver, error);
 
-        String[] tokens= error.split("/n");
+        String[] tokens = error.split("/n");
         int i;
         try {
             for (i = 0; i < tokens.length; i++)
@@ -1014,17 +1023,15 @@ public void iVerifyTheRelatedPaymentRecordChargeback(String RPaymentType, DataTa
             System.out.println("----------------------");
             System.out.println(erro);
             System.out.println("-----------------------");
-            Assert.assertEquals(tokens[i],erro);
-        }
-        catch (ArrayIndexOutOfBoundsException exp)
-        {
+            Assert.assertEquals(tokens[i], erro);
+        } catch (ArrayIndexOutOfBoundsException exp) {
             System.out.println(exp);
         }
     }
 
 
     @And("^I provide fields as (.*),(.*),(.*),(.*) and (.*)$")
-    public void iProvideFieldsAsCaseOriginRefundTypeRefundInstrumentBankAccountNoAndBankBSB(String fieldCaseOrigin, String fieldRefundType,String fieldRefundInstrument, String fieldBankAccountNo, String fieldBankBSB, DataTable dataTable ) throws Throwable {
+    public void iProvideFieldsAsCaseOriginRefundTypeRefundInstrumentBankAccountNoAndBankBSB(String fieldCaseOrigin, String fieldRefundType, String fieldRefundInstrument, String fieldBankAccountNo, String fieldBankBSB, DataTable dataTable) throws Throwable {
 
         List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
         String refundCaseOrigin = data.get(0).get("Case Origin");
@@ -1033,21 +1040,21 @@ public void iVerifyTheRelatedPaymentRecordChargeback(String RPaymentType, DataTa
         String refundBankAccountNo = data.get(0).get("Bank Account No");
         String refundBankBSB = data.get(0).get("Bank BSB");
 
-        navigateTo.clickReund(driver,fieldCaseOrigin,fieldRefundType,fieldRefundInstrument,fieldBankAccountNo,fieldBankBSB,refundCaseOrigin,refundRefundType,refundRefundInstrument,refundBankAccountNo,refundBankBSB);
+        navigateTo.clickReund(driver, fieldCaseOrigin, fieldRefundType, fieldRefundInstrument, fieldBankAccountNo, fieldBankBSB, refundCaseOrigin, refundRefundType, refundRefundInstrument, refundBankAccountNo, refundBankBSB);
 
     }
 
     @And("^I click \"(.*)\" btn$")
     public void iClickBtn(String back) throws Throwable {
         //  throw new PendingException();
-        navigateTo.back(driver,back);
+        navigateTo.back(driver, back);
     }
 
     @Then("^I verify user is on previous page and see (.*) radio btn$")
     public void iVerifyUserIsOnPreviousPageAndSeePaymentTypeRadioBtn(String fieldPaymentType) {
 //        List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
 //        String PaymentType = data.get(0).get("Payment Type");
-        String PaymentType= navigateTo.radioPaymentType(driver,fieldPaymentType);
+        String PaymentType = navigateTo.radioPaymentType(driver, fieldPaymentType);
         // Assert.assertEquals(fieldPaymentType,PaymentType);
     }
 
@@ -1056,8 +1063,8 @@ public void iVerifyTheRelatedPaymentRecordChargeback(String RPaymentType, DataTa
     public void iVerifyMessage(String message) throws Throwable {
 
 
-        String msg = navigateTo.validMessage(driver,message);
-        String[] tokens= message.split("/n");
+        String msg = navigateTo.validMessage(driver, message);
+        String[] tokens = message.split("/n");
         int i;
         try {
             for (i = 0; i < tokens.length; i++)
@@ -1070,10 +1077,8 @@ public void iVerifyTheRelatedPaymentRecordChargeback(String RPaymentType, DataTa
             System.out.println("----------------------");
             System.out.println(msg);
             System.out.println("-----------------------");
-            Assert.assertEquals(tokens[i],msg);
-        }
-        catch (ArrayIndexOutOfBoundsException exp)
-        {
+            Assert.assertEquals(tokens[i], msg);
+        } catch (ArrayIndexOutOfBoundsException exp) {
             System.out.println(exp);
         }
 
@@ -1082,14 +1087,14 @@ public void iVerifyTheRelatedPaymentRecordChargeback(String RPaymentType, DataTa
     @When("^I clicked on (.*) Tab$")
     public void iClickedOnCasesTab(String cases) {
 
-        navigateTo.casesClick(driver,cases);
+        navigateTo.casesClick(driver, cases);
 
     }
 
     @And("^I type the case number \"(.*)\" in the Search box and press Enter to view the particular case detail$")
     public void iTypeTheCaseNumberInTheSearchBoxAndPressEnterToViewTheParticularContactDetail(String casenumber) throws Throwable {
 
-        navigateTo.caseNumber(driver,casenumber);
+        navigateTo.caseNumber(driver, casenumber);
         // throw new PendingException();
     }
 
@@ -1106,11 +1111,11 @@ public void iVerifyTheRelatedPaymentRecordChargeback(String RPaymentType, DataTa
     }
 
     @Then("^I verified (.*) displayed$")
-    public void iVerifyRefundCompletionDateDisplayed(String CompletionDate,DataTable dataTable) throws ParseException {
+    public void iVerifyRefundCompletionDateDisplayed(String CompletionDate, DataTable dataTable) throws ParseException {
 
         List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
         String refundRefundCompletionDate = data.get(0).get("Refund Completion Date");
-        String dateCompare = navigateTo.refundDateDislayed(driver,CompletionDate,refundRefundCompletionDate);
+        String dateCompare = navigateTo.refundDateDislayed(driver, CompletionDate, refundRefundCompletionDate);
 
         //String d= formattedTime;
         //   Assert.assertEquals(refundRefundCompletionDate,dateCompare);
@@ -1118,25 +1123,26 @@ public void iVerifyTheRelatedPaymentRecordChargeback(String RPaymentType, DataTa
     }
 
     @Then("^I verify (.*) is display$")
-    public void iVerifyRefundDecisionDateIsDisplay(String fieldDecisionDate,DataTable dataTable) throws ParseException {
+    public void iVerifyRefundDecisionDateIsDisplay(String fieldDecisionDate, DataTable dataTable) throws ParseException {
 
         List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
         String refundDecisionDate = data.get(0).get("Refund Completion Date");
 
-        String decision = navigateTo.refundDecisionDate(driver,fieldDecisionDate,refundDecisionDate);
+        String decision = navigateTo.refundDecisionDate(driver, fieldDecisionDate, refundDecisionDate);
 
         // Assert.assertEquals(refundDecisionDate,decision);
 
     }
+
     @Then("^I verifed (.*) is displayed$")
-    public void iVerifyRefundCompletionDateIsDisplayed(String fieldRefundStatus,DataTable dataTable) {
+    public void iVerifyRefundCompletionDateIsDisplayed(String fieldRefundStatus, DataTable dataTable) {
 
         List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
         String refundRefundStatus = data.get(0).get("Refund Status");
 
         System.out.println(refundRefundStatus);
 
-        String status = navigateTo.Refundstatus(driver,fieldRefundStatus,refundRefundStatus);
+        String status = navigateTo.Refundstatus(driver, fieldRefundStatus, refundRefundStatus);
         //  Assert.assertEquals(refundRefundStatus,status);
 
     }
@@ -1144,22 +1150,22 @@ public void iVerifyTheRelatedPaymentRecordChargeback(String RPaymentType, DataTa
     @And("^I click (.*) under Case Information$")
     public void iClickOnEditStatus(String statusEdit) {
 
-        navigateTo.statusEdit(driver,statusEdit);
+        navigateTo.statusEdit(driver, statusEdit);
 
     }
 
     @And("^I provide (.*) under Refund$")
-    public void iProvideReferenceNumber(String fieldReferenceNumber,DataTable dataTable) {
+    public void iProvideReferenceNumber(String fieldReferenceNumber, DataTable dataTable) {
 
         List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
         String refundReferenceNumber = data.get(0).get("Payment Reference Number");
-        navigateTo.refNumber(driver,fieldReferenceNumber,refundReferenceNumber);
+        navigateTo.refNumber(driver, fieldReferenceNumber, refundReferenceNumber);
     }
 
     @And("^I click (.*) under Refund Details form$")
     public void iSave(String form) {
 
-        navigateTo.saveForm(driver,form);
+        navigateTo.saveForm(driver, form);
 
     }
 
@@ -1169,7 +1175,7 @@ public void iVerifyTheRelatedPaymentRecordChargeback(String RPaymentType, DataTa
 //        List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
 //        String fieldStatus = data.get(0).get("Status");
 
-        String stat= navigateTo.refundStatus(driver,reStatus);
+        String stat = navigateTo.refundStatus(driver, reStatus);
 
         //  Assert.assertEquals(reStatus,stat);
     }
@@ -1177,7 +1183,7 @@ public void iVerifyTheRelatedPaymentRecordChargeback(String RPaymentType, DataTa
     @And("^I clicked \"(.*)\" tab$")
     public void iRelatedTab(String related) throws Throwable {
 
-        navigateTo.relatedTab(driver,related);
+        navigateTo.relatedTab(driver, related);
         //   throw new PendingException();
     }
 
@@ -1196,7 +1202,7 @@ public void iVerifyTheRelatedPaymentRecordChargeback(String RPaymentType, DataTa
     @And("^I click on (.*) under Approval Request$")
     public void iClickOnApproveUnderApprovalRequest(String approve) {
 
-        navigateTo.requestApproval(driver,approve);
+        navigateTo.requestApproval(driver, approve);
     }
 
 
@@ -1205,17 +1211,18 @@ public void iVerifyTheRelatedPaymentRecordChargeback(String RPaymentType, DataTa
 
         navigateTo.caseApprove(driver);
     }
+
     @And("^I click (.*) btn under Approve case$")
     public void iClickApproveBtnUnderApproveCase(String app) {
 
-        navigateTo.approveCase(driver,app);
+        navigateTo.approveCase(driver, app);
     }
 
 
     @Then("^I verify Approval status as (.*)$")
     public void iVerifyApprovalStatusAsApproved(String approved) {
 
-        String approvalstatus= navigateTo.approvedStatus(driver,approved);
+        String approvalstatus = navigateTo.approvedStatus(driver, approved);
 
         //Assert.assertEquals(approved,approvalstatus);
     }
@@ -1223,14 +1230,14 @@ public void iVerifyTheRelatedPaymentRecordChargeback(String RPaymentType, DataTa
     @When("^I clicked the (.*) tab$")
     public void iClickOnOpportunities(String opportuniyTab) {
 
-        navigateTo.Opportunities(driver,opportuniyTab);
+        navigateTo.Opportunities(driver, opportuniyTab);
 
     }
 
     @And("^I type the opportunity name \"(.*)\" in the Search box and press Enter to view the particular opportunity detail$")
     public void iTypeTheOpportunityNameSearchBox(String arg0) throws Throwable {
 
-        navigateTo.opportunitySearchBox(driver,arg0);
+        navigateTo.opportunitySearchBox(driver, arg0);
     }
 
     @And("^I click on the searched opportunity name$")
@@ -1244,29 +1251,29 @@ public void iVerifyTheRelatedPaymentRecordChargeback(String RPaymentType, DataTa
     @And("^I clicked \"(.*)\"$")
     public void iClicked(String tab) throws Throwable {
 
-        navigateTo.clickTab(driver,tab);
+        navigateTo.clickTab(driver, tab);
     }
 
     @And("^I selected the \"(.*)\" from the list view$")
     public void iSelectedTheFromTheListView(String allOpportunity) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
-        navigateTo.allOpportunities(driver,allOpportunity);
+        navigateTo.allOpportunities(driver, allOpportunity);
     }
 
     @Then("^I verify their is no (.*)$")
     public void iVerifyTheirIsNoCase(String cases) {
-        navigateTo.noCases(driver,cases);
+        navigateTo.noCases(driver, cases);
     }
 
     @Then("^I checked (.*) as \"(.*)\"$")
-    public void iCheckedCaseOwnerAs(String Owner,String SSt) throws Throwable {
+    public void iCheckedCaseOwnerAs(String Owner, String SSt) throws Throwable {
 
-        navigateTo.caseOwner(driver,Owner,SSt);
+        navigateTo.caseOwner(driver, Owner, SSt);
     }
 
     @And("^I click \"(.*)\" Tab$")
     public void iClickTab(String clickOpportunity) throws Throwable {
-        navigateTo.opportunityClick(driver,clickOpportunity);
+        navigateTo.opportunityClick(driver, clickOpportunity);
 
         //  throw new PendingException();
     }
@@ -1278,7 +1285,7 @@ public void iVerifyTheRelatedPaymentRecordChargeback(String RPaymentType, DataTa
         String fieldOpportunityName = data.get(0).get("Opportunity Name");
         String fieldAccountName = data.get(0).get("Account Name");
 //        String fullName = Salutation + " " + firstName + " " + lastName;
-        String validOpportunities= navigateTo.validOpportunities(driver,fieldOpportunityName,fieldAccountName);
+        String validOpportunities = navigateTo.validOpportunities(driver, fieldOpportunityName, fieldAccountName);
         System.out.println("-------------------------------\n");
         System.out.println(validOpportunities);
         Assert.assertEquals(fieldOpportunityName, validOpportunities);
@@ -1289,25 +1296,25 @@ public void iVerifyTheRelatedPaymentRecordChargeback(String RPaymentType, DataTa
 
         List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
         String recordType = data.get(0).get("Record Type");
-        String type= navigateTo.paidUnchecked(driver,recordType);
-        Assert.assertEquals(recordType,type);
+        String type = navigateTo.paidUnchecked(driver, recordType);
+        Assert.assertEquals(recordType, type);
     }
 
 
     @And("^I give details as (.*)$")
-    public void iRefundType(String fieldRefundType,DataTable dataTable) {
+    public void iRefundType(String fieldRefundType, DataTable dataTable) {
 
         List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
         String refundRefundType = data.get(0).get("Refund Type");
 
-        navigateTo.typeRefund(driver,fieldRefundType,refundRefundType);
+        navigateTo.typeRefund(driver, fieldRefundType, refundRefundType);
 
     }
 
     @Then("^I verify GAUs allocation is available as (.*) under Manaual Refund$")
     public void iVerifyGAUsAllocationIsVisible(String alloc) {
 
-        String gau= navigateTo.GAUVisible(driver,alloc);
+        String gau = navigateTo.GAUVisible(driver, alloc);
         // Assert.assertEquals(alloc,gau);
     }
 
@@ -1316,26 +1323,26 @@ public void iVerifyTheRelatedPaymentRecordChargeback(String RPaymentType, DataTa
 
 //        List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
 //        String paymentAllocations = data.get(0).get("Payment Allocations");
-        navigateTo.paymentAllocations(driver,fieldPaymentAllocations);
+        navigateTo.paymentAllocations(driver, fieldPaymentAllocations);
     }
 
     @And("^I add amount for the (.*)$")
     public void iGaveAmount(String arg1) {
 
-        navigateTo.addAmount(driver,arg1);
+        navigateTo.addAmount(driver, arg1);
     }
 
     @And("^I clicked the GAU for (.*)$")
     public void clickGAU(String arg1) {
 
-        navigateTo.theGAUclick(driver,arg1);
+        navigateTo.theGAUclick(driver, arg1);
     }
 
     @Then("^I checked message as (.*)$")
     public void iErrorMessssge(String error) throws Throwable {
 
-        String msg = navigateTo.validErrorMessage(driver,error);
-        String[] tokens= error.split("/n");
+        String msg = navigateTo.validErrorMessage(driver, error);
+        String[] tokens = error.split("/n");
         int i;
         try {
             for (i = 0; i < tokens.length; i++)
@@ -1348,10 +1355,8 @@ public void iVerifyTheRelatedPaymentRecordChargeback(String RPaymentType, DataTa
             System.out.println("----------------------");
             System.out.println(msg);
             System.out.println("-----------------------");
-            Assert.assertEquals(tokens[i],msg);
-        }
-        catch (ArrayIndexOutOfBoundsException exp)
-        {
+            Assert.assertEquals(tokens[i], msg);
+        } catch (ArrayIndexOutOfBoundsException exp) {
             System.out.println(exp);
         }
 //      String message=  navigateTo.verifyEmptyField(driver,empty);
@@ -1369,7 +1374,7 @@ public void iVerifyTheRelatedPaymentRecordChargeback(String RPaymentType, DataTa
     @And("^I click (.*) linked$")
     public void iClickOnSupporterHistoryTab(String history) {
 
-        navigateTo.historyTab(driver,history);
+        navigateTo.historyTab(driver, history);
     }
 
     @Then("^I verify (.*) contains valid records$")
@@ -1377,8 +1382,8 @@ public void iVerifyTheRelatedPaymentRecordChargeback(String RPaymentType, DataTa
 
 //        List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
 //        String fieldHistoryName = data.get(0).get("Subject(Action)");
-         navigateTo.historyRecord(driver,fieldHistoryName);
-      //  String validOpportunities= navigateTo.validOpportunities(driver,fieldOpportunityName,fieldAccountName);
+        navigateTo.historyRecord(driver, fieldHistoryName);
+        //  String validOpportunities= navigateTo.validOpportunities(driver,fieldOpportunityName,fieldAccountName);
         System.out.println("-------------------------------\n");
         System.out.println();
 
@@ -1387,45 +1392,45 @@ public void iVerifyTheRelatedPaymentRecordChargeback(String RPaymentType, DataTa
     @And("^I select new Primary Contact as \"(.*)\"$")
     public void iSelectNewPrimaryContactAs(String arg0) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
-      //  throw new PendingException();
-        navigateTo.primaryContact(driver,arg0);
+        //  throw new PendingException();
+        navigateTo.primaryContact(driver, arg0);
 
     }
 
     @And("^I click on (.*) btn$")
     public void iClickOnAdjustContact(String adjContact) {
 
-      navigateTo.adjustContact(driver,adjContact);
+        navigateTo.adjustContact(driver, adjContact);
     }
 
     @And("^I see (.*)$")
     public void iVerifiySuccessMessageSupporter(String success) {
 
-        navigateTo.successMessage(driver,success);
+        navigateTo.successMessage(driver, success);
     }
 
     @Then("^I verifiy (.*) is null$")
     public void iVerifiyPaymentsRelatedPaymentRecordIsNull(String relatedPay) {
 
-        navigateTo.paymentRecord(driver,relatedPay);
+        navigateTo.paymentRecord(driver, relatedPay);
     }
 
     @And("^I select Reason option as (.*)$")
     public void selectReasonOptionAsUserError(String reason) {
 
-        navigateTo.selectReasionOpt(driver,reason);
+        navigateTo.selectReasionOpt(driver, reason);
     }
 
     @And("^I clicked \"(.*)\" radio button$")
     public void iRadioButton(String arg0) throws Throwable {
 
-        navigateTo.adjbtn(driver,arg0);
+        navigateTo.adjbtn(driver, arg0);
     }
 
     @And("^I give Reason Comments$")
     public void iGiveReasonComments() {
 
-    navigateTo.reasons(driver);
+        navigateTo.reasons(driver);
     }
 
 
@@ -1438,7 +1443,7 @@ public void iVerifyTheRelatedPaymentRecordChargeback(String RPaymentType, DataTa
     @And("^I select new Campagin Name as \"(.*)\"$")
     public void iSelectNewCampaginNameAs(String arg0) throws Throwable {
 
-        navigateTo.campaginName(driver,arg0);
+        navigateTo.campaginName(driver, arg0);
     }
 
     @Then("^I verify Primary Contact and Account Name is of the new Contact$")
@@ -1446,7 +1451,7 @@ public void iVerifyTheRelatedPaymentRecordChargeback(String RPaymentType, DataTa
         List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
         String fieldPrimaryName = data.get(0).get("Primary Name");
         String fieldAccountName = data.get(0).get("Account Name");
-        navigateTo.accountName(driver,fieldPrimaryName,fieldAccountName);
+        navigateTo.accountName(driver, fieldPrimaryName, fieldAccountName);
 
 
     }
@@ -1460,17 +1465,17 @@ public void iVerifyTheRelatedPaymentRecordChargeback(String RPaymentType, DataTa
     @And("^I observed (.*) is displayed$")
     public void iSeeMessage(String arg0) {
 
-        navigateTo.obsvervedMessage(driver,arg0);
+        navigateTo.obsvervedMessage(driver, arg0);
     }
 
     @And("^I select (.*) and (.*)$")
-    public void iNewCampaginNameAs(String arg0,String arg1,DataTable dataTable) throws Throwable {
+    public void iNewCampaginNameAs(String arg0, String arg1, DataTable dataTable) throws Throwable {
 
         List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
         String CampaignName = data.get(0).get("Campaign Name");
         String Product = data.get(0).get("Product");
-       // String Amount= data.get()
-        navigateTo.campaginN(driver,arg0,arg1,CampaignName,Product);
+        // String Amount= data.get()
+        navigateTo.campaginN(driver, arg0, arg1, CampaignName, Product);
     }
 
 
@@ -1480,31 +1485,31 @@ public void iVerifyTheRelatedPaymentRecordChargeback(String RPaymentType, DataTa
 //        List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
 //        String fieldRT = data.get(0).get("Payments (Related Payment Record)");
 //        // System.out.println(fieldRT);
-    //    System.out.println(fieldRT);
-        navigateTo.payInfoRecord(driver,related);
+        //    System.out.println(fieldRT);
+        navigateTo.payInfoRecord(driver, related);
     }
 
     @And("^I click on \"(.*)\"$")
     public void iClickOn(String arg0) throws Throwable {
 
-       navigateTo.payAlloction(driver,arg0);
+        navigateTo.payAlloction(driver, arg0);
 
     }
 
     @And("^I click \"(.*)\" link$")
     public void iClickLink(String arg0) throws Throwable {
 
-        navigateTo.link(driver,arg0);
+        navigateTo.link(driver, arg0);
     }
 
     @And("^I selected (.*) and (.*)$")
-    public void iSelectedCampaignNameAndProduct(String arg0,String arg1, DataTable dataTable) {
+    public void iSelectedCampaignNameAndProduct(String arg0, String arg1, DataTable dataTable) {
 
         List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
         String CampaignName = data.get(0).get("Campaign Name");
         String Product = data.get(0).get("Product");
 
-        navigateTo.changeProduct(driver,arg0,arg1,CampaignName,Product);
+        navigateTo.changeProduct(driver, arg0, arg1, CampaignName, Product);
 
     }
 
@@ -1513,19 +1518,331 @@ public void iVerifyTheRelatedPaymentRecordChargeback(String RPaymentType, DataTa
 //        List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
 //        String Amount = data.get(0).get("Amount");
 //
-        navigateTo.enterAmount(driver,amt);
+        navigateTo.enterAmount(driver, amt);
     }
 
     @Then("^I verify Adjustment Status is (.*)$")
     public void iVerifyAdjustmentStatusIsCompleted(String complete) {
 
-        navigateTo.complete(driver,complete);
+        navigateTo.complete(driver, complete);
     }
 
     @Then("^I verify (.*) is already populated$")
     public void iVerifyAlreadyPopulated(String PrimaryContact) {
 
-        navigateTo.alreadyPopulated(driver,PrimaryContact);
+        navigateTo.alreadyPopulated(driver, PrimaryContact);
+    }
+
+
+    @And("^I click (.*) button on right hand side of the page$")
+    public void iClickOnNewButtonOnRightHandSideOfThePage(String NewButton) {
+        navigateTo.newPage(driver, NewButton);
+
+    }
+
+    @Then("^I verify Lead is successfully created with (.*), (.*), (.*), (.*), (.*), (.*) (.*), (.*), (.*), (.*) and (.*)$")
+    public void iVerifyLeadIsSuccessfullyCreated(String fieldCompany, String fieldWebsite, String fieldCIN, String fieldGroup, String fieldEmail, String fieldAnnual, String fieldOwnership, String fieldLeadstat, String fieldLastName, String fieldExpdate, DataTable dataTable) {
+
+        List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+        String Company = data.get(0).get("Company");
+        String Website = data.get(0).get("Website");
+        String CIN = data.get(0).get("CIN");
+        String Group = data.get(0).get("Group");
+        String Email = data.get(0).get("Email");
+        String Annual = data.get(0).get("Annual Revenue");
+        String Ownership = data.get(0).get("Ownership");
+        String Lead_status = data.get(0).get("Lead Status");
+        String Last_Name = data.get(0).get("Last Name");
+        String Exp_date = data.get(0).get("Expected Date");
+        navigateTo.LeadValues(driver, fieldCompany, fieldWebsite, fieldCIN, fieldGroup, fieldEmail, fieldAnnual, fieldOwnership, fieldLeadstat, fieldLastName, fieldExpdate, Company, Website, CIN, Group, Email, Annual, Ownership, Lead_status, Last_Name, Exp_date);
+
+    }
+
+    @And("^I again click (.*) tab$")
+    public void iClickOnLeads(String Fieldtab) {
+
+        navigateTo.againLeads(driver, Fieldtab);
+    }
+
+
+    @And("^I provide (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*) and (.*)$")
+    public void iProvide(String fieldCompany, String fieldWebsite, String fieldCIN, String fieldGroup, String fieldEmail, String fieldAnnual, String fieldOwnership, String fieldLeadstat, String fieldFirstName, String fieldLastName, String fieldIncop, String fieldStreet,
+                         String fieldCity, String fieldCountry, String fieldLoanName, String fieldAmount, String fieldLoanpurpose, String fieldExpdate, DataTable dataTable) {
+
+        List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+        String Company = data.get(0).get("Company");
+        String Website = data.get(0).get("Website");
+        String CIN = data.get(0).get("CIN");
+        String Group = data.get(0).get("Group");
+        String Email = data.get(0).get("Email");
+        String Annual = data.get(0).get("Annual Revenue");
+        String Ownership = data.get(0).get("Ownership");
+        String Lead_status = data.get(0).get("Lead Status");
+        String Last_Name = data.get(0).get("Last Name");
+        String First_Name = data.get(0).get("First Name");
+        String Incop_Date = data.get(0).get("Date of Incorporation");
+        String Street = data.get(0).get("Street");
+        String City = data.get(0).get("City");
+        String Country = data.get(0).get("Country");
+        String Loan_Name = data.get(0).get("Loan Application Name");
+        String Amount = data.get(0).get("Amount");
+        String Loan_Purpose = data.get(0).get("Loan Purpose");
+        String Exp_date = data.get(0).get("Expected Date");
+
+        navigateTo.NewLeadsValues(driver, fieldCompany, fieldWebsite, fieldCIN, fieldGroup, fieldEmail, fieldAnnual, fieldOwnership, fieldLeadstat, fieldFirstName, fieldLastName,
+                fieldIncop, fieldStreet, fieldCity, fieldCountry, fieldLoanName, fieldAmount, fieldLoanpurpose, fieldExpdate,
+                Company, Website, CIN, Group, Email, Annual, Ownership, Lead_status, First_Name, Last_Name, Incop_Date, Street, City, Country, Loan_Name, Amount, Loan_Purpose, Exp_date);
+
+    }
+
+    @Then("^I verified Lead is successfully created with (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*) and (.*)$")
+    public void iVerifiedSuccessfully(String fieldCompany, String fieldWebsite, String fieldCIN, String fieldGroup, String fieldEmail, String fieldAnnual, String fieldOwnership, String fieldLeadstat, String fieldFirstName, String fieldLastName, String fieldIncop, String fieldStreet,
+                                      String fieldCity, String fieldCountry, String fieldLoanName, String fieldAmount, String fieldLoanpurpose, String fieldExpdate, DataTable dataTable) {
+
+
+        List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+        String Company = data.get(0).get("Company");
+        String Website = data.get(0).get("Website");
+        String CIN = data.get(0).get("CIN");
+        String Group = data.get(0).get("Group");
+        String Email = data.get(0).get("Email");
+        String Annual = data.get(0).get("Annual Revenue");
+        String Ownership = data.get(0).get("Ownership");
+        String Lead_status = data.get(0).get("Lead Status");
+        String Last_Name = data.get(0).get("Last Name");
+        String First_Name = data.get(0).get("First Name");
+        String Incop_Date = data.get(0).get("Date of Incorporation");
+        String Street = data.get(0).get("Street");
+        String City = data.get(0).get("City");
+        String Country = data.get(0).get("Country");
+        String Loan_Name = data.get(0).get("Loan Application Name");
+        String Amount = data.get(0).get("Amount");
+        String Loan_Purpose = data.get(0).get("Loan Purpose");
+        String Exp_date = data.get(0).get("Expected Date");
+
+        navigateTo.NewValues(driver, fieldCompany, fieldWebsite, fieldCIN, fieldGroup, fieldEmail, fieldAnnual, fieldOwnership, fieldLeadstat, fieldFirstName, fieldLastName,
+                fieldIncop, fieldStreet, fieldCity, fieldCountry, fieldLoanName, fieldAmount, fieldLoanpurpose, fieldExpdate,
+                Company, Website, CIN, Group, Email, Annual, Ownership, Lead_status, First_Name, Last_Name, Incop_Date, Street, City, Country, Loan_Name, Amount, Loan_Purpose, Exp_date);
+
+    }
+
+//    @And("^I provide values as (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*) and (.*)$")
+//    public void iProvideValuesAs(String fieldCompany1, String fieldWebsite1, String fieldCIN1, String fieldGroup1, String fieldEmail1, String fieldAnnual1, String fieldOwnership1, String fieldLeadstat1, String fieldLastName1, String fieldExpdate1, DataTable dataTable) {
+//
+//            List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+//            String Company1 = data.get(0).get("Company");
+//            String Website2 = data.get(0).get("Website");
+//            String CIN3 = data.get(0).get("CIN");
+//            String Group4= data.get(0).get("Group");
+//            String Email5= data.get(0).get("Email");
+//            String Annual6= data.get(0).get("Annual Revenue");
+//            String Ownership7= data.get(0).get("Ownership");
+//            String Lead_status8= data.get(0).get("Lead Status");
+//            String Last_Name9= data.get(0).get("Last Name");
+//            String Exp_date10= data.get(0).get("Expected Date");
+//
+//   navigateTo.Values(driver,fieldCompany1,fieldWebsite1,fieldCIN1,fieldGroup1,fieldEmail1,fieldAnnual1,fieldOwnership1,fieldLeadstat1,fieldLastName1,fieldExpdate1,Company1, Website2, CIN3, Group4, Email5, Annual6,Ownership7,Lead_status8, Last_Name9,Exp_date10);
+//
+//        }
+
+    @And("^I provide valued in (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*) and (.*)$")
+    public void iProvideValued(String fieldCompany, String fieldWebsite, String fieldCIN, String fieldGroup, String fieldEmail, String fieldAnnual, String fieldOwnership, String fieldLeadstat, String fieldLastName, String fieldExpdate, DataTable dataTable) {
+
+        List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+        String Company = data.get(0).get("Company");
+        String Website = data.get(0).get("Website");
+        String CIN = data.get(0).get("CIN");
+        String Group = data.get(0).get("Group");
+        String Email = data.get(0).get("Email");
+        String Annual = data.get(0).get("Annual Revenue");
+        String Ownership = data.get(0).get("Ownership");
+        String Lead_status = data.get(0).get("Lead Status");
+        String Last_Name = data.get(0).get("Last Name");
+        String Exp_date = data.get(0).get("Expected Date");
+
+        navigateTo.Valued(driver, fieldCompany, fieldWebsite, fieldCIN, fieldGroup, fieldEmail, fieldAnnual, fieldOwnership, fieldLeadstat, fieldLastName, fieldExpdate, Company, Website, CIN, Group, Email, Annual, Ownership, Lead_status, Last_Name, Exp_date);
+
+
+    }
+
+    @Then("^I verify note as (.*)$")
+    public void iVerifyNoLeadIsCreated(String nolead) {
+        navigateTo.NoLead(driver, nolead);
+
+    }
+
+
+    @And("^I click (.*) buttons$")
+    public void iClickConvertLeadButton(String conLead) {
+
+        navigateTo.ConvertLead(driver, conLead);
+
+    }
+
+    @And("^I (.*) page and click on (.*) tab$")
+    public void iClosePage(String close, String Loan_Proposal) {
+
+        navigateTo.loanProposal(driver, close, Loan_Proposal);
+
+    }
+
+    @Then("^I verify Lead is successfully converted to Loan proposal$")
+    public void iVerifyLeadIsSuccessfullyConvertedToLoanProposal(DataTable dataTable) {
+
+        List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+        String fieldOpport = data.get(0).get("Opportunity Name");
+        String fieldCustGroup = data.get(0).get("Customer Group Name");
+        String var = navigateTo.convertSuccessfully(driver, fieldOpport, fieldCustGroup);
+
+        //  Assert.assertEquals(fieldOpport, var);
+    }
+
+
+    @And("^I select (.*) as a record type$")
+    public void iSelectDirectorAsARecordType(String radioButton) {
+
+       navigateTo.RecordType(driver, radioButton);
+    }
+
+    @And("^I fill Basic Details as (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*) and (.*)$")
+    public void iFillBasicDetails(String fieldFirst_Name, String fieldLast_Name, String fieldPan_No, String fieldCust_Grop_Name, String fieldLead_Source, String fieldDIN,String fieldTitle, String fieldRelation_with_promoters, String fieldReports_To, String fieldPer_Holding, String fieldExp_Activity, String fieldNetworth_Returns, DataTable dataTable) {
+
+        List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+        String First_Name = data.get(0).get("First Name");
+        String Last_Name = data.get(0).get("Last Name");
+        String Pan_No = data.get(0).get("Pan No");
+        String Cust_Grp_Name = data.get(0).get("Customer Group Name");
+        String Lead_Source = data.get(0).get("Lead Source");
+        String DIN = data.get(0).get("DIN");
+        String Title = data.get(0).get("Title");
+        String Relation_with_promoters = data.get(0).get("Relationship with promoters/founders");
+        String Reports_To = data.get(0).get("Reports To");
+        String Per_Holding = data.get(0).get("%Holding");
+        String Exp_Activity = data.get(0).get("Experience in line of this activity");
+        String Networth_Returns = data.get(0).get("Networth as per IT Returns");
+
+        navigateTo.basicDetails(driver, fieldFirst_Name, fieldLast_Name, fieldPan_No, fieldCust_Grop_Name, fieldLead_Source, fieldDIN, fieldTitle, fieldRelation_with_promoters, fieldReports_To, fieldPer_Holding, fieldExp_Activity, fieldNetworth_Returns, First_Name, Last_Name, Pan_No, Cust_Grp_Name, Lead_Source, DIN, Title, Relation_with_promoters, Reports_To, Per_Holding, Exp_Activity, Networth_Returns);
+
+    }
+//    @And("^I fill Detail information (.*), (.*), (.*), (.*), (.*) and (.*)$")
+//    public void iFillDetailInformation(String fieldTitle, String fieldRelation_with_promoters, String fieldReports_To, String fieldPer_Holding, String fieldExp_Activity, String fieldNetworth_Returns, DataTable dataTable) {
+//
+//
+//        List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+//        String Title = data.get(0).get("Title");
+//        String Relation_with_promoters = data.get(0).get("Relationship with promoters/founders");
+//        String Reports_To = data.get(0).get("Reports To");
+//        String Per_Holding = data.get(0).get("%Holding");
+//        String Exp_Activity = data.get(0).get("Experience in line of this activity");
+//        String Networth_Returns = data.get(0).get("Networth as per IT Returns");
+//
+//        navigateTo.basicInfo(driver, fieldTitle, fieldRelation_with_promoters, fieldReports_To, fieldPer_Holding, fieldExp_Activity, fieldNetworth_Returns, Title, Relation_with_promoters, Reports_To, Per_Holding, Exp_Activity, Networth_Returns);
+//    }
+
+    @Then("^I verified Lead is successfully created (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*) and (.*)$")
+    public void iVerifiedLeadIsSuccessfully(String fieldFirst_Name, String fieldLast_Name, String fieldPan_No, String fieldCust_Grop_Name, String fieldLead_Source, String fieldDIN, String fieldTitle, String fieldRelation_with_promoters, String fieldReports_To, String fieldPer_Holding, String fieldExp_Activity, String fieldNetworth_Returns, DataTable dataTable) {
+
+        List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+        String First_Name = data.get(0).get("First Name");
+        String Last_Name = data.get(0).get("Last Name");
+        String Pan_No = data.get(0).get("Pan No");
+        String Cust_Grp_Name = data.get(0).get("Customer Group Name");
+        String Lead_Source = data.get(0).get("Lead Source");
+        String DIN = data.get(0).get("DIN");
+        String Title = data.get(0).get("Title");
+        String Relation_with_promoters = data.get(0).get("Relationship with promoters/founders");
+        String Reports_To = data.get(0).get("Reports To");
+        String Per_Holding = data.get(0).get("%Holding");
+        String Exp_Activity = data.get(0).get("Experience in line of this activity");
+        String Networth_Returns = data.get(0).get("Networth as per IT Returns");
+
+        navigateTo.ContactDirector(driver, fieldFirst_Name, fieldLast_Name, fieldPan_No, fieldCust_Grop_Name, fieldLead_Source, fieldDIN, fieldTitle, fieldRelation_with_promoters, fieldReports_To, fieldPer_Holding, fieldExp_Activity, fieldNetworth_Returns, Title, Relation_with_promoters, Reports_To, Per_Holding, Exp_Activity, Networth_Returns, First_Name, Last_Name, Pan_No, Cust_Grp_Name, Lead_Source, DIN);
+
+    }
+
+    @And("^again I provide (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*) and (.*)$")
+    public void again_iProvide(String fieldFirst_Name, String fieldLast_Name, String fieldPan_No, String fieldCust_Grop_Name, String fieldLead_Source, String fieldDIN, String fieldTitle, String fieldRelation_with_promoters, String fieldReports_To, String fieldPer_Holding, String fieldExp_Activity, String fieldNetworth_Returns, DataTable dataTable) {
+       // waitfortheelement();
+        List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+        String First_Name = data.get(0).get("First Name");
+        String Last_Name = data.get(0).get("Last Name");
+        String Pan_No = data.get(0).get("Pan No");
+        String Cust_Grp_Name = data.get(0).get("Customer Group Name");
+        String Lead_Source = data.get(0).get("Lead Source");
+        String DIN = data.get(0).get("DIN");
+        String Title = data.get(0).get("Title");
+        String Relation_with_promoters = data.get(0).get("Relationship with promoters/founders");
+        String Reports_To = data.get(0).get("Reports To");
+        String Per_Holding = data.get(0).get("%Holding");
+        String Exp_Activity = data.get(0).get("Experience in line of this activity");
+        String Networth_Returns = data.get(0).get("Networth as per IT Returns");
+
+//        int var= First_Name.length();
+//        String var1= First_Name.substring(var-1);
+//        var1.concat("Jessia");
+        navigateTo.Details(driver, fieldFirst_Name, fieldLast_Name, fieldPan_No, fieldCust_Grop_Name, fieldLead_Source, fieldDIN,
+                First_Name.replace("Maxwell","Jessica") , Last_Name.replace("Waynen","Waane") , Pan_No, Cust_Grp_Name, Lead_Source, DIN, fieldTitle, fieldRelation_with_promoters, fieldReports_To, fieldPer_Holding, fieldExp_Activity, fieldNetworth_Returns, Title.replace("Director","Beneficial Owner"), Relation_with_promoters, Reports_To, Per_Holding, Exp_Activity, Networth_Returns);
+
+
+    }
+
+    @And("^I fill the required (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*) and \"([^\"]*)\"$")
+    public void iFillTheRequiredCustomer(String arg0) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        throw new PendingException();
+    }
+
+    @And("^I click (.*) button on right hand side$")
+    public void iClickConvertButtonOnRightHandSide(String convert) {
+
+        navigateTo.convert(driver, convert);
+
+    }
+
+    @And("^I clicked (.*)$")
+    public void iClickedConvertButton(String leadConvert) {
+
+        navigateTo.leadconvert(driver, leadConvert);
+    }
+
+    @Then("^I verify success message as \"([^\"]*)\"$")
+    public void iVerifySuccessMessageAs(String message) throws Throwable {
+
+            navigateTo.successfulMessage(driver,message);
+          //  System.out.println(message);
+
+    }
+
+
+    @And("^I entered the required fields (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*) and (.*)$")
+
+    public void iFillTheRequired(String FieldCustomer_Group_Name,String FieldParent_Cust_Group, String FieldCIN, String FieldABN, String FieldAnnual_Revenue, String FieldPhone, String FieldWebsite, String FieldEmail, String FieldOwnership, String FieldEntity_Name, String FieldPAN, String FieldDate_of_Incorporation, String FieldMortgaged, String FiledNo_of_Months_in_Office, DataTable dataTable ) {
+
+        List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+        String Customer_Group_Name = data.get(0).get("Customer Group Name");
+        String Parent_Cust_Group = data.get(0).get("Parent Customer Group");
+     //   String Rating = data.get(0).get("Rating");
+        String CIN = data.get(0).get("CIN");
+        String ABN = data.get(0).get("ABN");
+        String Annual_Revenue = data.get(0).get("Annual Revenue");
+        String Phone = data.get(0).get("Phone");
+        String Website = data.get(0).get("Website");
+        String Email = data.get(0).get("Email");
+        String Ownership = data.get(0).get("Ownership");
+        String Entity_Name = data.get(0).get("Entity Name");
+        String PAN = data.get(0).get("PAN");
+        String Date_of_Incorporation = data.get(0).get("Date of Incorporation");
+        String Mortgaged = data.get(0).get("Mortgaged");
+        String No_of_Months_in_Office = data.get(0).get("No of Months in Office");
+
+       navigateTo.fillRequired(driver,FieldCustomer_Group_Name,FieldParent_Cust_Group, FieldCIN, FieldABN, FieldAnnual_Revenue, FieldPhone, FieldWebsite, FieldEmail, FieldOwnership, FieldEntity_Name, FieldPAN, FieldDate_of_Incorporation, FieldMortgaged, FiledNo_of_Months_in_Office,
+                Customer_Group_Name,Parent_Cust_Group,CIN,ABN, Annual_Revenue, Phone, Website, Email, Ownership, Entity_Name, PAN, Date_of_Incorporation,Mortgaged,No_of_Months_in_Office);
+    }
+
+    @And("^I again entered the required fields (.*), (.*), (.*), (.*), (.*), (.*), (.*), (.*) and (.*)$")
+    public void iFillAgain() {
+
+
     }
 }
 

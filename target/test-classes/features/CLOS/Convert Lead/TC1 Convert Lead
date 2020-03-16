@@ -1,0 +1,21 @@
+Feature: Verify Create a new Lead
+  As a Salesforce user, login to Salesforce and Create a new Lead
+
+  Scenario Outline: Verify Convert a new Lead
+ # Scenario:  Verify Create a new Lead
+    Given I login to Salesforce URL
+    When I click on Leads tag
+    And I click New button on right hand side of the page
+    And I select Commercial Real Estate Lending as a record type
+    And I click the Next button
+    And I provide Company, Website, CIN, Group, Email, Annual Revenue, Ownership, Lead Status, First Name, Last Name, Date of Incorporation, Street, City, Country, Loan Application Name, Amount, Loan Purpose and Expected Date
+      |Company | Website | CIN | Group | Email | Annual Revenue | Ownership | Lead Status | First Name  |Last Name | Date of Incorporation |Street | City | Country | Loan Application Name | Amount | Loan Purpose |Expected Date |
+      | <Company> | <Website> | <CIN> |<Group> | <Email> | <Annual Revenue> | <Ownership> | <Lead Status> | <First Name>| <Last Name> | <Date of Incorporation> | <Street> | <City> | <Country> | <Loan Application Name>| <Amount> |<Loan Purpose>|<Expected Date> |
+    And I click on Save button
+    And I click Convert button on right hand side
+    And I clicked Convert
+    Then I verify success message as "Your lead has been converted"
+
+    Examples:
+      |Company | Website  | CIN | Group | Email | Annual Revenue | Ownership | Lead Status | First Name |Last Name | Date of Incorporation | Street | City | Country | Loan Application Name | Amount | Loan Purpose | Expected Date |
+      | SQAP Company  | www.aelon.com | 742252874666  | Group AAC  | supportserv@gmail.com | 600000000 | Private | Working - Contacted | Pay |Tim | 15/1/2020| High Street| Pune | India | Personal Loan | 2000000 | Refinance Loan | 15/1/2020 |

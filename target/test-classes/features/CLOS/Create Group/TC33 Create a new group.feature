@@ -1,0 +1,25 @@
+# new feature
+# Tags: optional
+    
+Feature: Verify Create a new Group
+  As a Salesforce user, login to Salesforce and Create a new Lead
+
+  Scenario Outline: Verify Create a new Group
+    Given I login to Salesforce URL
+    When I click on Customer Groups tag
+    And I click New button on right hand side of the page
+    And I fill the required Customer Group Name, Parent Customer Group, Rating, CIN, ABN, Industry, Annual Revenue, Phone, Website, Email, Ownership, PAN, Date of Incorporation, Mortgaged and No of Months in Office
+    |Customer Group Name| Parent Customer Group| Rating| CIN| ABN| Industry| Annual Revenue| Phone| Website| Email| Ownership| PAN| Date of Incorporation| Mortgaged| No of Months in Office|
+    |<Customer Group Name>|<Parent Customer Group>| <Rating>| <CIN>| <ABN>| <Industry>| <Annual Revenue>| <Phone>| <Website>| <Email>| <Ownership>| <PAN>| <Date of Incorporation> | <Mortgaged>| <No of Months in Office>|
+   And I fill again Date of inception, Office, GST Reg No, Billing Street, Billing City, Billing Zip/Postal Code, Billing State/Province, Billing Country and Notes
+    | Date of inception| Office| GST Reg No| Billing Street| Billing City| Billing Zip/Postal Code| Billing State/Province| Billing Country| Notes |
+    |<Date of inception>| <Office>| <GST Reg No>| <Billing Street>| <Billing City>| <Billing Zip/Postal Code>| <Billing State/Province>| <Billing Country>| <Notes> |
+    And I click on Save button
+    And I again click Customer Groups tab
+    And I type the leads "Liam" in the Search box and press Enter to view the particular contact detail
+    And I click on the searched lead name
+   # Then I verified Lead is successfully created with Company, Website, CIN, Group, Email, Annual Revenue, Ownership, Lead Status, First Name, Last Name, Date of Incorporation, Street, City, Country, Loan Application Name, Amount, Loan Purpose and Expected Date
+
+    Examples:
+      | Customer Group Name| Parent Customer Group| Rating| CIN| ABN| Industry| Annual Revenue| Phone| Website| Email| Ownership| PAN| Date of Incorporation| Mortgaged| No of Months in Office| Date of inception| Office| GST Reg No| Billing Street| Billing City| Billing Zip/Postal Code| Billing State/Province| Billing Country| Notes |
+      | TATAS| TATA STEELS GROUPS| Warm | AWE12345678901234567T| 41526378945 | Real Estate construction | 500000000000 | 02024458412| www.tata.com| info@gmail.com| LLP | ERTY4567TY | 2/3/2020| Y | 30 | 2/3/2018 | | TED1452568544TR| Ville Parle | Mumbai | 411048| Maharashtra | India | Details updated |

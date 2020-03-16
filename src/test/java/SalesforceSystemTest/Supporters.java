@@ -13,7 +13,7 @@ public class Supporters {
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\Ankita\\Downloads\\New chrome\\chromedriver(1).exe");
 
         WebDriver driver =  new ChromeDriver();
-        driver.get("https://test.salesforce.com");
+        driver.get("https://login.salesforce.com/?locale=in");
 
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.findElement(By.id("username")).sendKeys("bheemk@oxfam.org.au.sprint6dev");

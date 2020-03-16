@@ -1,0 +1,27 @@
+Feature: Verify Create a new Lead
+  As a Salesforce user, login to Salesforce and Create a Lead with Save and New
+
+  Scenario Outline: Verify Create a Lead with Save and New
+ # Scenario:  Verify Create a new Lead
+    Given I login to Salesforce URL
+    When I click on Leads tag
+    And I click New button on right hand side of the page
+    And I select Commercial Real Estate Lending as a record type
+    And I click the Next button
+    And I provide values in Company, Website, CIN, Group, Email, Annual Revenue, Ownership, Lead Status, Last Name and Expected Date
+      | Company    | Website | CIN | Group | Email | Annual Revenue | Ownership | Lead Status | Last Name | Expected Date |
+      | <Company> | <Website> | <CIN> |<Group> | <Email> | <Annual Revenue> | <Ownership> | <Lead Status> | <Last Name> | <Expected Date> |
+    And I click on Save & New button
+ #   And I again provide the detail as follows
+    #And I provide values as Company, Website, CIN, Group, Email, Annual Revenue, Ownership, Lead Status, Last Name and Expected Date
+     #| Company1 | Website1 | CIN1 | Group1 | Email1 | Annual Revenue1 | Ownership1 | Lead Status1 | Last Name1 | Expected Date1 |
+      #| <Company1> | <Website1> | <CIN1> |<Group1> | <Email1> | <Annual Revenue1> | <Ownership1> | <Lead Status1> | <Last Name1> | <Expected Date1> |
+    And I again click Leads tab
+    And I type the leads "Jiam" in the Search box and press Enter to view the particular contact detail
+    And I click on the searched lead name
+    Then I verify Lead is successfully created with Company, Website, CIN, Group, Email, Annual Revenue, Ownership, Lead Status, Last Name and Expected Date
+
+     Examples:
+      | Company   | Website  | CIN | Group | Email | Annual Revenue | Ownership | Lead Status | Last Name | Expected Date |
+      | SSAP Company | www.aelon.com | 742252874666  | Group AAC  | supportserv@gmail.com | 600000000 | Private | Working - Contacted | Liam | 15/1/2020 |
+      |PPP Company  | www.aelon.com | 742252874666  | Group AAC  | supportserv@gmail.com | 600000000 | Private | Open - Not Contacted | Jiam | 15/1/2020 |

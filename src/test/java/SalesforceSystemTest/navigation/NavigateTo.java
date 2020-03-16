@@ -20,7 +20,12 @@ import java.util.concurrent.TimeUnit;
 
 import static java.lang.Thread.sleep;
 
+
+
+
 public class NavigateTo {
+
+
 
     @Step("Open the Salesforce home page")
     public void LogintoSalesforce(WebDriver driver) {
@@ -50,16 +55,22 @@ public class NavigateTo {
         }
     }
 
-    public void clickContacts(WebDriver driver, String tagname) {
+    public void clickContacts(WebDriver driver, String filedTagname) {
+
+         //waitfortheelement();
+        // driver.findElement (By.xpath("//span[@class=\"slds-truncate\"][text()='Leads']"));
         waitfortheelement();
-        // String e=driver.findElement(By.xpath("//one-app-nav-bar-item-root[@class='navItem slds-context-bar__item slds-shrink-none'][a[span[@class='slds-truncate'][text()='"+ tagname +"']]]")).getText();
+        WebElement element1 = driver.findElement(By.xpath(".//one-app-nav-bar-item-root[@class='navItem slds-context-bar__item slds-shrink-none']//a[@title='"+filedTagname+"']"));
+        waitfortheelement();
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        executor.executeScript("arguments[0].click();", element1);
 
 
-        driver.findElement(By.xpath(".//one-app-nav-bar-item-root[@class='navItem slds-context-bar__item slds-shrink-none'][a[span[@class='slds-truncate'][text()='" + tagname + "']]]")).click();
-//       // driver.findElement(By.xpath(".//one-app-nav-bar-item-root[@class='navItem slds-context-bar__item slds-shrink-none'][a[@title='Once Off']]//span")).click();
+   //     driver.findElement(By.xpath(".//one-app-nav-bar-item-root[@class='navItem slds-context-bar__item slds-shrink-none']//a[@title='Leads']")).click();
+       // driver.findElement(By.xpath(".//one-app-nav-bar-item-root[@class='navItem slds-context-bar__item slds-shrink-none'][a[@title='Once Off']]//span")).click();
 //        driver.findElement(By.xpath("//one-app-nav-bar-item-root[@class='navItem slds-context-bar__item slds-shrink-none']//a[@class='slds-context-bar__label-action dndItem']//span[text()='Once Off']")).click();
-        // driver.findElement(By.xpath(".//one-app-nav-bar-item-root[@class='navItem slds-context-bar__item slds-shrink-none']//a//span[@class='slds-truncate'][text()='"+ tagname +"']")).click();
-        waitfortheelement();
+ //        driver.findElement(By.xpath(".//one-app-nav-bar-item-root[@class='navItem slds-context-bar__item slds-shrink-none']//a//span[@class='slds-truncate'][text()='"+ tagname +"']")).click();
+//        waitfortheelement();
     }
 
     public void clickNewContact(WebDriver driver) {
@@ -188,7 +199,8 @@ public class NavigateTo {
         waitfortheelement();
 //        String contactName = getConfigurationDetails("Salesforce.contactName");
         String contactName = name;
-        driver.findElement(By.xpath("//input[@name='Contact-search-input']")).sendKeys(contactName);
+       // driver.findElement(By.xpath("//input[@name='Lead-search-input']")).sendKeys(contactName);
+        driver.findElement(By.xpath("//div[@class='test-listViewManager slds-grid slds-grid--vertical forceListViewManager']//div[@class='slds-form-element__control slds-grow slds-input-has-icon slds-input-has-icon_left-right']//input")).sendKeys(contactName);
         waitfortheelement();
         Actions act1 = new Actions(driver);
         waitfortheelement();
@@ -218,13 +230,12 @@ public class NavigateTo {
     public void clickTabName(WebDriver driver, String tagName) {
         waitfortheelement();
         //String filedTagName =TagName;
-        WebElement elem = driver.findElement(By.xpath("(//div[@class='uiTabBar']//a[@class='tabHeader'][@title='"+tagName+"']//span[@class='title'][text()='"+tagName+"'])[2]"));
-       // WebElement elem = driver.findElement(By.xpath("//div[@class='uiTabBar']//a[@class='tabHeader'][@title='Related']//span[@class='title'][text()='Related']"));
-    //   driver.findElement(By.xpath("//div[@class='column region-main']//div[@class='uiTabBar']//span[@class='title'][text()='"+tagName+"']")).click();
-      //  driver.findElement(By.xpath("//div[contains(@class,'uiTabBar')]//a[contains(@title,'"+tagName+"')]")).click();
+        WebElement elem = driver.findElement(By.xpath("//div[@class='windowViewMode-normal oneContent active lafPageHost']//span[@class='title'][text()='"+tagName+"']"));
         elem.click();
-        waitfortheelement();
-        waitfortheelement();
+
+//        driver.findElement(By.xpath("(//div[@class='uiTabBar']//a[@class='tabHeader'][@title='"+tagName+"']//span[@class='title'][text()='"+tagName+"'])[4]")).click();
+//        waitfortheelement();
+//        waitfortheelement();
     }
 
     public void clickTabUnderPayment(WebDriver driver, String tabName) {
@@ -655,11 +666,11 @@ public class NavigateTo {
         driver.findElement(By.xpath("//div[contains(@class,'undefined lookup__menu uiAbstractList')]//div//div[contains(@class,'primaryLabel slds')][text()='Suma Srinivasaiah']")).click();
     }
 
-    public void clickOpportunitybutton(WebDriver driver, String fieldValue) {
-        waitfortheelement();
-        driver.findElement(By.xpath("//div//a[@class='rlql-relatedListLink']//span[@title='" + fieldValue + "']")).click();
-        waitfortheelement();
-    }
+//    public void clickOpportunitybutton(WebDriver driver, String fieldValue) {
+//        waitfortheelement();
+//        driver.findElement(By.xpath("//div//a[@class='rlql-relatedListLink']//span[@title='" + fieldValue + "']")).click();
+//        waitfortheelement();
+//    }
 
     public void clickopportunityname(WebDriver driver, String opportunityName) {
         waitfortheelement();
@@ -1275,31 +1286,62 @@ public class NavigateTo {
 
     }
 
-    public void chargebackValues(WebDriver driver, String fieldChargebackBankAction,String fieldChargebackResponseBy, String fieldChargebackActualResponseDate, String fieldChargebackSSTResponse, String fieldChargebackBankFinalNotificationDate, String chargebackBankAction, String chargebackChargebackResponseBy,String chargebackChargebackActualResponseDate, String chargebackChargebackSSTResponse, String chargebackChargebackBankFinalNotificationDate) {
+    public void Values(WebDriver driver, String fieldCompany, String fieldWebsite, String fieldCIN, String fieldGroup, String fieldEmail, String fieldAnnual, String fieldOwnership, String fieldLeadstat, String fieldLastName, String fieldExpdate, String Company, String Website, String CIN, String Group, String Email, String Annual, String Ownership, String Lead_status, String Last_Name, String Exp_date) {
         waitfortheelement();
 
-        driver.findElement(By.xpath("//div[@class='slds-card__body']//label[text()='" + fieldChargebackBankAction + "']")).click();
-        driver.findElement(By.xpath("//div[@class='slds-card__body']//label[text()='" + fieldChargebackBankAction + "']/..//span[@title='" + chargebackBankAction + "']")).click();
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldCompany+"']//..//..//input")).sendKeys(Company);
+        waitfortheelement();
 
-        driver.findElement(By.xpath("//div[@class='slds-card__body']//label[text()='"+fieldChargebackResponseBy+"']/..//input")).click();
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldWebsite+"']//..//..//input")).sendKeys(Website);
+
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldCIN+"']//..//..//input")).sendKeys(CIN);
+        waitfortheelement();
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldEmail+"']//..//..//input")).sendKeys(Email);
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldAnnual+"']//..//..//input")).sendKeys(Annual);
+        waitfortheelement();
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//div[@class='slds-form-element slds-hint-parent']//span[contains(text(),'"+fieldOwnership+"')]//..//..//a[@class='select']")).click();
+       // driver.findElement(By.xpath("//div[@class='uiMenu']//a[@class='select']//..//..//a")).click();
+        driver.findElement(By.xpath("//div[@class='select-options']//li[@class='uiMenuItem uiRadioMenuItem']//a[@title='"+Ownership+"']")).click();
+
+       driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldGroup+"']//..//..//input")).sendKeys(Group);
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//div[@role='listbox']//div[@title='"+Group+"']")).click();
+       // driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//div[@role='listbox']//span[@title='New Customer Group']")).click();
+
+        //   driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldLeadstat+"']//..//..//input")).sendKeys(Lead_status);
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//div[@class='slds-form-element slds-hint-parent']//span[contains(text(),'"+fieldLeadstat+"')]//..//..//a[@class='select']")).click();
+        driver.findElement(By.xpath("//div[@class='select-options']//li[@class='uiMenuItem uiRadioMenuItem']//a[@title='"+Lead_status+"']")).click();
+        waitfortheelement();
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("javascript:window.scrollBy(0,200)");
+
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldLastName+"']//..//..//input")).sendKeys(Last_Name);
+
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldExpdate+"']//..//..//input")).sendKeys(Exp_date);
+
+
+
+
+        // driver.findElement(By.xpath("//div[@class='slds-card__body']//label[text()='" + fieldChargebackBankAction + "']/..//span[@title='" + chargebackBankAction + "']")).click();
+
+     //   driver.findElement(By.xpath("//div[@class='slds-card__body']//label[text()='"+fieldChargebackResponseBy+"']/..//input")).click();
 //        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 //        Date date = new Date();
 //        String strDate = dateFormat.format(date);
-        driver.findElement(By.xpath("//td[@data-value='" + chargebackChargebackResponseBy + "']")).click();
-        waitfortheelement();
+   //     driver.findElement(By.xpath("//td[@data-value='" + chargebackChargebackResponseBy + "']")).click();
+      //  waitfortheelement();
 
-        driver.findElement(By.xpath("//div[@class='slds-card__body']//label[text()='"+fieldChargebackActualResponseDate+"']/..//input")).click();
-        driver.findElement(By.xpath("//td[@data-value='" + chargebackChargebackActualResponseDate + "']")).click();
+     //   driver.findElement(By.xpath("//div[@class='slds-card__body']//label[text()='"+fieldChargebackActualResponseDate+"']/..//input")).click();
+       // driver.findElement(By.xpath("//td[@data-value='" + chargebackChargebackActualResponseDate + "']")).click();
 
-        waitfortheelement();
-        driver.findElement(By.xpath("//div[@class='slds-card__body']//label[text()='" + fieldChargebackSSTResponse + "']")).click();
-        driver.findElement(By.xpath("//div[@class='slds-card__body']//label[text()='" + fieldChargebackSSTResponse + "']/..//span[@title='" + chargebackChargebackSSTResponse + "']")).click();
-        waitfortheelement();
+     //   waitfortheelement();
+      //  driver.findElement(By.xpath("//div[@class='slds-card__body']//label[text()='" + fieldChargebackSSTResponse + "']")).click();
+      //  driver.findElement(By.xpath("//div[@class='slds-card__body']//label[text()='" + fieldChargebackSSTResponse + "']/..//span[@title='" + chargebackChargebackSSTResponse + "']")).click();
+      //  waitfortheelement();
 
-        driver.findElement(By.xpath("//div[@class='slds-card__body']//label[text()='"+fieldChargebackBankFinalNotificationDate+"']/..//input")).click();
-        driver.findElement(By.xpath("//div[@class='slds-card__body']//td[@data-value='" + chargebackChargebackBankFinalNotificationDate + "']")).click();
+      //  driver.findElement(By.xpath("//div[@class='slds-card__body']//label[text()='"+fieldChargebackBankFinalNotificationDate+"']/..//input")).click();
+      //  driver.findElement(By.xpath("//div[@class='slds-card__body']//td[@data-value='" + chargebackChargebackBankFinalNotificationDate + "']")).click();
 
-        waitfortheelement();
+      //  waitfortheelement();
     }
 
     public String verifyPaymentRecords(WebDriver driver, String fieldChargebackBankAction, String fieldChargebackResponseBy, String fieldChargebackActualResponseDate, String fieldChargebackSSTResponse, String fieldChargebackBankFinalNotificationDate, String chargebackBankAction, String chargebackChargebackResponseBy, String chargebackChargebackActualResponseDate, String chargebackChargebackSSTResponse, String chargebackChargebackBankFinalNotificationDate) throws ParseException {
@@ -1415,7 +1457,8 @@ public class NavigateTo {
         waitfortheelement();
         waitfortheelement();
 
-        String str= driver.findElement(By.xpath("//div[@class='error uiMessage']//div[@class='uiBlock']//div[@class='bBody']")).getText();
+        String str= driver.findElement(By.xpath("//div[@class='pageLevelErrors']//ul[@class='errorsList']//li")).getText();
+     //   String str= driver.findElement(By.xpath("//div[@class='error uiMessage']//div[@class='uiBlock']//div[@class='bBody']")).getText();
 
         return str;
     }
@@ -2377,6 +2420,501 @@ public class NavigateTo {
         String str= driver.findElement(By.xpath("//div[@class='column left-col']//div[@class='slds-card__header slds-grid']//div[@class='slds-media__body']//span[text()='"+cases+"']")).getText();
         waitfortheelement();
         System.out.println(str);
+
+    }
+
+
+    public void newPage(WebDriver driver, String newButton) {
+        waitfortheelement();
+        //driver.findElement(By.xpath("//div[@class='test-listViewManager slds-grid slds-grid--vertical forceListViewManager']//div[@class='slds-truncate'][text()='"+newButton+"']")).click();
+        driver.findElement(By.xpath("//div[@class='slds-grid']//div[@class='slds-col slds-no-flex slds-grid slds-align-top slds-p-bottom--xx-small test-lvmForceActionsContainer']//a//div[@title='"+newButton+"']")).click();
+        waitfortheelement();
+    }
+
+    public void againLeads(WebDriver driver, String fieldtab) {
+
+        waitfortheelement();
+    //  driver.findElement(By.xpath("//div[@class=\"slds-context-bar\"]//one-app-nav-bar-item-root[@class='navItem slds-context-bar__item slds-shrink-none']//..//a[@title='"+fieldtab+"']")).click();
+        WebElement element1 = driver.findElement(By.xpath("//div[@class=\"slds-context-bar\"]//one-app-nav-bar-item-root[@class='navItem slds-context-bar__item slds-shrink-none']//..//a[@title='"+fieldtab+"']"));
+    //    element1.click();
+       JavascriptExecutor executor = (JavascriptExecutor) driver;
+       executor.executeScript("arguments[0].click();", element1);
+
+    }
+
+    public void LeadValues(WebDriver driver, String fieldCompany, String fieldWebsite, String fieldCIN, String fieldGroup, String fieldEmail, String fieldAnnual, String fieldOwnership, String fieldLeadstat, String fieldLastName, String fieldExpdate, String company, String website, String cin, String group, String email, String annual, String ownership, String lead_status, String last_name, String exp_date) {
+
+        waitfortheelement();
+
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldCompany+"']//..//..//input")).getText();
+        waitfortheelement();
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldWebsite+"']//..//..//input")).getText();
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldCIN+"']//..//..//input")).getText();
+        waitfortheelement();
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldEmail+"']//..//..//input")).getText();
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldAnnual+"']//..//..//input")).getText();
+        waitfortheelement();
+      //  driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//div[@class='slds-form-element slds-hint-parent']//span[contains(text(),'Ownership')]//..//..//a[@class='select']")).click();
+    //    driver.findElement(By.xpath("//div[@class='select-options']//li[@class='uiMenuItem uiRadioMenuItem']//a[@title='"+ownership+"']")).click();
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldGroup+"']//..//..//input")).getText();
+    //    driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//div[@role='listbox']//div[@title='"+group+"']")).click();
+        waitfortheelement();
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("javascript:window.scrollBy(0,200)");
+
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldLastName+"']//..//..//input")).getText();
+
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldExpdate+"']//..//..//input")).getText();
+    }
+
+    public void NewLeadsValues(WebDriver driver, String fieldCompany, String fieldWebsite, String fieldCIN, String fieldGroup, String fieldEmail, String fieldAnnual, String fieldOwnership, String fieldLeadstat, String fieldFirstName, String fieldLastName, String fieldIncop, String fieldStreet, String fieldCity, String fieldCountry, String fieldLoanName, String fieldAmount, String fieldLoanpurpose, String fieldExpdate,
+                               String company, String website, String cin, String group, String email, String annual, String ownership, String lead_status, String first_name, String last_name, String incop_date, String street, String city, String country, String loan_name, String amount, String loan_purpose, String exp_date) {
+
+        waitfortheelement();
+
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldCompany+"']//..//..//input")).sendKeys(company);
+        waitfortheelement();
+
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldWebsite+"']//..//..//input")).sendKeys(website);
+
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldCIN+"']//..//..//input")).sendKeys(cin);
+        waitfortheelement();
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldEmail+"']//..//..//input")).sendKeys(email);
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldAnnual+"']//..//..//input")).sendKeys(annual);
+        waitfortheelement();
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//div[@class='slds-form-element slds-hint-parent']//span[contains(text(),'"+fieldOwnership+"')]//..//..//a[@class='select']")).click();
+
+        driver.findElement(By.xpath("//div[@class='select-options']//li[@class='uiMenuItem uiRadioMenuItem']//a[@title='"+ownership+"']")).click();
+
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldGroup+"']//..//..//input")).sendKeys(group);
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//div[@role='listbox']//div[@title='"+group+"']")).click();
+
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//div[@class='slds-form-element slds-hint-parent']//span[contains(text(),'"+fieldLeadstat+"')]//..//..//a[@class='select']")).click();
+        driver.findElement(By.xpath("//div[@class='select-options']//li[@class='uiMenuItem uiRadioMenuItem']//a[@title='"+lead_status+"']")).click();
+
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldIncop+"']//..//..//input")).sendKeys(incop_date);
+
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldStreet+"']//..//..//textarea")).sendKeys(street);
+
+        waitfortheelement();
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("javascript:window.scrollBy(0,200)");
+
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldCity+"']//..//..//input")).sendKeys(city);
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldCountry+"']//..//..//input")).sendKeys(country);
+
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldFirstName+"']//..//..//input")).sendKeys(first_name);
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldLastName+"']//..//..//input")).sendKeys(last_name);
+
+
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldLoanName+"']//..//..//input")).sendKeys(loan_name);
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldAmount+"']//..//..//input")).sendKeys(amount);
+      //  driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldLoanpurpose+"']//..//..//input")).sendKeys(loan_purpose);
+
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//div[@class='slds-form-element slds-hint-parent']//span[contains(text(),'"+fieldLoanpurpose+"')]//..//..//a[@class='select']")).click();
+
+        driver.findElement(By.xpath("//div[@class='select-options']//li[@class='uiMenuItem uiRadioMenuItem']//a[@title='"+loan_purpose+"']")).click();
+
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldExpdate+"']//..//..//input")).sendKeys(exp_date);
+
+    }
+
+    public void NewValues(WebDriver driver, String fieldCompany, String fieldWebsite, String fieldCIN, String fieldGroup, String fieldEmail, String fieldAnnual, String fieldOwnership, String fieldLeadstat, String fieldFirstName, String fieldLastName, String fieldIncop, String fieldStreet, String fieldCity, String fieldCountry, String fieldLoanName, String fieldAmount, String fieldLoanpurpose, String fieldExpdate, String company, String website, String cin, String group, String email, String annual, String ownership, String lead_status, String first_name, String last_name, String incop_date, String street, String city, String country, String loan_name, String amount, String loan_purpose, String exp_date) {
+
+
+        waitfortheelement();
+
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldCompany+"']//..//..//input")).getText();
+        waitfortheelement();
+
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldWebsite+"']//..//..//input")).getText();
+
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldCIN+"']//..//..//input")).getText();
+        waitfortheelement();
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldEmail+"']//..//..//input")).getText();
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldAnnual+"']//..//..//input")).getText();
+        waitfortheelement();
+        //driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//div[@class='slds-form-element slds-hint-parent']//span[contains(text(),'"+fieldOwnership+"')]//..//..//a[@class='select']")).click();
+
+      //  driver.findElement(By.xpath("//div[@class='select-options']//li[@class='uiMenuItem uiRadioMenuItem']//a[@title='"+ownership+"']")).click();
+
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldGroup+"']//..//..//input")).getText();
+      //  driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//div[@role='listbox']//div[@title='"+group+"']")).click();
+
+       // driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//div[@class='slds-form-element slds-hint-parent']//span[contains(text(),'"+fieldLeadstat+"')]//..//..//a[@class='select']")).click();
+     //   driver.findElement(By.xpath("//div[@class='select-options']//li[@class='uiMenuItem uiRadioMenuItem']//a[@title='"+lead_status+"']")).click();
+
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldIncop+"']//..//..//input")).getText();
+
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldStreet+"']//..//..//textarea")).getText();
+
+        waitfortheelement();
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("javascript:window.scrollBy(0,200)");
+
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldCity+"']//..//..//input")).getText();
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldCountry+"']//..//..//input")).getText();
+
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldFirstName+"']//..//..//input")).getText();
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldLastName+"']//..//..//input")).getText();
+
+
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldLoanName+"']//..//..//input")).getText();
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldAmount+"']//..//..//input")).getText();
+        //  driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldLoanpurpose+"']//..//..//input")).sendKeys(loan_purpose);
+
+     //   driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//div[@class='slds-form-element slds-hint-parent']//span[contains(text(),'"+fieldLoanpurpose+"')]//..//..//a[@class='select']")).click();
+
+    //    driver.findElement(By.xpath("//div[@class='select-options']//li[@class='uiMenuItem uiRadioMenuItem']//a[@title='"+loan_purpose+"']")).click();
+
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldExpdate+"']//..//..//input")).sendKeys(exp_date);
+    }
+
+    public void Valued(WebDriver driver, String fieldCompany, String fieldWebsite, String fieldCIN, String fieldGroup, String fieldEmail, String fieldAnnual, String fieldOwnership, String fieldLeadstat, String fieldLastName, String fieldExpdate, String company, String website, String cin, String group, String email, String annual, String ownership, String lead_status, String last_name, String exp_date) {
+
+        waitfortheelement();
+
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldCompany+"']//..//..//input")).sendKeys(company);
+        waitfortheelement();
+
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldWebsite+"']//..//..//input")).sendKeys(website);
+
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldCIN+"']//..//..//input")).sendKeys(cin);
+        waitfortheelement();
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldEmail+"']//..//..//input")).sendKeys(email);
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldAnnual+"']//..//..//input")).sendKeys(annual);
+        waitfortheelement();
+       // driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//div[@class='slds-form-element slds-hint-parent']//span[contains(text(),'"+fieldOwnership+"')]//..//..//a[@class='select']")).click();
+        // driver.findElement(By.xpath("//div[@class='uiMenu']//a[@class='select']//..//..//a")).click();
+        //driver.findElement(By.xpath("//div[@class='select-options']//li[@class='uiMenuItem uiRadioMenuItem']//a[@title='"+ownership+"']")).click();
+
+      //  driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldGroup+"']//..//..//input")).sendKeys(group);
+      //  driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//div[@role='listbox']//div[@title='"+group+"']")).click();
+
+        //   driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldLeadstat+"']//..//..//input")).sendKeys(Lead_status);
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//div[@class='slds-form-element slds-hint-parent']//span[contains(text(),'"+fieldLeadstat+"')]//..//..//a[@class='select']")).click();
+        driver.findElement(By.xpath("//div[@class='select-options']//li[@class='uiMenuItem uiRadioMenuItem']//a[@title='"+lead_status+"']")).click();
+        waitfortheelement();
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("javascript:window.scrollBy(0,200)");
+
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldLastName+"']//..//..//input")).sendKeys(last_name);
+
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldExpdate+"']//..//..//input")).sendKeys(exp_date);
+
+    }
+
+    public String NoLead(WebDriver driver, String nolead) {
+
+        waitfortheelement();
+        waitfortheelement();
+
+        String str= driver.findElement(By.xpath("//div[@data-aura-class='forceListViewManager']//div[@class='forceListViewManagerGrid']//div[@class='emptyContentInner']//p[text()='No items to display.']")).getText();
+        //   String str= driver.findElement(By.xpath("//div[@class='error uiMessage']//div[@class='uiBlock']//div[@class='bBody']")).getText();
+
+        return str;
+
+    }
+
+//    public void Values2(WebDriver driver, String company, String website, String cin, String group, String email, String annual, String ownership, String lead_status, String last_name, String exp_date) {
+//
+//
+//
+//
+//
+//    }
+
+    public void ConvertLead(WebDriver driver, String conLead) {
+
+        driver.findElement(By.xpath("//div[@class='flexipagePage']//div[@class='slds-grid primaryFieldRow']//div[@class='slds-truncate'][@title='"+conLead+"']")).click();
+        waitfortheelement();
+//        WebDriverWait wait = new WebDriverWait(driver, 30);
+//        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='flexipagePage']//div[@class='slds-grid primaryFieldRow']//div[@class='slds-truncate'][@title='"+conLead+"']")));
+//                element.click();
+    }
+
+    public void loanProposal(WebDriver driver, String close, String loan_proposal) {
+
+
+        WebDriverWait wait = new WebDriverWait(driver, 50);
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='DESKTOP uiContainerManager']//button[@type='button'][@title='"+close+"']")));
+              element.click();
+  //     driver.findElement(By.xpath("//div[@class='DESKTOP uiContainerManager']//button[@type='button'][@title='"+close+"']")).click();
+
+      //  driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+
+
+       waitfortheelement();
+        //  driver.findElement(By.xpath("//div[@class=\"slds-context-bar\"]//one-app-nav-bar-item-root[@class='navItem slds-context-bar__item slds-shrink-none']//..//a[@title='"+fieldtab+"']")).click();
+        WebElement element1 = driver.findElement(By.xpath("//div[@class='slds-context-bar']//one-app-nav-bar-item-root[@class='navItem slds-context-bar__item slds-shrink-none']//..//a[@title='"+loan_proposal+"']"));
+        //    element1.click();
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        executor.executeScript("arguments[0].click();", element1);
+
+
+    }
+
+    public String convertSuccessfully(WebDriver driver, String fieldOpport, String fieldCustGroup) {
+
+
+        driver.findElement(By.xpath("//div[@class='test-listViewManager slds-grid slds-grid--vertical forceListViewManager']//span[@title='"+fieldOpport+"']")).getText();
+
+        driver.findElement(By.xpath("//div[@class='test-listViewManager slds-grid slds-grid--vertical forceListViewManager']//span[@title='"+fieldCustGroup+"']")).getText();
+
+        waitfortheelement();
+
+     //   Assert.assertEquals(fieldOpport, OppoName);
+
+        waitfortheelement();
+        return fieldOpport;
+    }
+
+    public void RecordType(WebDriver driver, String radioButton) {
+
+        driver.findElement(By.xpath("//div[@class='isModal inlinePanel oneRecordActionWrapper']//span[@class='slds-radio--faux']//..//..//span[@class='slds-form-element__label'][text()='"+radioButton+"']")).click();
+
+
+    }
+
+    public void   basicDetails(WebDriver driver, String fieldFirst_name, String fieldLast_name, String fieldPan_no, String fieldCust_grop_name, String fieldLead_source, String fieldDIN, String fieldTitle, String fieldRelation_with_promoters, String fieldReports_To, String fieldPer_Holding, String fieldExp_Activity, String fieldNetworth_Returns,String first_name, String last_name, String pan_no, String cust_grp_name, String lead_source, String din, String title, String relation_with_promoters, String reports_to, String per_holding, String exp_activity, String networth_returns   )
+    {
+        waitfortheelement();
+
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='" + fieldFirst_name + "']//..//..//input")).sendKeys(first_name);
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldLast_name+"']//..//..//input")).sendKeys(last_name);
+
+        waitfortheelement();
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldPan_no+"']//..//..//input")).sendKeys(pan_no);
+
+        waitfortheelement();
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldCust_grop_name+"']//..//..//input")).sendKeys(cust_grp_name);
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//div[@role='listbox']//div[@title='"+cust_grp_name+"']")).click();
+
+        waitfortheelement();
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//div[@class='slds-form-element slds-hint-parent']//span[contains(text(),'"+fieldLead_source+"')]//..//..//a[@class='select']")).click();
+        driver.findElement(By.xpath("//div[@class='select-options']//li[@class='uiMenuItem uiRadioMenuItem']//a[@title='"+lead_source+"']")).click();
+
+        waitfortheelement();
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldDIN+"']//..//..//input")).sendKeys(din);
+
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("javascript:window.scrollBy(0,200)");
+
+        waitfortheelement();
+
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldTitle+"']//..//..//input")).sendKeys(title);
+
+        waitfortheelement();
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//div[@class='slds-form-element slds-hint-parent']//span[contains(text(),'"+fieldRelation_with_promoters+"')]//..//..//a[@class='select']")).click();
+       driver.findElement(By.xpath("//div[@class='select-options']//li[@class='uiMenuItem uiRadioMenuItem']//a[@title='"+relation_with_promoters+"']")).click();
+
+
+        waitfortheelement();
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldReports_To+"']//..//..//input")).sendKeys(reports_to);
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//div[@role='listbox']//div[@title='"+reports_to+"']")).click();
+
+
+        waitfortheelement();
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldPer_Holding+"']//..//..//input")).sendKeys(per_holding);
+
+        waitfortheelement();
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldExp_Activity+"']//..//..//input")).sendKeys(exp_activity);
+
+      //  waitfortheelement();
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldNetworth_Returns+"']//..//..//input")).sendKeys(networth_returns);
+
+        waitfortheelement();
+
+
+    }
+
+
+//    public void basicInfo(WebDriver driver, String fieldTitle, String fieldRelation_with_promoters, String fieldReports_to, String fieldPer_holding, String fieldExp_activity, String fieldNetworth_returns, String title, String relation_with_promoters, String reports_to, String per_holding, String exp_activity, String networth_returns) {
+//
+//
+//        waitfortheelement();
+//        waitfortheelement();
+//
+//        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldTitle+"']//..//..//input")).sendKeys(title);
+//
+//        waitfortheelement();
+//        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//div[@class='slds-form-element slds-hint-parent']//span[contains(text(),'"+fieldRelation_with_promoters+"')]//..//..//a[@class='select']")).click();
+//        driver.findElement(By.xpath("//div[@class='select-options']//li[@class='uiMenuItem uiRadioMenuItem']//a[@title='"+relation_with_promoters+"']")).click();
+//
+//
+//        waitfortheelement();
+//        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldReports_to+"']//..//..//input")).sendKeys(reports_to);
+//        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//div[@role='listbox']//div[@title='"+reports_to+"']")).click();
+//
+//
+//        waitfortheelement();
+//        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldPer_holding+"']//..//..//input")).sendKeys(per_holding);
+//
+//        waitfortheelement();
+//        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldExp_activity+"']//..//..//input")).sendKeys(exp_activity);
+//
+//        waitfortheelement();
+//        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldNetworth_returns+"']//..//..//input")).sendKeys(networth_returns);
+//
+//        waitfortheelement();
+//
+//    }
+
+    public void ContactDirector(WebDriver driver, String fieldFirst_name, String fieldLast_name, String fieldPan_no, String fieldCust_grop_name, String fieldLead_source, String fieldDIN, String fieldTitle, String fieldRelation_with_promoters, String fieldReports_to, String fieldPer_holding, String fieldExp_activity, String fieldNetworth_returns, String title, String relation_with_promoters, String reports_to, String per_holding, String exp_activity, String networth_returns, String first_name, String last_name, String pan_no, String cust_grp_name, String lead_source, String din) {
+
+
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldFirst_name+"']//..//..//input")).isDisplayed();
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldLast_name+"']//..//..//input")).isDisplayed();
+
+        waitfortheelement();
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldPan_no+"']//..//..//input")).isDisplayed();
+
+        waitfortheelement();
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldCust_grop_name+"']//..//..//input")).isDisplayed();
+       // driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//div[@role='listbox']//div[@title='"+cust_grp_name+"']")).click();
+
+        waitfortheelement();
+     //   driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//div[@class='slds-form-element slds-hint-parent']//span[contains(text(),'"+fieldLead_source+"')]//..//..//a[@class='select']")).click();
+    //    driver.findElement(By.xpath("//div[@class='select-options']//li[@class='uiMenuItem uiRadioMenuItem']//a[@title='"+lead_source+"']")).click();
+
+        waitfortheelement();
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldDIN+"']//..//..//input")).isDisplayed();
+        waitfortheelement();
+
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldTitle+"']//..//..//input")).isDisplayed();
+
+        waitfortheelement();
+      //  driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//div[@class='slds-form-element slds-hint-parent']//span[contains(text(),'"+fieldRelation_with_promoters+"')]//..//..//a[@class='select']")).click();
+      //  driver.findElement(By.xpath("//div[@class='select-options']//li[@class='uiMenuItem uiRadioMenuItem']//a[@title='"+relation_with_promoters+"']")).click();
+
+
+        waitfortheelement();
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldReports_to+"']//..//..//input")).isDisplayed();
+        //driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//div[@role='listbox']//div[@title='"+reports_to+"']")).click();
+
+
+        waitfortheelement();
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldPer_holding+"']//..//..//input")).isDisplayed();
+        waitfortheelement();
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldExp_activity+"']//..//..//input")).isDisplayed();
+
+        waitfortheelement();
+        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldNetworth_returns+"']//..//..//input")).isDisplayed();
+
+        waitfortheelement();
+
+
+    }
+
+    public void Details(WebDriver driver, String fieldFirst_name, String fieldLast_name, String fieldPan_no, String fieldCust_grop_name, String fieldLead_source, String fieldDIN, String first_name, String last_name, String pan_no, String cust_grp_name, String lead_source, String din, String fieldTitle, String fieldRelation_with_promoters, String fieldReports_to, String fieldPer_holding, String fieldExp_activity, String fieldNetworth_returns, String title, String relation_with_promoters, String reports_to, String per_holding, String exp_activity, String networth_returns) {
+//
+//        int var= first_name.length();
+//        String var1= first_name.substring(var-1);
+//        var1.concat("Jessia");
+
+             basicDetails(driver,fieldFirst_name,fieldLast_name,fieldPan_no,fieldCust_grop_name,fieldLead_source,fieldDIN,fieldTitle,fieldRelation_with_promoters,fieldReports_to,fieldPer_holding,fieldExp_activity,fieldNetworth_returns,first_name,last_name,pan_no,cust_grp_name,lead_source,din,title,relation_with_promoters,reports_to,per_holding,exp_activity,networth_returns);
+         }
+
+
+    public void convert(WebDriver driver, String convert) {
+
+        waitfortheelement();
+        waitfortheelement();
+        driver.findElement(By.xpath("//div[@class='slds-grid primaryFieldRow']//..//li//..//div[@class='slds-truncate'][text()='"+convert+"']")).click();
+
+    }
+
+
+    public void leadconvert(WebDriver driver, String leadConvert) {
+
+        waitfortheelement();
+        waitfortheelement();
+        Actions act1 = new Actions(driver);
+        act1.sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ARROW_DOWN).build().perform();
+        waitfortheelement();
+        driver.findElement(By.xpath("//div[@class='modal-container slds-modal__container']//div[@class='modal-footer slds-modal__footer']//button[@type='button']//span[@class=' label bBody'][text()='Convert']")).click();
+        waitfortheelement();
+    }
+
+    public void successfulMessage(WebDriver driver, String message) {
+
+        driver.findElement(By.xpath("//div[@class='modal-container slds-modal__container']//div[@class='panel runtime_sales_leadConvertedConfirmationDesktop']//div[@class='title']//span[text()='"+message+"']")).getText();
+
+
+    }
+
+    public void enterdetails(WebDriver driver, String fieldCustomerName, String fieldParent_Grp_name,String fieldCIN,String fieldABN,String fieldAnnual_Revenue,String fieldPhone, String filedCustValue, String filedParent_Grp_name, String filedCIN, String filedABN, String filedannual_revenue, String filedphone ) {
+
+        try
+        {
+            driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldCustomerName+"']//..//..//input")).sendKeys(filedCustValue);
+
+            driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldParent_Grp_name+"']//..//..//input")).sendKeys(filedParent_Grp_name);
+            driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//div[@role='listbox']//div[@title='"+filedParent_Grp_name+"']")).click();
+            waitfortheelement();
+            driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldCIN+"']//..//..//input")).sendKeys(filedCIN);
+            driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldABN+"']//..//..//input")).sendKeys(filedABN);
+            driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldAnnual_Revenue+"']//..//..//input")).sendKeys(filedannual_revenue);
+            waitfortheelement();
+            driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldPhone+"']//..//..//input")).sendKeys(filedphone );
+
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+
+    }
+
+    public void fillRequired(WebDriver driver, String fieldCustomer_group_name, String fieldParent_cust_group, String fieldCIN, String fieldABN, String fieldAnnual_revenue, String fieldPhone, String fieldWebsite, String fieldEmail, String fieldOwnership, String fieldEntity_Name, String fieldPAN, String fieldDate_of_incorporation, String fieldMortgaged, String filedNo_of_months_in_office, String customer_group_name, String parent_cust_group, String cin, String abn, String annual_revenue, String phone, String website, String email, String ownership, String entity_name, String pan, String date_of_incorporation, String mortgaged, String no_of_months_in_office) {
+
+        waitfortheelement();
+
+        enterdetails(driver,fieldCustomer_group_name,fieldParent_cust_group,fieldCIN,fieldABN,fieldAnnual_revenue,fieldPhone,customer_group_name,parent_cust_group,cin,abn,annual_revenue,phone);
+
+//      //        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldWebsite+"']//..//..//input")).sendKeys(website);
+//
+//        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldEmail+"']//..//..//input")).sendKeys(email);
+//        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldAnnual_revenue+"']//..//..//input")).sendKeys(annual_revenue);
+//        waitfortheelement();
+//
+//        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//div[@class='slds-form-element slds-hint-parent']//span[contains(text(),'"+fieldOwnership+"')]//..//..//a[@class='select']")).click();
+//
+//        driver.findElement(By.xpath("//div[@class='select-options']//li[@class='uiMenuItem uiRadioMenuItem']//a[@title='"+ownership+"']")).click();
+//
+//
+//        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//div[@class='slds-form-element slds-hint-parent']//span[contains(text(),'"+fieldLeadstat+"')]//..//..//a[@class='select']")).click();
+//        driver.findElement(By.xpath("//div[@class='select-options']//li[@class='uiMenuItem uiRadioMenuItem']//a[@title='"+lead_status+"']")).click();
+//
+//        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldIncop+"']//..//..//input")).sendKeys(incop_date);
+//
+//        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldStreet+"']//..//..//textarea")).sendKeys(street);
+//
+//        waitfortheelement();
+//
+////        Actions action = new Actions(driver);
+////        WebElement we = driver.findElement(By.xpath("html/body/div[13]/ul/li[4]/a"));
+////        action.moveToElement(we).moveToElement(driver.findElement(By.xpath("/expression-here"))).click().build().perform();
+//
+////        JavascriptExecutor js = (JavascriptExecutor) driver;
+////        js.executeScript("javascript:window.scrollBy(0,200)");
+//
+//        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldCity+"']//..//..//input")).sendKeys(city);
+//        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldCountry+"']//..//..//input")).sendKeys(country);
+//
+//        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldFirstName+"']//..//..//input")).sendKeys(first_name);
+//        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldLastName+"']//..//..//input")).sendKeys(last_name);
+//
+//
+//        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldLoanName+"']//..//..//input")).sendKeys(loan_name);
+//        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldAmount+"']//..//..//input")).sendKeys(amount);
+//        //  driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldLoanpurpose+"']//..//..//input")).sendKeys(loan_purpose);
+//
+//        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//div[@class='slds-form-element slds-hint-parent']//span[contains(text(),'"+fieldLoanpurpose+"')]//..//..//a[@class='select']")).click();
+//
+//        driver.findElement(By.xpath("//div[@class='select-options']//li[@class='uiMenuItem uiRadioMenuItem']//a[@title='"+loan_purpose+"']")).click();
+//
+//        driver.findElement(By.xpath("//div[@class='full forcePageBlock forceRecordLayout']//label//span[text()='"+fieldExpdate+"']//..//..//input")).sendKeys(exp_date);
 
     }
 }
